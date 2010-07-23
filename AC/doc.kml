@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<name> AirControl </name>
+<open> 1 </open>
+<description> FIR de Tahiti </description>
+<LookAt>
+    <longitude> -138.5 </longitude>
+    <latitude> -13.0 </latitude>
+    <altitude> 0 </altitude>
+    <range> 6000000 </range>
+    <tilt> 0 </tilt>
+    <heading> 0 </heading>
+    <altitudeMode>absolute</altitudeMode>
+    <gx:altitudeMode>absolute</gx:altitudeMode>
+</LookAt>
+<NetworkLink>
+<name> FIR </name>
+<description><![CDATA[ Includes all FIR ]]></description>
+<open> 0 </open>
+<LookAt>
+<longitude> -138.5 </longitude>
+<latitude> -13.0 </latitude>
+<altitude> 0 </altitude>
+<range> 6000000 </range>
+<tilt>  0 </tilt>
+<heading> 0 </heading>
+</LookAt>
+<Url>
+<href> KML/Fir.kml </href>
+<refreshMode> onChange </refreshMode>
+<refreshInterval> 0 </refreshInterval>
+</Url>
+</NetworkLink>
+<NetworkLink>
+<name> Routes </name>
+<description><![CDATA[ Includes all Routes referenced ]]></description>
+<open> 0 </open>
+<LookAt>
+<longitude> -138.5 </longitude>
+<latitude> -13.0 </latitude>
+<altitude> 0 </altitude>
+<range> 6000000 </range>
+<tilt>  0 </tilt>
+<heading> 0 </heading>
+</LookAt>
+<Url>
+<href> KML/Routes.kml </href>
+<refreshMode> onChange </refreshMode>
+<refreshInterval> 0 </refreshInterval>
+</Url>
+</NetworkLink>
+<NetworkLink>
+<name> CharacteristicsPoints </name>
+<description><![CDATA[ Includes all Characteristics points ]]></description>
+<open> 0 </open>
+<LookAt>
+<longitude> -138.5 </longitude>
+<latitude> -13.0 </latitude>
+<altitude> 0 </altitude>
+<range> 6000000 </range>
+<tilt>  0 </tilt>
+<heading> 0 </heading>
+</LookAt>
+<Url>
+<href> KML/CharacteristicsPoints.kml </href>
+<refreshMode> onChange </refreshMode>
+<refreshInterval> 0 </refreshInterval>
+</Url>
+</NetworkLink>
+<NetworkLink>
+<name> Fpl </name>
+<description><![CDATA[ Flight plan ]]></description>
+<open> 0 </open>
+<LookAt>
+<longitude> -138.5 </longitude>
+<latitude> -13.0 </latitude>
+<altitude> 0 </altitude>
+<range> 6000000 </range>
+<tilt>  0 </tilt>
+<heading> 0 </heading>
+</LookAt>
+<Url>
+<href> KML/Fpl.kml </href>
+<refreshMode> onChange </refreshMode>
+<refreshInterval> 0 </refreshInterval>
+</Url>
+</NetworkLink>
+<NetworkLink>
+<name> Ads </name>
+<description><![CDATA[ Automatic Dependant Surveillance ]]></description>
+<open> 0 </open>
+<LookAt>
+<longitude> -138.5 </longitude>
+<latitude> -13.0 </latitude>
+<altitude> 0 </altitude>
+<range> 6000000 </range>
+<tilt>  0 </tilt>
+<heading> 0 </heading>
+</LookAt>
+<Url>
+<href> KML/Ads.kml </href>
+<refreshMode> onChange </refreshMode>
+<refreshInterval> 0 </refreshInterval>
+</Url>
+</NetworkLink>
+</Document>
+</kml>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<name> Ads </name>
+<open> 1 </open>
+<description> Automatic Dependant Surveillance </description>
+<LookAt>
+    <longitude> -138.5 </longitude>
+    <latitude> -13.0 </latitude>
+    <altitude> 0 </altitude>
+    <range> 6000000 </range>
+    <tilt> 0 </tilt>
+    <heading> 0 </heading>
+    <altitudeMode>absolute</altitudeMode>
+    <gx:altitudeMode>absolute</gx:altitudeMode>
+</LookAt>
+<Style id="triangle">
+<IconStyle>
+<Icon>
+<href>files/images/triangle.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF00FFFF </color>
+<scale> 0.700000 </scale>
+</LabelStyle>
+</Style>
+<Style id="polygon">
+<IconStyle>
+<Icon>
+<href>files/images/polygon.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF00FFFF </color>
+<scale> 0.700000 </scale>
+</LabelStyle>
+</Style>
+<Style id="redCircle">
+<IconStyle>
+<Icon>
+<href>files/images/placemark_circle_highlight.png</href>
+</Icon>
+<scale> 0.6 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF0000FF </color>
+<scale> 0.900000 </scale>
+</LabelStyle>
+</Style>
+<Style id="avion">
+<IconStyle>
+<Icon>
+<href>files/images/avion.png</href>
+</Icon>
+<scale> 0.6 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF888888 </color>
+<scale> 0.900000 </scale>
+</LabelStyle>
+</Style>
+<Style id="avion3">
+<IconStyle>
+<Icon>
+<href>files/images/avion2.png</href>
+</Icon>
+<scale> 0.2 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.500000 </scale>
+</LabelStyle>
+</Style>
+<Style id="avion2">
+<IconStyle>
+<Icon>
+<href>files/images/avion2.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.700000 </scale>
+</LabelStyle>
+</Style>
+<Style id="airports">
+<IconStyle>
+<Icon>
+<href>files/images/airports.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFF6633 </color>
+<scale> 0.700000 </scale>
+</LabelStyle>
+</Style>
+<Style id="circle">
+<IconStyle>
+<Icon>
+<href>files/images/placemark_circle.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.700000 </scale>
+</LabelStyle>
+</Style>
+</Document>
+</kml>
