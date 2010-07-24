@@ -2,7 +2,7 @@ from math import *
 from decimal import *
 from Convertion import *
 
-
+AROUND = 10e15
 
 def cleanLine (txtFile):
     lineClean = []
@@ -27,9 +27,8 @@ def cleanLineWithComment (txtFile):
     return lineClean
 
 def round (num) :
-    getcontext().prec = 25
-    num = Decimal(str(num)).quantize(Decimal('.000000000000001'))
-    return float(num)
+    num = int(num*AROUND)
+    return float(num/AROUND)
     
 def sphericalToCartesian (lat,long):
     # converts spherical coordinates to cartesian coordinates in a point
@@ -136,30 +135,57 @@ def findIntersection(line1 ,line2) :
             intersection = i1    
     return intersection
 
-## test with Google Erath point
-#p11=convertCoordinate ('325111N0925021W')
-#p12=convertCoordinate ('385942N0811837W')
-#p21=convertCoordinate ('394023N0915033W')
-#p22=convertCoordinate ('312426N0843429W')
-#p=convertCoordinate ('353843N0880419W')
-    
-#line1 = {
-    #'lat1' : p11['latitude'],
-    #'long1' : p11['longitude'],
-    #'lat2' : p12['latitude'],
-    #'long2' : p12['longitude']
-    #}    
-#line2 = {
-    #'lat1' : p21['latitude'],
-    #'long1' : p21['longitude'],
-    #'lat2' : p22['latitude'],
-    #'long2' : p22['longitude']
-    #}    
-#print 'point trouve :'
-#print findIntersection(line1 ,line2 )    
-#print 'point lu:'
-#print p
+def log(fileName, string, mode):
+    date = strftime("%d%b%Y", gmtime())
+    time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
+    file = open(filename + date + '.log', mode)
+    file.write(string)
+    file.close()
     
     
+def testIntersection() : 
+    for i in xrange(10000) :
+        p11=convertCoordinate ('325111N0925021W')
+        p12=convertCoordinate ('385942N0811837W')
+        p21=convertCoordinate ('394023N0915033W')
+        p22=convertCoordinate ('312426N0843429W')
+        p=convertCoordinate ('353843N0880419W')
+            
+        line1 = {
+            'lat1' : p11['latitude'],
+            'long1' : p11['longitude'],
+            'lat2' : p12['latitude'],
+            'long2' : p12['longitude']
+            }    
+        line2 = {
+            'lat1' : p21['latitude'],
+            'long1' : p21['longitude'],
+            'lat2' : p22['latitude'],
+            'long2' : p22['longitude']
+            }    
+        #print 'point trouve :'
+        intersection = findIntersection(line1 ,line2 )    
+        #print 'point lu:'
+        #print p
     
+if __name__ == '__main__' :
+    import hotshot, os
+    from time import gmtime, strftime
+    
+    print 'Execution du test'
+    profiler = hotshot.Profile("/home/manu/DTI/stats/statistiques.prf")
+    profiler.runcall(testIntersection)
+    profiler.close()
+    print 'Test OK, analise des donnees'
+    time = strftime("%Y%m%d-%H%M%S", gmtime())
+    name = ('UsualFonction' + time +'.prof')
+    cmd = """\
+cd /home/manu/DTI/stats/
+hotshot2calltree -o %s statistiques.prf
+""" % name
+    os.system(cmd)
+    print 'Analyse OK'
+    os.system('kcachegrind /home/manu/DTI/stats/%s' % name)
+    
+
     

@@ -3,90 +3,56 @@ __author__ = "KERVIZIC Emmanuel (kervizic@hotmail.com)"
 __version__ = "0.0.1"
 __license__ = ""
 __copyright__ =""
+import re  
+
+COORDINATE = re.compile("""\
+([0-9]{2})([0-9]{2})?([0-9]{2})?([NS])([0-9]{3})([0-9]{2})?([0-9]{2})?([EW])\
+""")
 
 def convertCoordinate (coordinate):
-    """ Convert coordinates to decimal format """
-    # 3 solution sont possible : 7, 11 ou 15 charactères
-    if len(coordinate) == 7 : # heures seules
-        latitude = addLatitude(str(coordinate[0:3]))
-        longitude = addLongitude(str(coordinate[3:7]))
-    elif len(coordinate) == 11 : # heures et minutes
-        latitude = addLatitude(str(coordinate[0:5]))
-        longitude = addLongitude(str(coordinate[5:11]))
-    elif len(coordinate) == 15 : # heures, minutes et secondes
-        latitude = addLatitude(str(coordinate[0:7]))
-        longitude = addLongitude(str(coordinate[7:15]))
-    coordinate = {'latitude' : latitude, 'longitude' : longitude}
-    return coordinate
-
-            
-        
-def addLatitude (latitude):
-    """ This function saves the latitude of a point
+    """ Convert coordinates to decimal format 
+    # This function saves the latitude and longitude of a point
     # In this system the North and East coordinates are positive
     # The South and West coordinates are negatives
     # hh:mm:ss d (hhmmd) => HH+MM/60+SS/3600*(D)
-     """
-    latitudeD = ''
-    if len(latitude) == 3 : # Si seulement heures
-        h = float(latitude[0:2]) #Seletionne les deux premiers charactères
-        if str(latitude[2]) == "N" : #Défini la polarité
-            d = float(1)
-        elif str(latitude[2]) == "S" :
-            d = float(-1)                
-        latitudeD = float( h * d ) #Convertion en décimale
-    elif len(latitude) == 5 : # Si heures et minutes
-        h = float(latitude[0:2])
-        m = float(latitude[2:4])
-        if str(latitude[4]) == "N" :
-            d = float(1)
-        elif str(latitude[4]) == "S" :
-            d = float(-1)                
-        latitudeD = float( ( h + m / 60 ) * d ) 
-    elif len(latitude) == 7 : # Si heures et minutes
-        h = float(latitude[0:2])
-        m = float(latitude[2:4])
-        s = float(latitude[4:6])
-        if str(latitude[6]) == "N" :
-            d = float(1)
-        elif str(latitude[6]) == "S" :
-            d = float(-1)                
-        latitudeD = float( ( h + m / 60 + s / 3600) * d )
-    return latitudeD
-
-        
-def addLongitude (longitude):
-    """ This function saves the latitude of a point
-    # In this system the North and East coordinates are positive
-    # The South and West coordinates are negative
-    # hh:mm:ss d (hhmmd) => HH+MM/60+SS/3600*(D)
     """
-    longitudeD =''
-    if len(longitude) == 4 : # cf. Latitude
-        h = float(longitude[0:3])
-        if str(longitude[3]) == "E" :
-            d = float(1)
-        elif str(longitude[3]) == "W" :
-            d = float(-1)                
-        longitudeD = float( h * d )
-    elif len(longitude) == 6 :
-        h = float(longitude[0:3])
-        m = float(longitude[3:5])
-        if str(longitude[5]) == "E" :
-            d = float(1)
-        elif str(longitude[5]) == "W" :
-            d = float(-1)                
-        longitudeD = float( ( h + m / 60 ) * d )
-    elif len(longitude) == 8 :
-        h = float(longitude[0:3])
-        m = float(longitude[3:5])
-        s = float(longitude[5:7])
-        if str(longitude[7]) == "E" :
-            d = float(1)
-        elif str(longitude[7]) == "W" :
-            d = float(-1)                
-        longitudeD = float( ( h + m / 60 + s / 3600) * d )
-    return longitudeD
+    result = COORDINATE.search(coordinate)
+    latH = result.group(1)
+    latM = result.group(2)
+    latS = result.group(3)
+    latL = result.group(4)
+    longH = result.group(5)
+    longM = result.group(6)
+    longS = result.group(7)
+    longL = result.group(8)
+    
+    if latL == "N" :
+        latD = float(1)
+    elif latL == "S" :
+        latD = float(-1)   
+    else :
+        latD = None
+    if longL == "E" :
+        longD = float(1)
+    elif longL == "W" :
+        longD = float(-1)   
+    else :
+        longD = None
+    latitude = float(latH) * latD
+    longitude = float(longH) * longD
+    try :     
+        latitude += float(latM)/60 * latD
+        longitude += float(longM)/60 * longD
+    except : 
+        pass
+    try :     
+        latitude += float(latS)/3600 * latD
+        longitude += float(longS)/3600 * longD
+    except : 
+        pass
+
+    return {'latitude' : latitude, 'longitude' : longitude}
+
 
 def convertLevel (level) :
     """
@@ -198,4 +164,29 @@ def speedAndLevel(string) :
         }
     return ret
 
+def testCoordinate() :
+
+    coord = '803030N1201515W'
+
+    for i in xrange(100000):
+        coordi = convertCoordinate (coord)
+    print coordi
+
+if __name__ == '__main__' :
+    import hotshot, os
+    from time import gmtime, strftime
+    print 'Execution du test : testCoordinate'
+    profiler = hotshot.Profile("/home/manu/DTI/stats/statistiques.prf")
+    profiler.runcall(testCoordinate)
+    profiler.close()
+    print 'Test OK, analise des donnees'
+    time = strftime("%Y%m%d-%H%M%S", gmtime())
+    name = ('convertCoordinate' + time +'.prof')
+    cmd = """\
+cd /home/manu/DTI/stats/
+hotshot2calltree -o %s statistiques.prf
+""" % name
+    os.system(cmd)
+    print 'Analyse OK'
+    os.system('kcachegrind /home/manu/DTI/stats/%s' % name)
 
