@@ -8,13 +8,17 @@ __copyright__ =""
 
 print "Fpl Charge =) "
 
-import Convertion, os
+import Convertion, os, re
 from usualFonction import *
 from time import gmtime, strftime
 from datetime import datetime, timedelta
 
 fpl = {}     # dictionary of fpl : { (x) : instance}
 ETX = chr(3)
+FPL = re.compile("""\
+\(FPL- *(.+?) *- *(.+?) *- *(.+?) *- *(.+?) *- *([A-Z]{4}[0-9]{4}).*- *([KNM][\
+0-9]{3,4}([FSA]|VFR)[0-9]{0,4}) (.+?) *- *([A-Z]{4}[0-9]{4}).*-(.*?) *(\)|$)\
+""")
     
 class Fpl (object):
 
@@ -370,73 +374,98 @@ class Fpl (object):
                 
 def initFPL (adresse, points, routes, newFpl = {}):
     """ Analysele fichier FDX """
-    lineClean = []
-    fplLine =[]
-    line2 = ''
-    lstFpl = []
-    isFPL = False
-    theLine = ''
-    test = ''
-    date = ''
+
+    log = ''
     lstFplFile = os.listdir(adresse)
     for file in lstFplFile :
         if 'FDX' in file :
+            lineClean = []
+            line2 = ''
+            lstFpl = []
+            isFPL = False
+            theLine = ''
+            test = ''
+            date = ''
+            fplLine = []
+            getLine = False
             fileAdresse = adresse + file
             fplFile = open(fileAdresse,'r') # Open the file   
-            fplLine.extend(cleanLineWithComment(fplFile))
+            for line in fplFile.xreadlines(): # acts on each line of file
+                line=line[0:-1]
+                line = line.strip(None)
+                if line :
+                #removes comment lines and blank lines
+                    fplLine.append(line)
             #print 'file ok'
             fplFile.close()
             
-    for line in fplLine: # acts on each line of file
-        if r'(FPL-' in line[0:8] and r')' in line and r'Text' not in line:
-            line2 = str(line)
-        elif r'(FPL-' in line[0:8] and r'Text' not in line:
-            isFPL = True
-            theLine = ''
-            line2 = ''
-            theLine += str(line) + ' '
-        elif isFPL == True and ETX in line:
-            print 'Fatal error'
-            isFPL = False
-        elif isFPL == True and r')' not in line:
-            theLine += str(line) + ' '
-        elif isFPL == True:
-            isFPL = False
-            theLine += str(line) + ' '
-            line2 = str(theLine)
-        # Find the date of the flight without DOF
-        elif 'Updating RX event (for center AFTN) at  ' in line :
-            debut = line.find('at  ')
-            tabDate = line[debut+4:].split(' ')
-            #print tabDate
-            date = datetime(
-                int(tabDate[0]),
-                int(tabDate[1]),
-                int(tabDate[2]),
-                int(tabDate[3]),
-                int(tabDate[4]),
-                int(tabDate[5])
-                )
-            #print date
-                
-        if line2 and line2 not in lineClean and date :
-            lineClean.append(line2)
-            debut = line2.find(r'(')
-            fin = line2.find(r')')
-            theFpl = {
-                'line' : line2[int(debut)+1:int(fin)],
-                'date' : date
-                }
-            lstFpl.append(theFpl)
+            for line in fplLine: # acts on each line of file
+                if (r'(FPL-' in line[0:8] and r')' in line 
+                                    and r'Text' not in line):
+                    line2 = str(line)
+                    getLine = True
+                elif r'(FPL-' in line[0:8] and r'Text' not in line:
+                    isFPL = True
+                    theLine = ''
+                    line2 = ''
+                    theLine += str(line) + ' '
+                elif isFPL == True and ETX in line:
+                    print 'Fatal error'
+                    isFPL = False
+                    line2 = str(theLine)
+                    getLine = True
+                elif isFPL == True and r')' not in line:
+                    theLine += str(line) + ' '
+                elif isFPL == True:
+                    isFPL = False
+                    getLine = True
+                    theLine += str(line) + ' '
+                    line2 = str(theLine)
+                # Find the date of the flight without DOF
+                elif 'Updating RX event (for center AFTN) at  ' in line :
+                    debut = line.find('at  ')
+                    tabDate = line[debut+4:].split(' ')
+                    #print tabDate
+                    date = datetime(
+                        int(tabDate[0]),
+                        int(tabDate[1]),
+                        int(tabDate[2]),
+                        int(tabDate[3]),
+                        int(tabDate[4]),
+                        int(tabDate[5])
+                        )
+                    #print date
+                        
+                if getLine and line2 and line2 not in lineClean and date :
+                    getLine = False
+                    lineClean.append(line2)
+                    theFpl = {
+                        'line' : line2,
+                        'date' : date
+                        }
+                    lstFpl.append(theFpl)            
+            
+            for theFpl in lstFpl :
+                #print theFpl
+                line = theFpl['line']
+                date = theFpl['date']
+                result = FPL.search(line)
+                if result :
+                    #print result.group(0)
+                    #print result.group(1)
+                    #print result.group(2)
+                    #print result.group(3)
+                    #print result.group(4)
+                    #print result.group(5)
+                    #print result.group(6)
+                    #print result.group(7)
+                    #print result.group(8)
+                    #print result.group(9)
+                    pass
+                else :
+                    print 'KO' + line
 
-        
-    
-    
-    for theFpl in lstFpl :
-        #print theFpl
-        line = theFpl['line']
-        date = theFpl['date']
-        fplObject = Fpl(line, date, points, routes)
+                #fplObject = Fpl(line, date, points, routes)
         
     
     return fpl

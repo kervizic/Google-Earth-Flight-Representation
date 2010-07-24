@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #coding: utf-8
 
-__author__ = "KERVIZIC Emmanuel (kervizic@hotmail.com"
+__author__ = "KERVIZIC Emmanuel (kervizic@hotmail.com)"
 __version__ = "0.0.1"
 __license__ = ""
 __copyright__ =""

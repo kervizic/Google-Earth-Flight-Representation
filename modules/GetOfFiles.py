@@ -96,7 +96,7 @@ def getOfFile () :
     routes = Routes.initRT(adresse)
     
     adresse = path['characteristicsPointsFilePath']
-    charactPoints = CharacteristicPoints.initCP(adresse)
+    charactPoints, tahitiAirports = CharacteristicPoints.initCP(adresse)
     
     adresse = path['fdpFilePath']
     fdp = Fdp.initFDP(adresse)
@@ -112,6 +112,7 @@ def getOfFile () :
 
     allObjects['routes'] = routes
     allObjects['charactPoints'] = charactPoints
+    allObjects['tahitiAirport'] = tahitiAirports
     allObjects['fdp'] = fdp
     allObjects['aoi'] = aoi
     allObjects['fpl'] = fpl

@@ -8,10 +8,10 @@ __copyright__ =""
 
 import Convertion
 
-print "CharcteristicsPoints Charge =) "
-characteristisPoints = {} # dictionaire de CharacteristisPoints : { (x) : instance}
+print "CharcteristicPoints Charge =) "
+characteristicPoints = {} # dictionaire de CharacteristicPoints : { (x) : instance}
 
-class CharacteristisPoint :
+class CharacteristicPoint :
     #number = 0 #numéro du points dans la liste
     
     def __init__(self, donnees):
@@ -32,7 +32,7 @@ class CharacteristisPoint :
         """    
 
         self.addVariables(donnees)
-        characteristisPoints[str(self.name)] = self # Ajout du point au dictionaire
+        characteristicPoints[str(self.name)] = self # Ajout du point au dictionaire
 
     def addVariables (self, donnees) :
         """ Disperssion des données """
@@ -89,6 +89,12 @@ def initCP (adresse):
         #supprime lignes commentées et lignes vides
         if line[0] != "-" and line[0] != "/" and len(line) > 10 : 
             line=line[0:-1]
-            cPoint = CharacteristisPoint(str(line))
+            cPoint = CharacteristicPoint(str(line))
     cp.close()
-    return characteristisPoints
+    # defines the airports owned by the Tahiti FIR
+    tahitiAirports = []
+    for key in characteristicPoints :
+        cp = characteristicPoints[key]
+        if cp.name[:2] == 'NT' and 'AIRPORT' in cp.theType:
+            tahitiAirports.append(cp.name)
+    return characteristicPoints, tahitiAirports

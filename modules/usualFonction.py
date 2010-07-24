@@ -136,8 +136,8 @@ def findIntersection(line1 ,line2) :
     return intersection
 
 def log(fileName, string, mode):
-    date = strftime("%d%b%Y", gmtime())
-    time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
+    date = strftime("%Y%m%d-%H%M%S", gmtime())
+    #time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
     file = open(filename + date + '.log', mode)
     file.write(string)
     file.close()
