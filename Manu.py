@@ -28,25 +28,25 @@ print ""
 #adresse2 = r'/media/Manu/DTI/Sources/'
 #lstFplFile = os.listdir(adresse)
 #for file in lstFplFile :
-	#if '.7z' in file :
-		#print "7z e " + adresse2 + str(file)
-		#os.system("7z e " + adresse + str(file)) 
-	
+    #if '.7z' in file :
+        #print "7z e " + adresse2 + str(file)
+        #os.system("7z e " + adresse + str(file)) 
+    
 
 allObjects = GetOfFiles.getOfFile()
 makeFile = allObjects['makeFile']
 if makeFile['characteristicsPoints'] == 'yes':
-	kmlCP = MakeKML.addAllCharacteristicsPoints(allObjects)
+    kmlCP = MakeKML.addAllCharacteristicsPoints(allObjects)
 if makeFile['routes'] == 'yes':
-	kmlRT = MakeKML.addRoutes(allObjects)
+    kmlRT = MakeKML.addRoutes(allObjects)
 if makeFile['fir'] == 'yes':
-	kmlST = MakeKML.addSector(allObjects)
+    kmlST = MakeKML.addSector(allObjects)
 if makeFile['fpl'] == 'yes':
-	kmlFP = MakeKML.addFpl(allObjects)
+    kmlFP = MakeKML.addFpl(allObjects)
 if makeFile['ads'] == 'yes':
-	kmlFP = MakeKML.addAds(allObjects)
+    kmlFP = MakeKML.addAds(allObjects)
 if makeFile['main'] == 'yes':
-	kmlMain = MakeKML.addMain(allObjects)
+    kmlMain = MakeKML.addMain(allObjects)
 
 kmz = MakeKMZ.makeFile(allObjects)
 #os.system("c:/windows/notepad.exe monfichier.log")
