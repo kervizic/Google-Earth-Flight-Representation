@@ -1,6 +1,8 @@
 from math import *
 from decimal import *
 from Convertion import *
+from time import gmtime, strftime
+from datetime import datetime, timedelta
 
 AROUND = 10e15
 
@@ -135,10 +137,10 @@ def findIntersection(line1 ,line2) :
             intersection = i1    
     return intersection
 
-def log(fileName, string, mode):
+def writeLog(fileName, string):
     date = strftime("%Y%m%d-%H%M%S", gmtime())
     #time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
-    file = open(filename + date + '.log', mode)
+    file = open('log/' + fileName + date + '.log', 'w')
     file.write(string)
     file.close()
     

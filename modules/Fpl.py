@@ -21,8 +21,8 @@ FPL = re.compile("""\
 """)
     
 class Fpl (object):
-
     
+    log = ''
     def __init__(self, donnees, date, points, routes):
         """
         # Creation of a new route
@@ -50,13 +50,6 @@ class Fpl (object):
         # Add a fpl at the dictionary
         if str(self.name) in fpl :
             del fpl[str(self.name)]
-            date = strftime("%d%b%Y", gmtime())
-            time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
-            string = ('Reload instance = ' + str(time) + ' - Flight : ' +
-                self.name + '\n')
-            file = open('LogError' + date + '.log',"a")
-            file.write(string)
-            file.close()
             
         fpl[str(self.name)] = self
         
@@ -136,9 +129,13 @@ class Fpl (object):
                     int(dTime[0:2]),
                     int(dTime[2:])
                     )
+                #print self.deparatureTime
             else : 
-                print 'Errur de dof: ' +  str(dof)
-        else :
+                Fpl.log += ('DOF error = Flight : ' +
+                    self.name + ' - new deparature time :' +
+                    str(self.deparatureTime) + '\n')
+                    
+        if self.deparatureTime.year == 2000 :
             # determines the day of departure from the day and time 
             # the message was sent. the day of departure is the same as 
             # that of sending the following message it was sent within 
@@ -171,15 +168,10 @@ class Fpl (object):
                     int(dTime[0:2]),
                     int(dTime[2:])
                     )
-            date = strftime("%d%b%Y", gmtime())
-            time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
-            string = ('No DOF = ' + str(time) + ' - Flight : ' +
-                self.name + ' | new deparature time :' +
+            Fpl.log += ('No DOF = Flight : ' +
+                self.name + ' - new deparature time :' +
                 str(self.deparatureTime) + '\n')
-            file = open('LogError' + date + '.log',"a")
-            file.write(string)
-            file.close()
-        
+
     def addPoints (self) :
         pointsAndRoutes = self.pointsAndRoutes
         self.listOfPoints=[]
@@ -260,7 +252,6 @@ class Fpl (object):
         self.log += '\t================\n'
         for x in xrange(len(self.listOfPoints)):
             point = self.listOfPoints[x]
-            
             if point in self.defPoints :
                 defPoint = self.defPoints[self.listOfPoints[x]]
                 coordinate = defPoint.decimalCoordinate
@@ -273,39 +264,23 @@ class Fpl (object):
                     }
                 i += 1
                 self.log += '\tPoint:' + str(point) + '\n'
-            elif len(point) == 7 or len(point) == 11 or len(point) == 15:
-                self.log += '\tCoordinate:' + str(point) + '\n'
-                try :
-                    coordinate = Convertion.convertCoordinate(point)
-                except ValueError :
-                    date = strftime("%d%b%Y", gmtime())
-                    time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
-                    string = ('Error of point = ' + str(time) + ' - Flight : ' +
-                        self.name + ' Point = ' + point + '\n')
-                    file = open('LogError' + date + '.log',"a")
-                    file.write(string)
-                    file.close()
-                name = point
-                self.points[i]= {
-                    'coordinate' : coordinate,
-                    'name' : name,
-                    'altitude' : self.altitude[name],
-                    'speed' : self.speed[name]
-                    }
-                i += 1
             elif point == 'DCT' or point == '':
                 self.log += '\tRemove:' + str(point) + '\n'
-                pass
             else :
-                date = strftime("%d%b%Y", gmtime())
-                time = strftime("%a, %d %b %Y %H:%M:%S (DST Time): ", gmtime())
-                string = ('Unknown point = ' + str(time) + ' - Flight : ' +
-                    self.name +    ' - Point : ' + point + '\n')
-                file = open('LogError' + date + '.log',"a")
-                file.write(string)
-                file.close()
-                self.log += '\tUnknown:' + str(point) + '\n'
-                        
+                 try :
+                    coordinate = Convertion.convertCoordinate(point)
+                    name = point
+                    self.points[i]= {
+                        'coordinate' : coordinate,
+                        'name' : name,
+                        'altitude' : self.altitude[name],
+                        'speed' : self.speed[name]
+                        }
+                    i += 1
+                 except :
+                    Fpl.log += ('POINT error = Flight : ' +
+                    self.name + '     Point: ' +
+                    str(point) + '\n')
         #print self.name
         #if selfprint self.points
 
@@ -379,6 +354,8 @@ def initFPL (adresse, points, routes, newFpl = {}):
     lstFplFile = os.listdir(adresse)
     for file in lstFplFile :
         if 'FDX' in file :
+            log += '=======================\n'
+            log += 'File : ' + str(file) + '\n\n'
             lineClean = []
             line2 = ''
             lstFpl = []
@@ -410,7 +387,6 @@ def initFPL (adresse, points, routes, newFpl = {}):
                     line2 = ''
                     theLine += str(line) + ' '
                 elif isFPL == True and ETX in line:
-                    print 'Fatal error'
                     isFPL = False
                     line2 = str(theLine)
                     getLine = True
@@ -451,21 +427,12 @@ def initFPL (adresse, points, routes, newFpl = {}):
                 date = theFpl['date']
                 result = FPL.search(line)
                 if result :
-                    #print result.group(0)
-                    #print result.group(1)
-                    #print result.group(2)
-                    #print result.group(3)
-                    #print result.group(4)
-                    #print result.group(5)
-                    #print result.group(6)
-                    #print result.group(7)
-                    #print result.group(8)
-                    #print result.group(9)
-                    pass
+                    line = result.group(0)
+                    fplObject = Fpl(line, date, points, routes)
                 else :
-                    print 'KO' + line
+                    log += '   Bad line for :' + line + ' at ' + str(date) +'\n'
 
                 #fplObject = Fpl(line, date, points, routes)
-        
-    
+    allLog = log + '\n\n\n' + Fpl.log    
+    writeLog('BadFpl',allLog)
     return fpl
