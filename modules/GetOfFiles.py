@@ -105,7 +105,8 @@ def getOfFile () :
     aoi = Aoi.initAOI(adresse)
 
     adresse = path['fplFilePath']
-    fpl = Fpl.initFPL(adresse, charactPoints, routes['codedRoutes'])
+    fpl = Fpl.initFPL(adresse, charactPoints, routes['codedRoutes'], 
+        tahitiAirports)
     
     adresse = path['adsFilePath']
     ads = Ads.initADS(adresse, charactPoints, routes['codedRoutes'], fpl)

@@ -66,17 +66,11 @@ lookAt['heading'] # String
 <visibility> %i </visibility>
 <description><![CDATA[ %s ]]></description>
 <styleUrl>#%s</styleUrl>
-<TimeSpan>
-<begin> %s </begin>
-<end> %s </end>
-</TimeSpan>
 """ % (
 name,
 visibility,
 description,
 style,  # String
-begin,
-end
 )
         if begin and end :
             self.kml += """\
@@ -315,7 +309,7 @@ name,
 visibility,
 description,
 'FF' + str(color[2:]),
-width,
+'0.5',
 color
 )
         self.kml +="""\

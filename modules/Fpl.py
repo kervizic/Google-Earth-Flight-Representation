@@ -23,7 +23,7 @@ FPL = re.compile("""\
 class Fpl (object):
     
     log = ''
-    def __init__(self, donnees, date, points, routes):
+    def __init__(self, donnees, date, points, routes, airport):
         """
         # Creation of a new route
         #
@@ -34,17 +34,19 @@ class Fpl (object):
         # self.odds = str        ODDS/EVENS or NONE
         # self.points = []         is the list of points of the route
          """
-        self.defPoints         = points
-        self.defRoutes         = routes
+        self.defPoints       = points
+        self.defRoutes       = routes
+        self.defAirport      = airport
         self.description     = donnees
-        self.messageTime    = date
-        self.points         = {}
-        self.altitude         = {}
-        self.speed             = {}
-        self.name             = ''
-        self.trajectTime    = {}
-        self.deparatureTime    = datetime(2000,1,1)
-        self.estimatedTime    = timedelta(0)
+        self.messageTime     = date
+        self.points          = {}
+        self.altitude        = {}
+        self.speed           = {}
+        self.name            = ''
+        self.trajectTime     = {}
+        self.deparatureTime  = datetime(2000,1,1)
+        self.estimatedTime   = timedelta(0)
+        self.flightStatus    = ''
 
         self.definition(donnees)
         # Add a fpl at the dictionary
@@ -52,13 +54,6 @@ class Fpl (object):
             del fpl[str(self.name)]
             
         fpl[str(self.name)] = self
-        
-        #time = strftime("%d%b%Y-%H:%M", gmtime())
-        #file = open('LogFpl' + time + '.log',"a")
-        #file.write(self.log)
-        #file.close()
-        #if self.name == 'ANZ1-KLAX0430' : 
-            #print 'Depart de : ' + str(self.name) + ' a ' + str(self.deparatureTime)
 
     def definition (self, donnees) :
         """ 
@@ -102,17 +97,34 @@ class Fpl (object):
             self.destinationAerodrome = str(tabDonnees[7][0:4])
             self.eTime = str(tabDonnees[7][4:8])
             self.comments = tabDonnees[8]
-            self.name = (str(self.aircraftID) +'-'+
-                str(self.deparatureAerodrome) + str(self.dTime))
             self.estimatedTime = timedelta(
                 hours = int(self.eTime[0:2]), 
                 minutes = int(self.eTime[2:])
                 )
-            self.log = str(self.name) + '\n'
             self.setDeparatureTime()
             self.addPoints()
             self.setDistance()
             self.addTime()
+            self.setFlightPlanStatus()
+            self.name = (str(self.aircraftID) +'-'+
+                str(self.deparatureAerodrome) + '-' +
+                self.deparatureTime.strftime("%Y%m%d-%H%M")
+                )
+    
+    def setFlightPlanStatus(self):
+        """
+        define with the deparature and arival aerodrome if the flight is :
+        in, out, transit or internal.
+        """
+        if self.deparatureAerodrome in self.defAirport :
+            if self.destinationAerodrome in self.defAirport :
+                self.flightStatus = 'internal'
+            else :
+                self.flightStatus = 'out'
+        elif self.destinationAerodrome in self.defAirport :
+            self.flightStatus = 'in'
+        else :
+            self.flightStatus = 'transit'
             
 
     def setDeparatureTime(self):
@@ -200,13 +212,10 @@ class Fpl (object):
                     self.altitude[pointsAndRoutes[x]] = curentAltitude
                     self.speed[pointsAndRoutes[x]] = curentSpeed
         for x in xrange(len(pointRoute)):
-            self.log += '\t' + str(pointRoute[x]) + '\n'
             if pointRoute[x] in self.defPoints :
                 point = self.defPoints[pointRoute[x]]
                 self.listOfPoints.append(point.name)
-                self.log += '\tPoint:' + str(point.name) + '\n'
             elif pointRoute[x] in self.defRoutes :
-                self.log += '\tRoute:' + str(pointRoute[x]) + '\n'
                 route = self.defRoutes[pointRoute[x]]
                 curentRouteAltitude = self.altitude[pointRoute[x]]
                 curentRouteSpeed = self.speed[pointRoute[x]]
@@ -218,7 +227,6 @@ class Fpl (object):
                         yDebut = y
                     elif route.points[y] == pointRoute[x+1] :
                         yFin = y
-                self.log += '\t\tDebut: ' + str(yDebut) + ' ,Fin: ' + str(yFin) +'\n'
                 if yDebut == -1 or yFin == -1 :
                     pass
                 elif yDebut < yFin :
@@ -230,7 +238,6 @@ class Fpl (object):
                     for i in xrange(len(listPoint)) :
                         point = listPoint[i]
                         self.listOfPoints.append(point)
-                        self.log += '\t\tPoint: ' + point +'\n'
                 else :
                     for i in range(yFin+1, yDebut) :
                         point = route.points[i]
@@ -241,7 +248,6 @@ class Fpl (object):
                     for i in xrange(len(listPoint)) :
                         point = listPoint[i]
                         self.listOfPoints.insert(leng, point)
-                        self.log += '\t\tPoint: ' + point + ' leng: ' + str(leng) + '\n'
             else :
                 self.listOfPoints.append(pointRoute[x])
         self.listOfPoints.append(self.destinationAerodrome)
@@ -249,7 +255,6 @@ class Fpl (object):
         self.speed[self.destinationAerodrome] = curentSpeed
 
         i = 0
-        self.log += '\t================\n'
         for x in xrange(len(self.listOfPoints)):
             point = self.listOfPoints[x]
             if point in self.defPoints :
@@ -263,9 +268,8 @@ class Fpl (object):
                     'speed' : self.speed[name]
                     }
                 i += 1
-                self.log += '\tPoint:' + str(point) + '\n'
             elif point == 'DCT' or point == '':
-                self.log += '\tRemove:' + str(point) + '\n'
+                pass
             else :
                  try :
                     coordinate = Convertion.convertCoordinate(point)
@@ -328,7 +332,8 @@ class Fpl (object):
             point['estimatedPointTime'] = time
             point['estimatedTotalTime'] = lastTime + time
         
-            #print 'Estimated = Total :' + str(totalTime) + ' time :'+ str(time) + ' lastTime :' + str(lastTime + time)
+            #print 'Estimated = Total :' + str(totalTime) + ' time :'+ 
+                        #str(time) + ' lastTime :' + str(lastTime + time)
         # Depending on the speed of the aircraft
         # speed is given in miles per hour and the distance in miles
         self.points[0]['calculateTotalTime'] = timedelta(minutes=0)
@@ -345,11 +350,12 @@ class Fpl (object):
             point['calculatePointTime'] = time
             point['calculateTotalTime'] = lastTime + time
         
-            #print 'Calculate = Total :' + str(totalTime) + ' time :'+ str(time) + ' lastTime :' + str(lastTime + time)
+            #print 'Calculate = Total :' + str(totalTime) + ' time :'+ 
+                            #str(time) + ' lastTime :' + str(lastTime + time)
                 
-def initFPL (adresse, points, routes, newFpl = {}):
+def initFPL (adresse, points, routes, airport):
     """ Analysele fichier FDX """
-
+    print 'Debut du traitement des FPL'
     log = ''
     lstFplFile = os.listdir(adresse)
     for file in lstFplFile :
@@ -428,11 +434,12 @@ def initFPL (adresse, points, routes, newFpl = {}):
                 result = FPL.search(line)
                 if result :
                     line = result.group(0)
-                    fplObject = Fpl(line, date, points, routes)
+                    fplObject = Fpl(line, date, points, routes, airport)
                 else :
-                    log += '   Bad line for :' + line + ' at ' + str(date) +'\n'
+                    log += '  Bad line for :' + line + ' at ' + str(date) +'\n'
 
                 #fplObject = Fpl(line, date, points, routes)
     allLog = log + '\n\n\n' + Fpl.log    
     writeLog('BadFpl',allLog)
+    print 'Fin du traitement des FPL'
     return fpl

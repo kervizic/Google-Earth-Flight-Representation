@@ -15,6 +15,7 @@ from time import gmtime, strftime
 from datetime import datetime, timedelta
 
 ads = {}     # dictionary of Ads: { (x) : instance}
+adsId = {}
     
 class Ads (object):
 
@@ -37,7 +38,8 @@ class Ads (object):
          """
         self.points         = {}
         self.tracks         = {}
-        self.name             = name
+        self.name             = name + '-' + time.strftime('%Y%m%d-%H%M')
+        adsId[name] = self.name
         self.firstTime    = time
         self.nbPoints = 0
         self.nbTracks = 0
@@ -45,11 +47,12 @@ class Ads (object):
         ads[str(self.name)] = self
         
 
-    def addPoints (self, type, description, time, latitude, longitude, altitude = 0) :
+    def addPoints (self, type, description, time, latitude, longitude, 
+    altitude = 0, pointN = {}, pointN1 = {}) :
         """
         Add points
         """
-        self.points[self.nbPoints] = {
+        point = {
             'type' : type,
             'time' : time,
             'latitude' : float(latitude),
@@ -57,9 +60,23 @@ class Ads (object):
             'altitude' : altitude,
             'description' : description
             }
+        if pointN:
+            lat = pointN['latitude']
+            long = pointN['longitude']
+            if lat and long :
+                point['latitudeN'] = lat
+                point['longitudeN'] = long
+        if pointN1:
+            lat = pointN1['latitude']
+            long = pointN1['longitude']
+            if lat and long :
+                point['latitudeN1'] = lat
+                point['longitudeN1'] = long
+        self.points[self.nbPoints] = point
         self.nbPoints += 1
     
-    def addTracks (self, type, description, time, latitude, longitude, altitude = 0) :
+    def addTracks (self, type, description, time, latitude, longitude, 
+    altitude = 0) :
         """
         Add Track : Point calculated by the TIARE systeme
         """
@@ -73,23 +90,29 @@ class Ads (object):
             }
         self.nbTracks += 1
         
-    def addPeriodic (self, description, time, latitude, longitude, altitude) :
+    def addPeriodic (self, description, time, latitude, longitude, altitude, 
+    pointN = {}, PointN1 = {}) :
         """
         Add PERIODIC REPORT
         """
-        self.addPoints('Periodic Report', description, time, latitude, longitude, altitude)
+        self.addPoints('Periodic Report', description, time, latitude, 
+            longitude, altitude, pointN, PointN1)
     
-    def addAltitudeEvent (self, description, time, latitude, longitude, altitude) :
+    def addAltitudeEvent (self, description, time, latitude, longitude, 
+    altitude) :
         """
         Add ALTITUDE RANGE DEVIATION EVENT 
         """
-        self.addPoints('Altitude Deviation', description, time, latitude, longitude, altitude)
+        self.addPoints('Altitude Deviation', description, time, latitude, 
+            longitude, altitude)
 
-    def addWaypointEvent (self, description, time, latitude, longitude, altitude) :
+    def addWaypointEvent (self, description, time, latitude, longitude, 
+    altitude, pointN = {}, PointN1 = {}) :
         """
         Add WAYPOINT CHANGE EVENT
         """
-        self.addPoints('Waypoint Change', description, time, latitude, longitude, altitude)
+        self.addPoints('Waypoint Change', description, time, latitude, 
+            longitude, altitude, pointN, PointN1)
         
 def initADS (adresse, points, routes, fpl):
     #""" Analysele fichier ADS """
@@ -120,42 +143,32 @@ def initADS (adresse, points, routes, fpl):
     return ads
 
 def buildAds (adsLine, date) :
+    print 'Debut du traitement des ADS'
     
     raz = True
     
-    logonRe = re.compile(
-        '([0-9]{2}):([0-9]{2}):([0-9]{2}) LOGON RECEIVED from (.+)'
-        )
-    logonCoordinateRe = re.compile(
-        'Aircraft indicates position ([NS])([0-9]+)([EW])([0-9]+)'
-        )
-    periodicRe = re.compile(
-        'PERIODIC REPORT REPORT RECEIVED for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})'
-        )
-    waypointRe = re.compile(
-        'WAYPOINT CHANGE EVENT REPORT RECEIVED for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})'
-        )
-    altitudeRe = re.compile(
-        'ALTITUDE RANGE DEVIATION EVENT REPORT RECEIVED for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})'
-        )
-    coordinateRe = re.compile(
-        'Basic Group  Lat :(.+) Long :(.+) Alt :(.+)'
-        )
-    trackRe =  re.compile(
-        'start extrapolation for (.+) at: ([0-9]{2}):([0-9]{2}):([0-9]{2})'
-        )
-    trackLatLongRe =  re.compile(
-        'Position Lat : ?(.+) Long: ?(.+)'
-        )
-    trackAltRe =  re.compile(
-        'Altitude : ?(.+)'
-        )
-    reportRe = re.compile(
-        'Report is correct'
-        )
-    endTrackRe = re.compile(
-        'TRACK extrapolation completed'
-        )
+    logonRe = re.compile("""([0-9]{2}):([0-9]{2}):([0-9]{2}) LOGON RECEIVED fr\
+om (.+)""")
+    logonCoordinateRe = re.compile("""Aircraft indicates position ([NS])([0-9]\
++)([EW])([0-9]+)""")
+    periodicRe = re.compile("""PERIODIC REPORT REPORT RECEIVED for aircraft (.\
++) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})""")
+    waypointRe = re.compile("""WAYPOINT CHANGE EVENT REPORT RECEIVED for aircr\
+aft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})""")
+    altitudeRe = re.compile("""ALTITUDE RANGE DEVIATION EVENT REPORT RECEIVED \
+for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})""")
+    coordinateRe = re.compile("""Basic Group  Lat :(.+) Long :(.+) Alt :(.+)\
+""")
+    trackRe =  re.compile("""start extrapolation for (.+) at: ([0-9]{2}):([0-9\
+]{2}):([0-9]{2})""")
+    trackLatLongRe =  re.compile("""Position Lat : ?(.+) Long: ?(.+)""")
+    trackAltRe =  re.compile("""Altitude : ?(.+)""")
+    nextRe = re.compile("""NEXT Lat : *(-?[0-9]{1,2}.[0-9]+) *Long : *(-?[0-9]\
+{1,3}.[0-9]+) *Alt : ([0-9]*) at ([0-9:]*)""")
+    next1Re = re.compile("""NEXT \+ 1 Lat : *(-?[0-9]{1,2}.[0-9]+) *Long : *(-\
+?[0-9]{1,3}.[0-9]+) *Alt : *([0-9]*)""")    
+    reportRe = re.compile("""Report is correct""")
+    endTrackRe = re.compile("""TRACK extrapolation completed""")
     
     i = 0
     l = 0    
@@ -175,10 +188,13 @@ def buildAds (adsLine, date) :
             longitude = ''
             latitude = ''
             altitude = ''
+            pointN = {}
+            pointN1 = {}
             description = []
             time = False
             raz = False
             i = 0
+            searchNext = False
 
         # Logon
         resultat = logonRe.search(line)
@@ -212,7 +228,10 @@ def buildAds (adsLine, date) :
         # PERIODIC REPORT
         result = periodicRe.search(line)
         if result :
+            searchNext = True
             i = 25
+            pointN = {}
+            pointN1 = {}
             periodic = result.group(1)
             time = datetime(
                 date.year,
@@ -226,6 +245,8 @@ def buildAds (adsLine, date) :
         result = altitudeRe.search(line)
         if result :
             i = 5
+            pointN = {}
+            pointN1 = {}
             altitudeEvent = result.group(1)
             time = datetime(
                 date.year,
@@ -238,7 +259,10 @@ def buildAds (adsLine, date) :
         # WAYPOINT CHANGE EVENT
         result = waypointRe.search(line)
         if result :
+            searchNext = True
             i = 10
+            pointN = {}
+            pointN1 = {}
             waypointEvent = result.group(1)
             time = datetime(
                 date.year,
@@ -276,6 +300,25 @@ def buildAds (adsLine, date) :
             latitude = result.group(1)
             longitude = result.group(2)
             altitude = result.group(3) 
+        # Coordinate for next point
+        if searchNext :
+            # Next point
+            result = nextRe.search(line)
+            if result :
+                pointN = {
+                    'latitude' : result.group(1),
+                    'longitude' : result.group(2),
+                    'altitude' : result.group(3),
+                    'at' : result.group(4)
+                    }
+            # Next Point +1
+            result = next1Re.search(line)
+            if result :
+                pointN1 = {
+                    'latitude' : result.group(1),
+                    'longitude' : result.group(2),
+                    'altitude' : result.group(3)
+                    }
         
         # Add the file lines in description argument
         if logon or periodic or waypointEvent or altitudeEvent or track:
@@ -287,7 +330,8 @@ def buildAds (adsLine, date) :
         
         # creating a new object has the appearance of a logon.
         if logon and longitude and latitude :
-            #print 'Logon : ' + str(logon) + ' at ' + str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + str(longitude)
+            #print 'Logon : ' + str(logon) + ' at ' + str(time) + ' Lat : ' + 
+                #str(latitude) + ' - Long : ' + str(longitude)
             adsObject = Ads(logon, description, time, latitude, longitude)
             # reset attributes
             raz = True
@@ -296,24 +340,55 @@ def buildAds (adsLine, date) :
         result = reportRe.search(line)
         if result :
             if periodic :
-                #print '\tPeriodic : ' + str(periodic) + ' at ' + str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + str(longitude)
-                ads[periodic].addPeriodic(description, time, latitude, longitude, altitude)
+                #print '\tPeriodic : ' + str(periodic) + ' at ' + str(time) + 
+                    #' Lat : ' + str(latitude) + ' - Long : ' + str(longitude)
+                ads[adsId[periodic]].addPeriodic(
+                    description, 
+                    time, 
+                    latitude, 
+                    longitude, 
+                    altitude,
+                    pointN,
+                    pointN1
+                    )
             elif waypointEvent :
-                #print '\tWaypoint : ' + str(waypointEvent) + ' at ' + str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + str(longitude)
-                ads[waypointEvent].addWaypointEvent(description ,time, latitude, longitude, altitude)
+                #print '\tWaypoint : ' + str(waypointEvent) + ' at ' + 
+                    #str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + 
+                    #str(longitude)
+                ads[adsId[waypointEvent]].addWaypointEvent(
+                    description,
+                    time, 
+                    latitude, 
+                    longitude, 
+                    altitude,
+                    pointN,
+                    pointN1
+                    )
             elif altitudeEvent :
-                #print '\tAltitude : ' + str(altitudeEvent) + ' at ' + str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + str(longitude)
-                ads[altitudeEvent].addAltitudeEvent(description, time, latitude, longitude, altitude)
+                #print '\tAltitude : ' + str(altitudeEvent) + ' at ' + 
+                    #str(time) + ' Lat : ' + str(latitude) + ' - Long : ' + 
+                    #str(longitude)
+                ads[adsId[altitudeEvent]].addAltitudeEvent(
+                    description, 
+                    time, 
+                    latitude, 
+                    longitude, 
+                    altitude
+                    )
             # reset attributes
             raz = True
         
         # Adding track.
         result = endTrackRe.search(line)
         if result and track:
-            ads[track].addTracks('TRACK', description, time, latitude, longitude, altitude)
+            ads[adsId[track]].addTracks(
+                'TRACK', 
+                description, 
+                time, latitude, 
+                longitude, 
+                altitude
+                )
 
             # reset attributes
             raz = True
-    #fplFile.close()
-    
-    #return fpl
+    print 'Fin du traitement des ADS'

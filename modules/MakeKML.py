@@ -25,15 +25,16 @@ def addCharctPoint (kml, point, visibility, style, lookAt) :
     position = lookAt.copy()
     position['longitude'] = point.longitude
     position['latitude'] = point.latitude
-    description = [
-        '<p>',
-        'Type of the point : ' +  point.theType + '<br>',
-        'Rel fix :' + str(point.relFix) + '<br>',
-        'Airport List fixes : ' + str(point.airportListFixes) + '<br>',
-        'PIL display : ' + str(point.pilDisplay) + '<br>',
-        'DTI : ' + str(point.dti) + '<br>',
-        'Comment : ' + str(point.comment) + '<br>',
-        '</p>']
+    description = (
+        '<p>'+
+        'Type of the point : ' +  point.theType + '<br>'+
+        'Rel fix :' + str(point.relFix) + '<br>'+
+        'Airport List fixes : ' + str(point.airportListFixes) + '<br>'+
+        'PIL display : ' + str(point.pilDisplay) + '<br>'+
+        'DTI : ' + str(point.dti) + '<br>'+
+        'Comment : ' + str(point.comment) + '<br>'+
+        '</p>'
+        )
     kml.addPlacemark(
         point.name ,
         description ,
@@ -159,13 +160,14 @@ def addRoutes(allObjects) :
         visibility = True
         width = 1
         name = cp[key].name
-        description = ['sense : ' + str(cp[key].sense),]
+        description = 'sense : ' + str(cp[key].sense)
         i=0
         points = {}
         for p in cp[key].points :
             points[i] = allObjects['charactPoints'][p].decimalCoordinate
             i += 1
-        writeKml = kml.addLine (name ,description, color, points, visibility, width)
+        writeKml = kml.addLine(name ,description, color, 
+            points, visibility, width)
     #print "Coded line OK"
     kml.close_folder()
     
@@ -179,14 +181,15 @@ def addRoutes(allObjects) :
         visibility = True
         width = 1
         name = cp[key].name
-        description = ['<b>airport: </b>' + str(cp[key].airport) + '<br>',
-            '<b>Assigned RWY</b> : ' + str(cp[key].assigned)]
+        description = ('<b>airport: </b>' + str(cp[key].airport) + '<br>'+
+            '<b>Assigned RWY</b> : ' + str(cp[key].assigned))
         i=0
         points = {}
         for p in cp[key].points :
             points[i] = allObjects['charactPoints'][p].decimalCoordinate
             i += 1
-        writeKml = kml.addLine (name ,description, color, points, visibility, width)
+        writeKml = kml.addLine (name ,description, color, points, 
+            visibility, width)
     #print "SID OK"
     kml.close_folder()
 
@@ -200,14 +203,15 @@ def addRoutes(allObjects) :
         visibility = True
         width = 1
         name = cp[key].name
-        description = ['<b>airport: </b>' + str(cp[key].airport) + '<br>',
-            '<b>Assigned RWY</b> : ' + str(cp[key].assigned)]
+        description = ('<b>airport: </b>' + str(cp[key].airport) + '<br>'+
+            '<b>Assigned RWY</b> : ' + str(cp[key].assigned))
         i=0
         points = {}
         for p in cp[key].points :
             points[i] = allObjects['charactPoints'][p].decimalCoordinate
             i += 1
-        writeKml = kml.addLine (name ,description, color, points, visibility, width)
+        writeKml = kml.addLine (name ,description, color, points, 
+            visibility, width)
     #print "STAR OK"
     kml.close_folder()
 
@@ -296,140 +300,163 @@ def addFpl(allObjects) :
         1)
 
     kml = addStyle(kml, allObjects)
-    
+    status = ['in', 'out', 'transit', 'internal']
     fpl = allObjects['fpl']
-
-    for key in sorted(fpl) :
-        theFpl = fpl[key]
-        name = theFpl.name
-        description = fpl[key].description
-        isOpen = 0
-        kml.open_folder(name, description, isOpen)    
-        deparatureTime = theFpl.deparatureTime
-        estimatedTime = theFpl.estimatedTime
-        arrivalTime = deparatureTime + estimatedTime
-        color = '8F000000'
-        visibility = True
-        width = 1
-        i=0
-        points = {}
-        description = [fpl[key].name,fpl[key].description]
-        for p in theFpl.points :
-            points[i] = fpl[key].points[p]['coordinate']
-            i += 1
-        begin = deparatureTime.strftime("%Y-%m-%dT%H:%MZ")
-        end = arrivalTime.strftime("%Y-%m-%dT%H:%MZ")
-        writeKml = kml.addLine (name ,description, color, points,
-            visibility, width, begin, end)    
-        x = random()
-        x = x *16**6
-        x = hex(int(x))
-        tmpColor = 'FF' + str(x[2:].zfill(6))
-        # add the flight in thge time
-        for i in xrange(len(theFpl.points)-1) :
-            tmpPoints = {}
-            tmpPoints[0] = theFpl.points[i]['coordinate']
-            tmpPoints[1] = theFpl.points[i+1]['coordinate']
-            if tmpPoints[0] != tmpPoints[1] :
-                tmpName = (
-                    str(theFpl.points[i]['name']) + '-' +
-                    str(theFpl.points[i+1]['name'])
-                    )
-                tmpBegin = (
-                    deparatureTime + 
-                    theFpl.points[i]['estimatedTotalTime']
-                    )
-                tmpEnd = (
-                    deparatureTime + 
-                    theFpl.points[i+1]['estimatedTotalTime']
-                    )
-                begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")
-                end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
-                tmpWidth = 4
-                tmpDescription = [
-                     str(tmpBegin.strftime("%H:%M")) + '-' +
-                     str(tmpEnd.strftime("%H:%M")),
-                     ]
-                position = lookAt.copy()
-                position['longitude'] = tmpPoints[0]['longitude']
-                position['latitude'] = tmpPoints[0]['latitude']
-                description =''
-                style = 'avion'
-                ptName = str(tmpBegin.strftime("%H:%M-")) + str(name)
-                kml.addPlacemark(
-                    ptName,
-                    description ,
-                    position,
-                    visibility,
-                    style,
-                    begin,
-                    end
-                    )
-                kml.addLine (
-                    tmpName,
-                    tmpDescription, 
-                    tmpColor, 
-                    tmpPoints,    
-                    visibility, 
-                    tmpWidth, 
-                    begin, 
-                    end
-                    )
-                # Find intrsection with AOI
-                line1 = {
-                    'lat1' : tmpPoints[0]['latitude'],
-                    'long1' :  tmpPoints[0]['longitude'],
-                    'lat2' : tmpPoints[1]['latitude'],
-                    'long2' :  tmpPoints[1]['longitude'],
-                    }
-                aoi = allObjects['aoi']['aoi']
-                for key in aoi :    
-                    aoiPoints = aoi[key].points
-                    for j in xrange(len(aoiPoints)-1) :
-                        line2 = {
-                            'lat1' : aoiPoints[j].coordinate['latitude'],
-                            'long1' :  aoiPoints[j].coordinate['longitude'],
-                            'lat2' : aoiPoints[j+1].coordinate['latitude'],
-                            'long2' :  aoiPoints[j+1].coordinate['longitude'],
-                            }
-                        intersection = usualFonction.findIntersection(line1, line2)
-                        if intersection:
-                            distance = Convertion.distanceBetwennTwoPoint(
-                                intersection['latitude'], 
-                                intersection['longitude'], 
-                                tmpPoints[0]['latitude'], 
-                                tmpPoints[0]['longitude'], 
-                                theFpl.points[i]['altitude']
-                                )
-                            pToPTime = theFpl.points[i+1]['estimatedPointTime']
-                            pToPDistance =  theFpl.points[i+1]['lastPointDistance']
-                            iTime = pToPTime *int(distance * 1000000000 / pToPDistance)
-                            iTime =iTime  / 1000000000 
-                            intersectionTime = tmpBegin + iTime
-                            begin = deparatureTime.strftime("%Y-%m-%dT%H:%MZ")
-                            end = arrivalTime.strftime("%Y-%m-%dT%H:%MZ")
-                            position = lookAt.copy()
-                            position['longitude'] = intersection['longitude']
-                            position['latitude'] = intersection['latitude']
-                            description =''
-                            style = 'redCircle'
-                            ptName = str(intersectionTime.strftime("%H:%M - ")) + str(name)
-                            kml.addPlacemark(
-                                ptName,
-                                description ,
-                                position,
-                                visibility,
-                                style,
-                                begin,
-                                end
-                                )
+    
+    for stat in status :
+        name = allObjects['comment'][stat]
+        kml.open_folder(name, '', '0')
+        
+        for key in sorted(fpl) :
+            if fpl[key].flightStatus == stat :
+                theFpl = fpl[key]
+                name = theFpl.name
+                description = fpl[key].description
+                isOpen = 0
+                kml.open_folder(name, description, isOpen)    
+                deparatureTime = theFpl.deparatureTime
+                estimatedTime = theFpl.estimatedTime
+                arrivalTime = deparatureTime + estimatedTime
+                color = '8F000000'
+                visibility = True
+                width = 1
+                i=0
+                points = {}
+                description = (fpl[key].name + fpl[key].description)
+                for p in theFpl.points :
+                    points[i] = fpl[key].points[p]['coordinate']
+                    i += 1
+                begin = deparatureTime.strftime("%Y-%m-%dT%H:%MZ")
+                end = arrivalTime.strftime("%Y-%m-%dT%H:%MZ")
+                writeKml = kml.addLine (name ,description, color, points,
+                    visibility, width, begin, end)    
+                x = random()
+                x = x *16**6
+                x = hex(int(x))
+                tmpColor = 'FF' + str(x[2:].zfill(6))
+                # add the flight in thge time
+                for i in xrange(len(theFpl.points)-1) :
+                    tmpPoints = {}
+                    tmpPoints[0] = theFpl.points[i]['coordinate']
+                    tmpPoints[1] = theFpl.points[i+1]['coordinate']
+                    if tmpPoints[0] != tmpPoints[1] :
+                        tmpName = (
+                            str(theFpl.points[i]['name']) + '-' +
+                            str(theFpl.points[i+1]['name'])
+                            )
+                        tmpBegin = (
+                            deparatureTime + 
+                            theFpl.points[i]['estimatedTotalTime']
+                            )
+                        tmpEnd = (
+                            deparatureTime + 
+                            theFpl.points[i+1]['estimatedTotalTime']
+                            )
+                        begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")
+                        end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
+                        tmpWidth = 4
+                        tmpDescription = (
+                             str(tmpBegin.strftime("%H:%M")) + '-' +
+                             str(tmpEnd.strftime("%H:%M"))
+                             )
+                        position = lookAt.copy()
+                        position['longitude'] = tmpPoints[0]['longitude']
+                        position['latitude'] = tmpPoints[0]['latitude']
+                        description =''
+                        style = 'avion'
+                        ptName = str(tmpBegin.strftime("%H:%M-")) + str(name)
+                        kml.addPlacemark(
+                            ptName,
+                            description ,
+                            position,
+                            visibility,
+                            style,
+                            begin,
+                            end
+                            )
+                        kml.addLine (
+                            tmpName,
+                            tmpDescription, 
+                            tmpColor, 
+                            tmpPoints,    
+                            visibility, 
+                            tmpWidth, 
+                            begin, 
+                            end
+                            )
+                        # Find intrsection with AOI
+                        kml = findAoiIntersection(i, 
+                            kml,
+                            tmpPoints, 
+                            allObjects, 
+                            theFpl,
+                            lookAt,
+                            tmpBegin
+                            )       
+                kml.close_folder()
         kml.close_folder()
     #print "FPL line OK"
 
     kml.close()
     print "FPL file OK\n"
     return kml
-
+    
+def findAoiIntersection(i, kml, tmpPoints, allObjects, theFpl, lookAt, 
+tmpBegin) :
+    # Find intrsection with AOI
+    deparatureTime = theFpl.deparatureTime
+    estimatedTime = theFpl.estimatedTime
+    arrivalTime = deparatureTime + estimatedTime
+    line1 = {
+        'lat1' : tmpPoints[0]['latitude'],
+        'long1' :  tmpPoints[0]['longitude'],
+        'lat2' : tmpPoints[1]['latitude'],
+        'long2' :  tmpPoints[1]['longitude'],
+        }
+    aoi = allObjects['aoi']['aoi']  
+    aoiPoints = aoi['VCC1_AOI'].points
+    for j in xrange(len(aoiPoints)-1) :
+        line2 = {
+            'lat1' : aoiPoints[j].coordinate['latitude'],
+            'long1' :  aoiPoints[j].coordinate['longitude'],
+            'lat2' : aoiPoints[j+1].coordinate['latitude'],
+            'long2' : aoiPoints[j+1].coordinate['longitude'],
+            }
+        intersection = usualFonction.findIntersection(line1, line2)
+        if intersection:
+            distance = Convertion.distanceBetwennTwoPoint(
+                intersection['latitude'], 
+                intersection['longitude'], 
+                tmpPoints[0]['latitude'], 
+                tmpPoints[0]['longitude'], 
+                theFpl.points[i]['altitude']
+                )
+            pToPTime = theFpl.points[i+1]['estimatedPointTime']
+            pToPDistance =  theFpl.points[i+1]['lastPointDistance']
+            iTime = pToPTime *int(distance * 1000000000 / pToPDistance)
+            iTime =iTime  / 1000000000 
+            intersectionTime = tmpBegin + iTime
+            begin = deparatureTime.strftime("%Y-%m-%dT%H:%MZ")
+            end = arrivalTime.strftime("%Y-%m-%dT%H:%MZ")
+            position = lookAt.copy()
+            position['longitude'] = intersection['longitude']
+            position['latitude'] = intersection['latitude']
+            description =''
+            style = 'redCircle'
+            visibility = 1
+            ptName = ( str(intersectionTime.strftime("%H:%M - ")) + 
+                str(theFpl.name))
+            kml.addPlacemark(
+                ptName,
+                description ,
+                position,
+                visibility,
+                style,
+                begin,
+                end
+                )
+    return kml
+    
 def addAds(allObjects) :
     print 'Start ADS'
     kmlFileName = allObjects['comment']['AdsFileName']
@@ -453,7 +480,7 @@ def addAds(allObjects) :
         points = theAds.points
         tracks = theAds.tracks
         name = theAds.name
-        description = theAds.firstTime
+        description = str(theAds.firstTime)
         isOpen = 0
         kml.open_folder(name, description, isOpen)
         
@@ -468,8 +495,7 @@ def addAds(allObjects) :
         color = '8F999999'
         visibility = True
         width = 1
-        description=[]
-        description.append(theAds.firstTime)
+        description = str(theAds.firstTime)
         begin = deparatureTime.strftime("%Y-%m-%dT%H:%MZ")
         end = arrivalTime.strftime("%Y-%m-%dT%H:%MZ")
         writeKml = kml.addLine (name ,description, color, points,
@@ -498,21 +524,21 @@ def addAds(allObjects) :
                 begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")
                 end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
                 tmpWidth = 4
-                tmpDescription = [
+                tmpDescription = (
                     str(name),
                     str(tmpBegin.strftime("%H:%M")) + '-' +
                     str(tmpEnd.strftime("%H:%M"))
-                    ]
+                    )
                 position = lookAt.copy()
                 position['longitude'] = point['longitude']
                 position['latitude'] = point['latitude']
-                description = []
-                description.append('<p>')
+                description = '<p>'
                 for line in point['description']:
-                    description.append(line[:-1] + '<br>')
-                description.append('</p>')
+                    description += line[:-1] + '<br>'
+                description += '</p>'
                 style = 'avion2'
-                ptName = str(theAds.name) + ' : ' + str(point['type']) + ' - ' + str(point['time'].strftime("%H:%M"))
+                ptName = (str(theAds.name) + ' : ' + str(point['type']) + 
+                    ' - ' + str(point['time'].strftime("%H:%M")))
                 kml.addPlacemark(
                     ptName,
                     description ,
@@ -522,6 +548,40 @@ def addAds(allObjects) :
                     begin,
                     end
                     )
+                try :
+                    position['longitude'] = float(point['longitudeN'])
+                    position['latitude'] = float(point['latitudeN'])
+                    ptName = ptName + 'NEXT'
+                    description = ''
+                    style = 'avion4'
+                    kml.addPlacemark(
+                        ptName,
+                        description ,
+                        position,
+                        visibility,
+                        style,
+                        begin,
+                        end
+                        )
+                except : 
+                    pass
+                try :
+                    position['longitude'] = float(point['longitudeN1'])
+                    position['latitude'] = float(point['latitudeN1'])
+                    ptName = ptName + ' +1'
+                    description = ''
+                    style = 'avion4'
+                    kml.addPlacemark(
+                        ptName,
+                        description ,
+                        position,
+                        visibility,
+                        style,
+                        begin,
+                        end
+                        )
+                except :
+                    pass
                 kml.addLine (
                     tmpName,
                     tmpDescription, 
@@ -536,13 +596,13 @@ def addAds(allObjects) :
         position = lookAt.copy()
         position['longitude'] = point['longitude']
         position['latitude'] = point['latitude']
-        description = []
-        description.append('<p>')
+        description = '<p>'
         for line in point['description']:
-            description.append(line[:-1] + '<br>')
-        description.append('</p>')
+            description += line[:-1] + '<br>'
+        description += '</p>'
         style = 'avion2'
-        ptName = str(point['type']) + ' - ' + str(point['time'].strftime("%H:%M"))
+        ptName = (str(point['type']) + ' - ' + 
+            str(point['time'].strftime("%H:%M")))
         kml.addPlacemark(
             ptName,
             description ,
@@ -580,13 +640,13 @@ def addAds(allObjects) :
             position = lookAt.copy()
             position['longitude'] = track['longitude']
             position['latitude'] = track['latitude']
-            description = []
-            description.append('<p>')
+            description = '<p>'
             for line in track['description']:
-                description.append(line[:-1] + '<br>')
-            description.append('</p>')
+                description += line[:-1] + '<br>'
+            description += '</p>'
             style = 'avion3'
-            ptName = str(theAds.name) + ' : ' + str(track['type']) + ' - ' + str(track['time'].strftime("%H:%M"))
+            ptName = (str(theAds.name) + ' : ' + str(track['type']) + ' - ' + 
+                str(track['time'].strftime("%H:%M")))
             kml.addPlacemark(
                 ptName,
                 description ,
