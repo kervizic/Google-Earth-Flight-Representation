@@ -358,7 +358,7 @@ def initFPL (adresse, points, routes, airport):
     print 'Debut du traitement des FPL'
     log = ''
     lstFplFile = os.listdir(adresse)
-    for file in lstFplFile :
+    for file in sorted(lstFplFile) :
         if 'FDX' in file :
             log += '=======================\n'
             log += 'File : ' + str(file) + '\n\n'

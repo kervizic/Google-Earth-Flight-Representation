@@ -354,7 +354,7 @@ def addFpl(allObjects) :
                             )
                         begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")
                         end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
-                        tmpWidth = 4
+                        tmpWidth = 3
                         tmpDescription = (
                              str(tmpBegin.strftime("%H:%M")) + '-' +
                              str(tmpEnd.strftime("%H:%M"))
@@ -363,7 +363,7 @@ def addFpl(allObjects) :
                         position['longitude'] = tmpPoints[0]['longitude']
                         position['latitude'] = tmpPoints[0]['latitude']
                         description =''
-                        style = 'avion'
+                        style = 'blackRound'
                         ptName = str(tmpBegin.strftime("%H:%M-")) + str(name)
                         kml.addPlacemark(
                             ptName,
@@ -484,12 +484,8 @@ def addAds(allObjects) :
         isOpen = 0
         kml.open_folder(name, description, isOpen)
         
-        # Add TRACK
-        kml.open_folder(
-            'ADS', 
-            'Point calculated by the TIARE systeme', 
-            isOpen
-            )
+        # Add ADS and track
+        
         deparatureTime = theAds.firstTime
         arrivalTime = points[len(points)-1]['time']
         color = '8F999999'
@@ -506,24 +502,29 @@ def addAds(allObjects) :
         tmpColor = 'FF' + str(x[2:].zfill(6))
         # add the flight in thge time
         if len(points) > 1 :
-            for i in xrange(len(points)-1) :
+            for i in xrange(len(points)) :
                 tmpPoints = {}
+                point = False
+                nextPoint = False
                 tmpPoints[0] = point = points[i]
-                tmpPoints[1] = nextPoint = points[i+1]
+                try :
+                    tmpPoints[1] = nextPoint = points[i+1]
+                    tmpName = (
+                        str(point['time'].strftime("%H:%M")) + '-' +
+                        str(nextPoint['time'].strftime("%H:%M"))
+                        )
+                    tmpBegin = (
+                        point['time']
+                        )
+                    tmpEnd = (
+                        nextPoint['time']
+                        )
+                except:
+                    pass
                 
-                tmpName = (
-                    str(point['time'].strftime("H:%M")) + '-' +
-                    str(nextPoint['time'].strftime("H:%M"))
-                    )
-                tmpBegin = (
-                    point['time']
-                    )
-                tmpEnd = (
-                    nextPoint['time']
-                    )
                 begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")
                 end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
-                tmpWidth = 4
+                tmpWidth = 1
                 tmpDescription = (
                     str(name),
                     str(tmpBegin.strftime("%H:%M")) + '-' +
@@ -536,9 +537,14 @@ def addAds(allObjects) :
                 for line in point['description']:
                     description += line[:-1] + '<br>'
                 description += '</p>'
-                style = 'avion2'
+                style = 'greenRound'
                 ptName = (str(theAds.name) + ' : ' + str(point['type']) + 
                     ' - ' + str(point['time'].strftime("%H:%M")))
+                kml.open_folder(
+                    ptName, 
+                    '', 
+                    isOpen
+                    )
                 kml.addPlacemark(
                     ptName,
                     description ,
@@ -553,7 +559,7 @@ def addAds(allObjects) :
                     position['latitude'] = float(point['latitudeN'])
                     ptName = ptName + 'NEXT'
                     description = ''
-                    style = 'avion4'
+                    style = 'orangeRound'
                     kml.addPlacemark(
                         ptName,
                         description ,
@@ -570,7 +576,7 @@ def addAds(allObjects) :
                     position['latitude'] = float(point['latitudeN1'])
                     ptName = ptName + ' +1'
                     description = ''
-                    style = 'avion4'
+                    style = 'orangeRound'
                     kml.addPlacemark(
                         ptName,
                         description ,
@@ -582,60 +588,70 @@ def addAds(allObjects) :
                         )
                 except :
                     pass
-                kml.addLine (
-                    tmpName,
-                    tmpDescription, 
-                    tmpColor, 
-                    tmpPoints,    
-                    visibility, 
-                    tmpWidth, 
-                    begin, 
-                    end
-                    )
-        point = points[len(points)-1]
-        position = lookAt.copy()
-        position['longitude'] = point['longitude']
-        position['latitude'] = point['latitude']
-        description = '<p>'
-        for line in point['description']:
-            description += line[:-1] + '<br>'
-        description += '</p>'
-        style = 'avion2'
-        ptName = (str(point['type']) + ' - ' + 
-            str(point['time'].strftime("%H:%M")))
-        kml.addPlacemark(
-            ptName,
-            description ,
-            position,
-            visibility,
-            style,
-            begin,
-            end
-            )
+                if nextPoint :
+                    kml.addLine (
+                        tmpName,
+                        tmpDescription, 
+                        tmpColor, 
+                        tmpPoints,    
+                        visibility, 
+                        tmpWidth, 
+                        begin, 
+                        end
+                        )
+                    kml = addTrack(
+                        tracks, 
+                        lookAt, 
+                        kml, 
+                        theAds, 
+                        tmpBegin, 
+                        tmpEnd)
+                else :
+                    kml = addTrack(
+                        tracks, 
+                        lookAt, 
+                        kml, 
+                        theAds, 
+                        tmpEnd)
+                
+                
+                kml.close_folder()
+                
+        # End Add ADS and Track
         kml.close_folder()
-        # End Add ADS
+    kml.close()
+    print "ADS file OK\n"
+    return kml
         
-        
-        # Add TRACK
-        kml.open_folder(
-            'TRACK', 
-            'Point calculated by the TIARE systeme', 
-            isOpen
-            )
-        visibility = True
-        for i in xrange(len(tracks)) :
-            track = tracks[i]
-            if i > 0 :
-                lastTrack = tracks[i-1]
-                tmpBegin = lastTrack['time']
-            else :
-                tmpBegin = track['time']
-            begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ")                
-            if i < len(tracks)-1:
-                nextTrack = tracks[i+1]
-                tmpEnd = nextTrack['time']
-            else :
-                tmpEnd = track['time']
+def addTrack (tracks, lookAt, kml, theAds, tmpBegin, 
+tmpEnd = False) :  
+    # Add TRACK
+    folder = False
+    visibility = True
+    if not tmpEnd:
+        tmpEnd = tracks[len(tracks)-1]['time']
+    for i in xrange(len(tracks)) :
+        track = tracks[i]
+        #if i > 0 :
+            #lastTrack = tracks[i-1]
+            #tmpBegin = lastTrack['time']
+        #else :
+            #tmpBegin = track['time']
+        #               
+        #if i < len(tracks)-1:
+            #nextTrack = tracks[i+1]
+            #tmpEnd = nextTrack['time']
+        #else :
+            #tmpEnd = track['time']
+        if tmpBegin < track['time'] <= tmpEnd:
+            if not folder :
+                kml.open_folder(
+                    'TRACK', 
+                    'Point calculated by the TIARE systeme', 
+                    '0'
+                    )
+                folder = True
+            begin = tmpBegin.strftime("%Y-%m-%dT%H:%MZ") 
             end = tmpEnd.strftime("%Y-%m-%dT%H:%MZ")
             position = lookAt.copy()
             position['longitude'] = track['longitude']
@@ -644,7 +660,8 @@ def addAds(allObjects) :
             for line in track['description']:
                 description += line[:-1] + '<br>'
             description += '</p>'
-            style = 'avion3'
+            style = 'glossyRound'
+            visibility = 1
             ptName = (str(theAds.name) + ' : ' + str(track['type']) + ' - ' + 
                 str(track['time'].strftime("%H:%M")))
             kml.addPlacemark(
@@ -656,14 +673,9 @@ def addAds(allObjects) :
                 begin,
                 end
                 )
-        
+    if folder :
         kml.close_folder()
         # End Add TRACK
-        kml.close_folder()
-    
-
-    kml.close()
-    print "ADS file OK\n"
     return kml
 
 def addMain (allObjects) :    

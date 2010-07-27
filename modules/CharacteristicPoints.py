@@ -83,7 +83,7 @@ class CharacteristicPoint :
 def initCP (adresse):
     """ Creér le dictionnaire de Points characteritique
         à partir du fichier mentioné """
-    
+    print 'Debut du traitement des points characteistique'
     cp = open(adresse,'r') # Ouvre le fichier 
     for line in cp.xreadlines(): # agit sur chaque ligne du fichier
         #supprime lignes commentées et lignes vides
@@ -97,4 +97,5 @@ def initCP (adresse):
         cp = characteristicPoints[key]
         if cp.name[:2] == 'NT' and 'AIRPORT' in cp.theType:
             tahitiAirports.append(cp.name)
+    print 'Fin du traitement des points characteistique'
     return characteristicPoints, tahitiAirports

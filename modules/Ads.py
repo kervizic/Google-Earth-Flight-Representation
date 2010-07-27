@@ -95,7 +95,7 @@ class Ads (object):
         """
         Add PERIODIC REPORT
         """
-        self.addPoints('Periodic Report', description, time, latitude, 
+        self.addPoints('PR', description, time, latitude, 
             longitude, altitude, pointN, PointN1)
     
     def addAltitudeEvent (self, description, time, latitude, longitude, 
@@ -103,7 +103,7 @@ class Ads (object):
         """
         Add ALTITUDE RANGE DEVIATION EVENT 
         """
-        self.addPoints('Altitude Deviation', description, time, latitude, 
+        self.addPoints('Alt', description, time, latitude, 
             longitude, altitude)
 
     def addWaypointEvent (self, description, time, latitude, longitude, 
@@ -111,14 +111,15 @@ class Ads (object):
         """
         Add WAYPOINT CHANGE EVENT
         """
-        self.addPoints('Waypoint Change', description, time, latitude, 
+        self.addPoints('Wayp', description, time, latitude, 
             longitude, altitude, pointN, PointN1)
         
 def initADS (adresse, points, routes, fpl):
-    #""" Analysele fichier ADS """
+    """ Analyse le fichier ADS """
+    print 'Debut du traitement des ADS'
     lstAdsFile = os.listdir(adresse)
     dateRe = re.compile('(2[0-9]{3})([0-9]{2})([0-9]{2})')
-    for file in lstAdsFile :
+    for file in sorted(lstAdsFile) :
         if 'ADS' in file :
             fileAdresse = adresse + file
             adsFile = open(fileAdresse,'r') # Open the file   
@@ -140,10 +141,10 @@ def initADS (adresse, points, routes, fpl):
             #for line in ads[key].points[k]['description']:
                 #print '---- ' + str(line) 
     
+    print 'Fin du traitement des ADS'
     return ads
 
 def buildAds (adsLine, date) :
-    print 'Debut du traitement des ADS'
     
     raz = True
     
@@ -275,7 +276,7 @@ for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})""")
         # AIRCRAFT INTENT TRACK: origin is EXTRAPOLATION
         result = trackRe.search(line)
         if result :
-            i = 80
+            i = 100
             track = result.group(1)
             time = datetime(
                 date.year,
@@ -391,4 +392,3 @@ for aircraft (.+) time stamped at : ([0-9]{2}):([0-9]{2}):([0-9]{2})""")
 
             # reset attributes
             raz = True
-    print 'Fin du traitement des ADS'

@@ -19,11 +19,11 @@
 <Icon>
 <href>files/images/triangle.png</href>
 </Icon>
-<scale> 0.4 </scale>
+<scale> 0.2 </scale>
 </IconStyle>
 <LabelStyle>
 <color> FF00FFFF </color>
-<scale> 0.700000 </scale>
+<scale> 0.500000 </scale>
 </LabelStyle>
 </Style>
 <Style id="polygon">
@@ -31,11 +31,23 @@
 <Icon>
 <href>files/images/polygon.png</href>
 </Icon>
-<scale> 0.4 </scale>
+<scale> 0.2 </scale>
 </IconStyle>
 <LabelStyle>
 <color> FF00FFFF </color>
-<scale> 0.700000 </scale>
+<scale> 0.500000 </scale>
+</LabelStyle>
+</Style>
+<Style id="greenRound">
+<IconStyle>
+<Icon>
+<href>files/images/greenround.png</href>
+</Icon>
+<scale> 0.3 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.600000 </scale>
 </LabelStyle>
 </Style>
 <Style id="redCircle">
@@ -43,11 +55,11 @@
 <Icon>
 <href>files/images/placemark_circle_highlight.png</href>
 </Icon>
-<scale> 0.6 </scale>
+<scale> 0.4 </scale>
 </IconStyle>
 <LabelStyle>
 <color> FF0000FF </color>
-<scale> 0.900000 </scale>
+<scale> 0.700000 </scale>
 </LabelStyle>
 </Style>
 <Style id="avion">
@@ -86,16 +98,52 @@
 <scale> 0.700000 </scale>
 </LabelStyle>
 </Style>
+<Style id="orangeRound">
+<IconStyle>
+<Icon>
+<href>files/images/orangeround.png</href>
+</Icon>
+<scale> 0.2 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.500000 </scale>
+</LabelStyle>
+</Style>
+<Style id="glossyRound">
+<IconStyle>
+<Icon>
+<href>files/images/glossyround.png</href>
+</Icon>
+<scale> 0.1 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.400000 </scale>
+</LabelStyle>
+</Style>
+<Style id="avion4">
+<IconStyle>
+<Icon>
+<href>files/images/avion.png</href>
+</Icon>
+<scale> 0.3 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.600000 </scale>
+</LabelStyle>
+</Style>
 <Style id="airports">
 <IconStyle>
 <Icon>
 <href>files/images/airports.png</href>
 </Icon>
-<scale> 0.4 </scale>
+<scale> 0.2 </scale>
 </IconStyle>
 <LabelStyle>
 <color> FFFF6633 </color>
-<scale> 0.700000 </scale>
+<scale> 0.500000 </scale>
 </LabelStyle>
 </Style>
 <Style id="circle">
@@ -103,10 +151,58 @@
 <Icon>
 <href>files/images/placemark_circle.png</href>
 </Icon>
-<scale> 0.4 </scale>
+<scale> 0.2 </scale>
 </IconStyle>
 <LabelStyle>
 <color> FFFFFFFF </color>
+<scale> 0.500000 </scale>
+</LabelStyle>
+</Style>
+<Style id="yellowRound">
+<IconStyle>
+<Icon>
+<href>files/images/yellowround.png</href>
+</Icon>
+<scale> 0.3 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.600000 </scale>
+</LabelStyle>
+</Style>
+<Style id="blueRound">
+<IconStyle>
+<Icon>
+<href>files/images/blueround.png</href>
+</Icon>
+<scale> 0.3 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FFFFFFFF </color>
+<scale> 0.600000 </scale>
+</LabelStyle>
+</Style>
+<Style id="blackRound">
+<IconStyle>
+<Icon>
+<href>files/images/blackround.png</href>
+</Icon>
+<scale> 0.2 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF888888 </color>
+<scale> 0.500000 </scale>
+</LabelStyle>
+</Style>
+<Style id="redRound">
+<IconStyle>
+<Icon>
+<href>files/images/redround.png</href>
+</Icon>
+<scale> 0.4 </scale>
+</IconStyle>
+<LabelStyle>
+<color> FF0000FF </color>
 <scale> 0.700000 </scale>
 </LabelStyle>
 </Style>
@@ -125,7 +221,7 @@
 <Placemark>
 <name> A212 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -151,7 +247,7 @@
 <Placemark>
 <name> A220 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -182,7 +278,7 @@
 <Placemark>
 <name> B200 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -212,7 +308,7 @@
 <Placemark>
 <name> B454 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -243,7 +339,7 @@
 <Placemark>
 <name> B578 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -279,7 +375,7 @@
 <Placemark>
 <name> B595 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -308,7 +404,7 @@
 <Placemark>
 <name> B599 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -337,7 +433,7 @@
 <Placemark>
 <name> C1177 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -358,7 +454,7 @@
 <Placemark>
 <name> C1318 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -376,7 +472,7 @@
 <Placemark>
 <name> G223 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -426,7 +522,7 @@
 <Placemark>
 <name> G224 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -456,7 +552,7 @@
 <Placemark>
 <name> G575 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -484,7 +580,7 @@
 <Placemark>
 <name> G594 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -517,7 +613,7 @@
 <Placemark>
 <name> G595 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -550,7 +646,7 @@
 <Placemark>
 <name> G599 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -574,7 +670,7 @@
 <Placemark>
 <name> J21 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -594,7 +690,7 @@
 <Placemark>
 <name> J22 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -613,7 +709,7 @@
 <Placemark>
 <name> J23 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -633,7 +729,7 @@
 <Placemark>
 <name> J26 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -651,7 +747,7 @@
 <Placemark>
 <name> J27 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -669,7 +765,7 @@
 <Placemark>
 <name> J28 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -687,7 +783,7 @@
 <Placemark>
 <name> J29 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -705,7 +801,7 @@
 <Placemark>
 <name> J30 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -723,7 +819,7 @@
 <Placemark>
 <name> R582 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -750,7 +846,7 @@
 <Placemark>
 <name> UL348 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['sense : B'] ]]></description>
+<description><![CDATA[ sense : B ]]></description>
 <Style>
 <LineStyle>
 <color> 7F00FFFF </color>
@@ -793,7 +889,7 @@
 <Placemark>
 <name> ARONA2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -811,7 +907,7 @@
 <Placemark>
 <name> ARONA2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -829,7 +925,7 @@
 <Placemark>
 <name> ARONA2X </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -847,7 +943,7 @@
 <Placemark>
 <name> BEBIG3W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -865,7 +961,7 @@
 <Placemark>
 <name> BENKO3E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -884,7 +980,7 @@
 <Placemark>
 <name> EMIRI1N </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 30'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 30 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -902,7 +998,7 @@
 <Placemark>
 <name> EMIRI1S </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 12'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 12 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -920,7 +1016,7 @@
 <Placemark>
 <name> EMIRI2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -938,7 +1034,7 @@
 <Placemark>
 <name> EMIRI2L </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -956,7 +1052,7 @@
 <Placemark>
 <name> EMIRI2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -975,7 +1071,7 @@
 <Placemark>
 <name> EMIRI2X </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -993,7 +1089,7 @@
 <Placemark>
 <name> IKELO3E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1011,7 +1107,7 @@
 <Placemark>
 <name> IKELO3N </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 30'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 30 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1029,7 +1125,7 @@
 <Placemark>
 <name> IKELO3S </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 12'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 12 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1047,7 +1143,7 @@
 <Placemark>
 <name> IKELO3W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1065,7 +1161,7 @@
 <Placemark>
 <name> KAINA2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1084,7 +1180,7 @@
 <Placemark>
 <name> KAINA2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1103,7 +1199,7 @@
 <Placemark>
 <name> METUA2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1122,7 +1218,7 @@
 <Placemark>
 <name> METUA2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1141,7 +1237,7 @@
 <Placemark>
 <name> NARAI2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1159,7 +1255,7 @@
 <Placemark>
 <name> NARAI2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1177,7 +1273,7 @@
 <Placemark>
 <name> ONIDO3W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1195,7 +1291,7 @@
 <Placemark>
 <name> ORAVA2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1213,7 +1309,7 @@
 <Placemark>
 <name> ORAVA2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1231,7 +1327,7 @@
 <Placemark>
 <name> PASTI3E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1250,7 +1346,7 @@
 <Placemark>
 <name> PONUI2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1268,7 +1364,7 @@
 <Placemark>
 <name> PONUI2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1287,7 +1383,7 @@
 <Placemark>
 <name> RUMIA2E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1305,7 +1401,7 @@
 <Placemark>
 <name> RUMIA2W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1324,7 +1420,7 @@
 <Placemark>
 <name> VAITE3E </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1342,7 +1438,7 @@
 <Placemark>
 <name> VAITE3N </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 30'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 30 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1360,7 +1456,7 @@
 <Placemark>
 <name> VAITE3S </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 12'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 12 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1378,7 +1474,7 @@
 <Placemark>
 <name> VAITE3W </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F00FF00 </color>
@@ -1409,7 +1505,7 @@
 <Placemark>
 <name> AROBA3M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1429,7 +1525,7 @@
 <Placemark>
 <name> AROBA3V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1448,7 +1544,7 @@
 <Placemark>
 <name> ARONA2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1467,7 +1563,7 @@
 <Placemark>
 <name> ARONA2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1486,7 +1582,7 @@
 <Placemark>
 <name> ASOKI3M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1505,7 +1601,7 @@
 <Placemark>
 <name> ASOKI3V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1525,7 +1621,7 @@
 <Placemark>
 <name> EMIRI2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1544,7 +1640,7 @@
 <Placemark>
 <name> EMIRI2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1564,7 +1660,7 @@
 <Placemark>
 <name> IDUTA3M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1583,7 +1679,7 @@
 <Placemark>
 <name> IDUTA3V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1602,7 +1698,7 @@
 <Placemark>
 <name> KAINA2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1621,7 +1717,7 @@
 <Placemark>
 <name> KAINA2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1641,7 +1737,7 @@
 <Placemark>
 <name> METUA2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1660,7 +1756,7 @@
 <Placemark>
 <name> METUA2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1680,7 +1776,7 @@
 <Placemark>
 <name> NARAI2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1700,7 +1796,7 @@
 <Placemark>
 <name> NARAI2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1719,7 +1815,7 @@
 <Placemark>
 <name> ORAVA2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1739,7 +1835,7 @@
 <Placemark>
 <name> ORAVA2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1758,7 +1854,7 @@
 <Placemark>
 <name> PONUI2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1778,7 +1874,7 @@
 <Placemark>
 <name> PONUI2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1797,7 +1893,7 @@
 <Placemark>
 <name> RUMIA2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1817,7 +1913,7 @@
 <Placemark>
 <name> RUMIA2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1836,7 +1932,7 @@
 <Placemark>
 <name> TEANO2M </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 22'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 22 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1855,7 +1951,7 @@
 <Placemark>
 <name> TEANO2V </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTAA<br>', '<b>Assigned RWY</b> : 04'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTAA<br><b>Assigned RWY</b> : 04 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1874,7 +1970,7 @@
 <Placemark>
 <name> TIARE12 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 12'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 12 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
@@ -1893,7 +1989,7 @@
 <Placemark>
 <name> TIARE30 </name>
 <visibility> 1 </visibility>
-<description><![CDATA[ ['<b>airport: </b>NTTM<br>', '<b>Assigned RWY</b> : 30'] ]]></description>
+<description><![CDATA[ <b>airport: </b>NTTM<br><b>Assigned RWY</b> : 30 ]]></description>
 <Style>
 <LineStyle>
 <color> 9F0000FF </color>
