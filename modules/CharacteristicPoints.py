@@ -9,7 +9,8 @@ __copyright__ =""
 import Convertion
 
 print "CharcteristicPoints Charge =) "
-characteristicPoints = {} # dictionaire de CharacteristicPoints : { (x) : instance}
+# dictionaire de CharacteristicPoints : { (x) : instance}
+characteristicPoints = {} 
 
 class CharacteristicPoint :
     #number = 0 #numéro du points dans la liste
@@ -32,7 +33,8 @@ class CharacteristicPoint :
         """    
 
         self.addVariables(donnees)
-        characteristicPoints[str(self.name)] = self # Ajout du point au dictionaire
+        # Ajout du point au dictionaire
+        characteristicPoints[str(self.name)] = self 
 
     def addVariables (self, donnees) :
         """ Disperssion des données """

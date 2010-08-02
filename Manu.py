@@ -4,34 +4,20 @@ __version__ = "0.0.1"
 __license__ = ""
 __copyright__ =""
 
-
 import sys
 sys.path.append(r'modules')
 import CharacteristicPoints, Routes, KML, Fdp, GetOfFiles, MakeKML, Ads
 import MakeKMZ, Aoi, os
 
 def main():
-    print "###################################################################### "
-    print "## Representation des traces et routes des avions dans Google Earth ## "
-    print "#  Programme realise par:                                            # "
-    print "#      KERVIZIC Emmanuel                                             # "
-    print "#  Pour :                                                            # "
-    print "#      La DTI de l'aviation civile                                   # "
-    print "#  Le :                                                              # "
-    print "##     17/06/2010                                                   ## "
-    print "###################################################################### "
-    print ""
-    print "C'est un bon debut ;) "
-    print ""
-
-    #adresse = r'/media/Manu/DTI/Sources/'
-    #adresse2 = r'/media/Manu/DTI/Sources/'
-    #lstFplFile = os.listdir(adresse)
-    #for file in lstFplFile :
-        #if '.7z' in file :
-            #print "7z e " + adresse2 + str(file)
-            #os.system("7z e " + adresse + str(file)) 
-        
+    print ("""
+######################################################################
+## Representation des traces et routes des avions dans Google Earth ##
+#    Programme realise par: KERVIZIC Emmanuel                        #
+#      Pour :   La DTI de l'aviation civile                          #
+##     Le :     17/06/2010                                          ##
+######################################################################
+\nC'est un bon debut ;)\n""")
 
     allObjects = GetOfFiles.getOfFile()
     makeFile = allObjects['makeFile']
@@ -49,9 +35,8 @@ def main():
         kmlMain = MakeKML.addMain(allObjects)
 
     kmz = MakeKMZ.makeFile(allObjects)
-    #os.system("c:/windows/notepad.exe monfichier.log")
-    #print allObjects['fdp']['volume']
     print "Et ca fini bien !"
 
+# Execute only if this file is main
 if __name__ == '__main__':
     main()
