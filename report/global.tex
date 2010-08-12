@@ -1,5 +1,5 @@
 % Configuration du fichier final
-\input{config}
+\input{tex/config}
 %¯¯¯¯¯¯¯¯¯¯¯¯¯
 
 \date{10 septembre 2010}
@@ -11,27 +11,45 @@
 % Page de garde
 \maketitle
 
-%Table des matieres
+% Table des matieres
 \tableofcontents
 
- ...
-% Debut de section
-\chapter{La DGAC}
-%¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-
+% Debut des section
+\chapter{Introduction}
 % Insertion de fichier
-\input{intro}
+\input{tex/intro}
 
-\chapter{Le projet}
-%¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-\input{projet}
+\chapter{Contexte}
+\input{tex/contexte}
 
+\chapter{Expression du besoin}
+\input{tex/besoin}
+
+\chapter{Gestion de projet}
+\input{tex/extrem}
+
+\chapter{Rédaction des spécifications}
+\input{tex/spec}
+
+\chapter{Réalisation technique}
+\input{tex/real}
+
+\chapter{Tests et validation de la réalisation}
+\input{tex/validation}
+
+\chapter{Synthèse}
+\input{tex/synthese}
+
+\chapter{Evolution projet}
+\input{tex/evol}
+
+% Bibliographie
 \bibliographystyle{plain}
-\bibliography{biblio}
+\bibliography{tex/biblio}
 
 % Début annexes
 \appendix
-\input{annexes}
+%\input{annexes}
 %\section{Anexes}
 %%¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 

@@ -1,0 +1,50 @@
+Expression du besoin par les clients\par
+Enumère le besoin ,\par
+micro analyse ,\par
+Client dirigiste (python , google earth) mais sans besoin précis pour l’utilisation du produit .\par
+Risque que cela ne marche pas
+ 
+\section{Les objectifs et besoins du projet}
+    \subsection{L'objectif initial du projet}
+L’objectif principal est de pouvoir réaliser un logiciel banalisé et ergonomique permettant de
+représenter l’ensemble des données de contrôle (repères, balises, secteurs...) afin de pouvoir
+visualiser le trafic aérien circulant dans la \textsc{Fir} et la zone \textsc{Aci}.
+Les bénéfices attendus de cet outil sont :
+\begin{itemize}
+\item l’amélioration de l’analyse et de la compréhension visuelle du trafic aérien de Tahiti,
+\item la possibilité d’élaborer de statistiques à partir des fonctions de calcule du logiciel,
+\item une aide dans le travail de définition des points d’entrée dans la zone \textsc{Aci} que réalise le
+service de contrôle de Tahiti.
+\end{itemize}
+
+    \subsection{Le besoin}
+        \subsubsection{Le besoin au début du projet}
+Le besoin était initialement de pouvoir visualiser les plans de vol des avions afin de pouvoir aider les contrôleurs à déterminer l'heure d'entrée approximative de l'avion dans la zone \textsc{Aci} (cf. \vref{Aci})
+Le logiciel devant être portable et adaptable, l'utilisation langage Python a été défini comme l'une des meilleur alternative.
+Tout au long du projet de nouveau besoin se sont fait ressentir. Ceux-ci comme nous pourrons le constater dans la suite du rapport nous a amener à modifier les objectifs du projet.
+
+        \subsubsection{Un besoin redéfinit tout au long du projet}
+On a très vite constaté, ce e dès les premières représentations,  que la création d'un logiciel qui pouvait représenter les données du système TIARE dans Google Eath pourrait avoir plusieurs intérêts:
+\begin{itemize}
+\item Visualiser comment le Système interprète les données
+\item Comparer les plan de vol déposé avec les vols réalisé
+\item Visualiser les zone de contrôles
+\item Évaluer la mise en place du système \textsc{Ads}
+\end{itemize}
+C'est pourquoi les besoins on été redéfinit en cours de projet.
+
+        \subsubsection{Des besoins redéfinis}
+Les nouveaux besoins définis sont donc de pouvoir disposer d'une maquette (Appellée en anglais: Poc\footnote{Poc: Proof of concept, soit une démonstration de faisabilité}) qui serrait représentative de toutes les possibilités que pourrait apporter un logiciel de ce type.
+
+Cette maquette doit être capable de:
+\begin{itemize}
+\item définir un point d'entré approximatif d'un plan de vol dans la zone \textsc{Aci}.
+\item Visualiser les zone de contrôles
+\item Visualiser tous les points caractéristique du système (Aéroport, balises …)
+\item Visualiser les routes définie dans le système.
+\item Visualiser les plan de vol en fonction du temps
+\item Visualiser les report \textsc{Ads} ainsi que les points calculés par le système \textsc{Tiare}
+\item Différencier les vols interne, sortant, entrant et en transit.
+\end{itemize}
+
+L’intérêt de cette maquette serrait de définir les spécification d'un logiciel qui pourrait être ensuite réalisé et mis en production dans des sites ou la sécurité n'est pas à négliger. Il aurait aussi l’intérêt de définir les fonctionnalités nécessaires à un utilisateur donné.

@@ -1,0 +1,266 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{longtable,geometry}
+\usepackage[francais]{babel}
+\usepackage[francais]{layout}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[francais]{varioref}
+
+\geometry{%
+  a4paper,
+  body={150mm,240mm},
+  left=40mm,top=30mm,
+  headheight=10mm,headsep=7mm,
+  marginparsep=0mm,
+  marginparwidth=0mm}
+
+\lstset{ %
+language=Python,                % choose the language of the code
+basicstyle=\scriptsize,         % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\scriptsize,        % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it's 1 each line 
+                                % will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,	                % adds a frame around the code
+tabsize=2,	                    % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                % also try caption instead of title
+escapeinside={\%*}{*)},         % if you want to add a comment within your code
+morekeywords={*,self},            % if you want to add more keywords to the set
+keywordstyle=\bf \color {blue},
+%identifierstyle=\underline,
+commentstyle=\color[gray]{0.5},
+stringstyle=\color{red}
+}
+
+\ifpdf
+    \pdfoutput=1
+    \pdfcompresslevel=9
+    \usepackage[pdftex=true,
+    hyperindex=true,
+    colorlinks=true,
+    pdfpagelabels,
+    linkcolor=blue,
+    citecolor=red,
+    urlcolor=blue,
+    anchorcolor=red,
+    plainpages=false,
+    bookmarks=true]{hyperref}
+\else
+    \usepackage[hypertex=true,
+    hyperindex=true,
+    colorlinks=false]{hyperref}
+\fi
+
+
+\fancyhf{} %initialise tous les champs dans head et foot
+\chead{\small Representation du trafic aérien de Tahiti dans Google Earth}
+\lhead{\thesection}
+\rhead{\small DGAC}
+\lfoot{\small Satge été 2010}
+\rfoot{\small Page: \thepage\ sur \pageref{LastPage}}
+\cfoot{M. \textsc{Kervizic} Emmanuel - \textsc{Promo}2011}
+\renewcommand{\headrulewidth}{1.5pt}% met la largeur du trait à 1.5pt
+\renewcommand{\footrulewidth}{1.5pt}
+
+
+%\fancyhead[L]{\footnotesize{\textit{\wtitre}}}%
+%\fancyfoot[R]{\thepage}% le n° de page en bas a droite
+%\fancyfoot[C]{\footnotesize{---~\wperiode~---}}% la periode au centre
+%\fancyfoot[L]{\footnotesize{\textit{\wauteur}}}% l'auteur a gauche
+
+%\fancypagestyle{chapter}{%
+ %\fancyhf{} % clear all header and footer fields
+ %\renewcommand{\headrulewidth}{0pt} % met la largeur du trait à 0.2pt
+ %\renewcommand{\footrulewidth}{0.2pt}%
+ %\fancyfoot[R]{\thepage}	% le n° de page en bas a droite
+ %\fancyfoot[C]{\footnotesize{---~\wperiode~---}} % la periode au centre
+ %\fancyfoot[L]{\footnotesize {\textit{\wauteur}}}}%
+
+%%%% rendre robustes les commandes de style de page ...
+%\addtocontents{toc}{\protect\thispagestyle{chapter}}
+%\addtocontents{lof}{\protect\thispagestyle{chapter}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% Définitions des variables et des macros pour les modifier pour la 
+%% page de titre. dans le texte, utiliser \wxxx pour ecrire xxx dans 
+%% le document, par exple : \wauteur ecrit l'auteur ...
+%% Période du stage
+%\def\@periode{Non renseigné~!}
+%\def\periode#1{\def\@periode{#1}}
+%\newcommand{\wperiode}{\@periode}
+%% Auteur du rapport
+%\def\@auteur{Non renseigné~!}
+%\def\auteur#1{\def\@auteur{#1}}
+%\newcommand{\wauteur}{\@auteur}
+%% Type de rapport (tfe, stage 2A, 3A, \ldots)
+%\def\@typerapport{Non renseigné~!}
+%\def\typerapport#1{\def\@typerapport{#1}}
+%\newcommand{\wtyperapport}{\@typerapport}
+%% Titre
+%\def\@titre{Non renseigné~!}
+%\def\titre#1{\def\@titre{#1}}
+%\newcommand{\wtitre}{\@titre}
+%% Tuteur entreprise
+%\def\@tuteurent{Non renseigné~!}
+%\def\tuteurent#1{\def\@tuteurent{#1}}
+%% Tuteur école
+%\def\@tuteurstage{Non renseigné~!}
+%\def\tuteurstage#1{\def\@tuteurstage{#1}}
+%% Logo entreprise (exple : logo_emac.png)
+%\def\@logoentrep{}
+%\def\logoentrep#1{\def\@logoentrep{#1}}
+%% Nom entreprise
+%\def\@nomentrep{Non renseigné~!}
+%\def\nomentrep#1{\def\@nomentrep{#1}}
+%% Adresse entreprise
+%\def\@addrentrep{Non renseigné~!}
+%\def\addrentrep#1{\def\@addrentrep{#1}}
+%% Logo de l'école, université, \ldots
+%\def\@logoecole{}
+%\def\logoecole#1{\def\@logoecole{#1}}
+%% taille des logos (width)
+%\newlength{\widthecole}
+%\newlength{\widthent}
+%\setlength{\widthecole}{0cm}
+%\setlength{\widthent}{0cm}
+%% macros utilisateurs pour spécifier les tailles
+%\newcommand{\tailleecole}[1]{\addtolength{\widthecole}{#1}}
+%\newcommand{\tailleent}[1]{\addtolength{\widthent}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% réglage des paramètres pour la création des pdf
+%% à mettre dans l'entête du document
+%\def\docpdf{
+%\hypersetup{
+  %pdftitle={\@typerapport},
+  %pdfauthor={\@auteur},
+  %pdfsubject={\@titre},
+%}}
+%% \myref produit une référence à un document numéroté
+%% par son numéro et la page. #1 est le type de document, 
+%% #2 est le label du document
+%\newcommand{\myref}[1]{\ref{#1}, page~\pageref{#1}}
+%% nouvelle commande : \chapitre pour prendre le fancy style en compte
+%\newcommand{\chapitre}[1]{\chapter{#1} \thispagestyle{chapter}}
+%% Création de la page de titre
+%\newcommand{\pagedetitre}{
+%\thispagestyle{empty}
+%\begin{titlepage} %%% page de titre
+%\begin{center}
+%\includegraphics[width=\widthecole]{\@logoecole}\\
+%\vspace{5mm}
+%\rule{\linewidth}{0.8mm}\vspace{3mm}\\
+%\setlength{\baselineskip}{1.5\baselineskip}
+%{\Huge \textsc{\@titre}\par} \\
+%\setlength{\baselineskip}{0.67\baselineskip}
+%\vspace{3mm}
+%{\rule{\linewidth}{0.8mm}}\\
+%\vspace{1.2cm}
+%\begin{tabularx}{\linewidth}{>{\centering}p{\linewidth}}
+%{\LARGE \bf \@typerapport} \cr
+%~~ \cr
+%{\Large  \@nomentrep}\cr
+%\end{tabularx}\\
+%\vspace{1.3cm}
+%\begin{tabularx}{\linewidth}{>{\raggedright}p{7.5cm} >{\raggedleft}p{4cm}}
+%~~ & 
+%\multirow{5}{0.5cm}{\includegraphics[width=\widthent]{\@logoentrep}}
+%\tabularnewline 
+%{\Large Tuteur école~: } \tabularnewline
+%\hspace{8mm}{\Large \@tuteurstage }\tabularnewline
+%~~ \tabularnewline
+%{\Large Tuteur entreprise~: }\tabularnewline
+%\hspace{8mm}{\Large \@tuteurent}\tabularnewline
+%\end{tabularx}
+
+%\vspace{3cm}
+
+%{\Large \@auteur}\\
+%\vspace{7mm}
+%\large{---~\@periode~---}
+%\end{center}
+%\end{titlepage}
+%}
+%% Création de la page de titre détaillée (interieur)
+%\newcommand{\pagetitredetail}{
+%\thispagestyle{empty}
+%\begin{titlepage} %%% page de titre
+%\begin{center}
+%\includegraphics[width=\widthecole]{\@logoecole}\\
+%\vspace{3mm}
+%\rule{\linewidth}{0.8mm}\vspace{3mm}\\
+%\setlength{\baselineskip}{1.5\baselineskip}
+%{\Huge \textsc{\@titre}\par} \\
+%\setlength{\baselineskip}{0.67\baselineskip}
+%\vspace{3mm}
+%{\rule{\linewidth}{0.8mm}}\\
+%\vspace{1cm}
+%\begin{tabularx}{\linewidth}{>{\centering}p{\linewidth}}
+%{\LARGE \bf \@typerapport} \tabularnewline
+%~~ \tabularnewline
+%{\Large  \@nomentrep}\tabularnewline
+%\end{tabularx}\\
+%\vspace{1cm}
+%\begin{tabularx}{\linewidth}{>{\raggedright}p{7.5cm} >{\raggedleft}p{4cm}}
+%~~ & 
+%\multirow{5}{0.5cm}{\includegraphics[width=.8\widthent]{\@logoentrep}}
+%\tabularnewline 
+%{\Large Tuteur école~: } \tabularnewline
+%\hspace{8mm}{\Large \@tuteurstage }\tabularnewline
+%~~ \tabularnewline
+%{\Large Tuteur entreprise~: }\tabularnewline
+%\hspace{8mm}{\Large \@tuteurent}\tabularnewline
+%\end{tabularx}\\
+%\vspace{1cm}
+%\begin{flushright}
+%\@addrentrep
+%\end{flushright}
+%\vspace{8mm}
+
+%{\Large \@auteur}\\
+%\vspace{5mm}
+%\large{---~\@periode~---}
+%\end{center}
+%\end{titlepage}
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%nouvelles commandes pour inserer des images sur les titres de parties. 
+%% usage : part[nom court]{nom long}{ce qu'on veut}
+%%                                   ^^^^^^^^^^^^^ (image, texte, ...)
+%\makeatletter
+%\def\@part[#1]#2#3{%
+  %\ifnum \c@secnumdepth >-2\relax \refstepcounter {part}%
+    %\addcontentsline{toc}{part}{\thepart \hspace {1em}#1}%
+  %\else
+    %\addcontentsline {toc}{part}{#1}%
+  %\fi
+  %\markboth {}{}{%
+  %\centering \vfill
+  %\interlinepenalty \@M \normalfont 
+  %\ifnum \c@secnumdepth >-2\relax
+    %\Huge \bfseries \partname ~\thepart \par \vskip 20\p@ 
+  %\fi 
+  %\Huge \bfseries #2
+  %\par}%
+  %{\centering
+  %\vfill #3 \vfill}%
+  %\@endpart}
+%\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
