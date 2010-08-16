@@ -1,11 +1,10 @@
-Expression du besoin par les clients\par
-Enumère le besoin ,\par
-micro analyse ,\par
-Client dirigiste (python , google earth) mais sans besoin précis pour l’utilisation du produit .\par
-Risque que cela ne marche pas
+%Expression du besoin par les clients
+%Enumère le besoin,
+%micro analyse,
+%Client dirigiste (python , google earth) mais sans besoin précis pour l’utilisation du produit.
+%Risque que cela ne marche pas
  
-\section{Les objectifs et besoins du projet}
-    \subsection{L'objectif initial du projet}
+\section{L'objectif initial du projet}
 L’objectif principal est de pouvoir réaliser un logiciel banalisé et ergonomique permettant de
 représenter l’ensemble des données de contrôle (repères, balises, secteurs...) afin de pouvoir
 visualiser le trafic aérien circulant dans la \textsc{Fir} et la zone \textsc{Aci}.
@@ -17,34 +16,29 @@ Les bénéfices attendus de cet outil sont :
 service de contrôle de Tahiti.
 \end{itemize}
 
-    \subsection{Le besoin}
-        \subsubsection{Le besoin au début du projet}
-Le besoin était initialement de pouvoir visualiser les plans de vol des avions afin de pouvoir aider les contrôleurs à déterminer l'heure d'entrée approximative de l'avion dans la zone \textsc{Aci} (cf. \vref{Aci})
-Le logiciel devant être portable et adaptable, l'utilisation langage Python a été défini comme l'une des meilleur alternative.
-Tout au long du projet de nouveau besoin se sont fait ressentir. Ceux-ci comme nous pourrons le constater dans la suite du rapport nous a amener à modifier les objectifs du projet.
-
-        \subsubsection{Un besoin redéfinit tout au long du projet}
-On a très vite constaté, ce e dès les premières représentations,  que la création d'un logiciel qui pouvait représenter les données du système TIARE dans Google Eath pourrait avoir plusieurs intérêts:
+\section{Les besoins}
+Au debut de projet les besoins initiaux ont été definis. Nous verons par la suite comment ceux-ci ont pu evoluer. Il faut noter que le client est assez dirigiste, il a deja vu ce produit pour d'autres applications et a donc une vue global de ce qu'il souhaite en sortie. A savoir:
 \begin{itemize}
-\item Visualiser comment le Système interprète les données
-\item Comparer les plan de vol déposé avec les vols réalisé
-\item Visualiser les zone de contrôles
-\item Évaluer la mise en place du système \textsc{Ads}
+    \item Une application etant basée sur le logiciel \textsc{Google Earth}.
+    \item Python comme langage de programmation
 \end{itemize}
-C'est pourquoi les besoins on été redéfinit en cours de projet.
+Par contre le besoins précis de l'utilisation du produit reste indeterminée. C'est pourquoi nous avons orienté notre gestion de projet vers une méthode dite agile (cf. \vref{xtreme}). Cette méthode nous permettra de redefinir les besoins tout au long du projet en fonction de ce qui a déja été réalisé. Et ainsi obtenir un produit correspondant au mieux a ce que le client aurait pu esperer.
 
-        \subsubsection{Des besoins redéfinis}
-Les nouveaux besoins définis sont donc de pouvoir disposer d'une maquette (Appellée en anglais: Poc\footnote{Poc: Proof of concept, soit une démonstration de faisabilité}) qui serrait représentative de toutes les possibilités que pourrait apporter un logiciel de ce type.
-
-Cette maquette doit être capable de:
+Lors du lancement du projet les besoins étaient:
 \begin{itemize}
-\item définir un point d'entré approximatif d'un plan de vol dans la zone \textsc{Aci}.
-\item Visualiser les zone de contrôles
-\item Visualiser tous les points caractéristique du système (Aéroport, balises …)
-\item Visualiser les routes définie dans le système.
-\item Visualiser les plan de vol en fonction du temps
-\item Visualiser les report \textsc{Ads} ainsi que les points calculés par le système \textsc{Tiare}
-\item Différencier les vols interne, sortant, entrant et en transit.
+    \item Représenter le trafic aérien déposé par les plans de vol dans la zone de contrôle de \textsc{Tahiti} dans \textsc{Google Erath}.
+    \item Visualiser la configuration de la plateforme \textsc{Tiare} (zone de controle, point characteristique ...)
+\end{itemize}
+Tout au long du projet de nouveau besoins sont apparus tel que:
+\begin{itemize}
+    \item Representer le trafic aérien en fontion du temps
+    \item Definir approximativement l'heure d'entrée de et sortie des avion dans la \textsc{Fir} (cf. \vref{Fir}) en fonction de leur plan de vol déposé.
+    \item Visualiser le vol des avions en temps réel grace aux données \textsc{Ads} (cf. \vref{Ads}).
+    \item Visualiser le positionement des avions estimer par le système \textsc{Teiare} entre deux reports \textsc{Ads} afin de visualiser l'iterpretation des données recue par le système.
+    \item Diferentier les type de vol en quatre categories: Entrant, Sortant, Transit, Interne. 
 \end{itemize}
 
-L’intérêt de cette maquette serrait de définir les spécification d'un logiciel qui pourrait être ensuite réalisé et mis en production dans des sites ou la sécurité n'est pas à négliger. Il aurait aussi l’intérêt de définir les fonctionnalités nécessaires à un utilisateur donné.
+\section{Les risques}
+Lorsque l'on a comme projet de réaliser une appliquation qui a deja été réalisé par le passé nous avons une base sur laquel se referencer (en terme de methode, de temps, de couts). Hors sur un projet tel que le nôtre ou mème aucun prototype n'a encore été réalisé le risque que cela ne fonctionne pas est très elevé.
+
+C'est pour cela qu'une methode de gestion de projet dite agile decrite ci-dessous (\vref{xtreme}) à été utilisé. Cette méthode nous a permis d'avancer petit a petit afin de suicité des besoins "réalisable". Contrairement à la methode en V utilisée originelement a la \textsc{Dti} ou les besoins et les spésification sont déterminé avant le bebut de la réalisation technique.
