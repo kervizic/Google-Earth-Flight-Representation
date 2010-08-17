@@ -14,27 +14,27 @@
 
 
 
-Avant de passer à la pratique un apprentissage théorique à du etre réalisé.
+Avant de passer à la pratique un apprentissage théorique à du être réalisé.
 
-\section{Le contexte technique operationel}
+\section{Le contexte technique opérationnel}
 
     \subsection{\textsc{EurocatX}}
-Il faut bien comprendre comment marche le système afin de bien visulaliser d'où proviennent les informations. Comme décrit grossièrement dans le schéma (cf. Fig. \vref{eurocatx}),
+Il faut bien comprendre comment marche le système afin de bien visualiser d'où proviennent les informations. Comme décrit grossièrement dans le schéma (cf. Fig. \vref{eurocatx}),
 \begin{figure}
     \center
     \includegraphics[width=15cm]{images/SchemaControle.png}
-    \caption{Schématisation du système \textsc{EurocatX} au niveau des tour de controle}
+    \caption{Schématisation du système \textsc{EurocatX} au niveau des tour de contrôle}
     \label{eurocatx}
 \end{figure}
-\textsc{EurocatX} récupere les information sur les plans de vol par l'intermediaire de \textsc{Cagou}\footnote{\textsc{Cagou}: nom donné au commutateur \textsc{Rsfta}}. Il rcupère aussi le positionement émis par l'avion à l'aide de la transmition Satelite, \textsc{Vhf}\footnote{\textsc{Vhf}: Very High Frequency, soit une bande radio de très haute frequance} ou des données radars lors de son approche. Le système \textsc{EurocatX} donne un acces à la bureautique protégé par un parfeu (FireWall) afin de rendre disponible sur ce réseau un certain nombre d'information. Dans notre cas nous y recupererons:
+\textsc{EurocatX} récupère les information sur les plans de vol par l'intermédiaire de \textsc{Cagou}\footnote{\textsc{Cagou}: nom donné au commutateur \textsc{Rsfta}}. Il récupère aussi le positionnement émis par l'avion à l'aide de la transmission Satellite, \textsc{Vhf}\footnote{\textsc{Vhf}: Very High Frequency, soit une bande radio de très haute fréquence} ou des données radars lors de son approche. Le système \textsc{EurocatX} donne un accès à la bureautique protégé par un par-feu (FireWall) afin de rendre disponible sur ce réseau un certain nombre d'information. Dans notre cas nous y récupérerons:
 \begin{itemize}
-    \item toutes les données de configuration du système tels que les nom et coordonnées des balise referancée, la position des zone de controle et des zone \textsc{Aci} ou encore les route utilisée pour décrire les plans de vols.
+    \item toutes les données de configuration du système tels que les nom et coordonnées des balise référencée, la position des zone de contrôle et des zone \textsc{Aci} ou encore les route utilisée pour décrire les plans de vols.
     \item Les fichiers de log du Commutateur \textsc{Cagou} afin de pouvoir exploiter les plans de vol reçus par le réseaux \textsc{Rsfta}.
-    \item Tous les report \textsc{Ads} reçu par satelite et traité par le systeme.
+    \item Tous les report \textsc{Ads} reçu par satellite et traité par le système.
 \end{itemize} 
-Le système envoye les information recoltées et celle calculées au visues\footnote{Visue: Nom pour décrire les ordinateur utilisés pour visualiser les données de controles} situées dans la tour de controle au niveau de la Vigie ou de la salle \textsc{Ccr} ainsi que de la position deportée à \textsc{Morea}.
+Le système envoyé les information récoltées et celle calculées au visues\footnote{Visue: Nom pour décrire les ordinateur utilisés pour visualiser les données de contrôles} situées dans la tour de contrôle au niveau de la Vigie ou de la salle \textsc{Ccr} ainsi que de la position déportée à \textsc{Morea}.
 
-Les données seront donc recupérée dans les fichiers ".asf" pour tous ce qui est de la configuration du système, dans les fichier du \textsc{Fdp} pour les plans de vol et dans les fichiers du serveur \textsc{Ads} pour les repport ainsi que pour la position calculée des aéronefs.
+Les données seront donc récupérée dans les fichiers ".asf" pour tous ce qui est de la configuration du système, dans les fichier du \textsc{Fdp} pour les plans de vol et dans les fichiers du serveur \textsc{Ads} pour les report ainsi que pour la position calculée des aéronefs.
 
     \subsection{Le domaine de l'aviation}
 Il m'a aussi été nécessaire de prendre connaissance de touts les terme, unité, convention et j'en passe utilisé dans le domaine aéronautique.
@@ -46,7 +46,7 @@ me remémoré les manière de calculé le point d'intersection de deux arc de ce
 
         \subsubsection{Convention:}
 Plusieurs conventions on du être acquise comme celle utilisé par le système TIARE pour décrire les report \textsc{Ads} ou encre celle utilisée par les compagnie pour le dépôt de plan de vole.
-NE PAS OUBLIER DE FAIR REF AU DOCUMLENT 4444 ...
+NE PAS OUBLIER DE FAIRE RÉF AU DOCUMENT 4444 ...
 
 
 
@@ -55,55 +55,55 @@ NE PAS OUBLIER DE FAIR REF AU DOCUMLENT 4444 ...
 \section{Base de travail}
     \subsection{Le langage Python}
         \subsubsection{Bien coder:\label{pygood}}
-Afin de pouvoir apprendre les bonne pratique de la programmation Python\cite{pybook} j'ai lu (en diagonale) un livre tres bien expliqué intitulé Programation Python, conception et Optimisation. Celui-ci m'a permit de pouvoir d'une part revoir ce qui avait été appliquer lors de mes etudes et d'autre part avoir une vue global sur le langage et ainsi pouvoir prendre du recule lors du codage.
+Afin de pouvoir apprendre les bonne pratique de la programmation Python j'ai lu un livre intitulé "Programmation Python, conception et Optimisation"\cite{pybook}. Celui-ci m'a permit de pouvoir d'une part revoir ce qui avait été appliquer lors de mes études et d'autre part avoir une vue global sur le langage et ainsi pouvoir prendre du recule lors du codage.
 
-Celui ci m'a par exemple appris le nouveau style de programmation qui part du principe que chaque nouvel objet définit est basé sur un Objet existant, et que par la même occasion tout en python était Objet (même une simple variable booléene). Ou encore la maniere de verifier si un objet etait faux, egale à 0 ou encore une chaine vide simplement en demandant si il existait (ex:~\texttt{"if x != 0:"}~devient \texttt{"if not x:"})
+Celui ci m'a par exemple appris le nouveau style de programmation qui part du principe que chaque nouvel objet définit est basé sur un Objet existant, et que par la même occasion tout en python était Objet (même une simple variable booléenne). Ou encore la manière de vérifier si un objet était faux, égale à 0 ou encore une chaîne vide simplement en demandant si il existait (ex:~\texttt{"if x != 0:"}~devient \texttt{"if not x:"})
 
         \subsubsection{Utiliser les expression régulière:} 
-L'apprentissage de l'utilisation des expression réguliere\footnote{Une expression régulière
- est en informatique une chaîne de caractères que l’on appelle parfois un motif et qui décrit un ensemble de chaînes de caractères possibles selon une syntaxe précise.}, m'a été grandement facilité garce au site: \url{http://www.dsimb.inserm.fr/}\cite{re} et a la documentation en ligne de Python\cite{pydoc}. Il s'est avéré après apprentissage que ces expression régulière auron grandement facilité la faisabilité du projet.
+L'apprentissage de l'utilisation des expression régulière\footnote{Une expression régulière
+ est en informatique une chaîne de caractères que l’on appelle parfois un motif et qui décrit un ensemble de chaînes de caractères possibles selon une syntaxe précise.}, m'a été grandement facilité garce au site: \url{http://www.dsimb.inserm.fr/}\cite{re} et a la documentation en ligne de Python\cite{pydoc}. Il s'est avéré après apprentissage que ces expression régulière aurons grandement facilité la faisabilité du projet.
 
         \subsubsection{L'optimisation:}
-Je pourrais cité un passage du livre qui dit:
+Je pourrais cité un passage du livre\cite{pybook} qui dit:
 \begin{quotation}
     Fourni dès le départ avec des modules de tests, Python est un langage agile. Le terme agile est originellement issu de la méthodologie de programmation agile (Beck et Al.), très proche de la programmation itérative. Cette méthodologie, qui réduit les risques liés à la conception de logiciels, introduit entre autres des principes de tests continus du code.
     \raggedleft Vincent \textsc{Lozano}.
 \end{quotation}
 
-En effet il m'a été rapidement nécessaire de réalisé des test, aussi bien pour vérifier que mon code etait valide que pour vérifier que celui-ci s’exécutait normalement. Il c'est avéré à plusieurs reprises que certaines parties de mon code étaient très gourmandes en processus. L’apprentissage des fonction de test du code tel que le module hotshot décrit plus tard (cf. \vref{perf}) m'a été rapidement nécessaire.
+En effet il m'a été rapidement nécessaire de réalisé des test, aussi bien pour vérifier que mon code était valide que pour vérifier que celui-ci s’exécutait normalement. Il c'est avéré à plusieurs reprises que certaines parties de mon code étaient très gourmandes en processus. L’apprentissage des fonction de test du code tel que le module hotshot décrit plus tard (cf. \vref{perf}) m'a été rapidement nécessaire.
 
-    \subsection{\textsc{Google Erath}}
-\textsc{Google Erath} est un logiciel, propriété de la société \textsc{Google}, permettant une visualisation de la terre en 3 dimensions avec un assemblage de photographies aériennes ou satellitaires. Ce logiciel donne la possibilité de configurer un environement, ajouter des lignes, des points ou encore des polygone en 3D en passent par des fichier de configuration au format KML\footnote{\label{Kml}KML: Keyhole Markup Language, est un format de fichier et de grammaire XML pour la modélisation et le stockage de caractéristiques géographiques comme les points, les lignes, les images, les polygones et les modèles pour l'affichage dans \textsc{Google Erath}, dans \textsc{Google Maps} et dans d'autres applications.}.
+    \subsection{\textsc{Google Earth}}
+\textsc{Google Earth} est un logiciel, propriété de la société \textsc{Google}, permettant une visualisation de la terre en 3 dimensions avec un assemblage de photographies aériennes ou satellites. Ce logiciel donne la possibilité de configurer un environnement, ajouter des lignes, des points ou encore des polygone en 3D en passent par des fichier de configuration au format KML\footnote{\label{Kml}KML: Keyhole Markup Language, est un format de fichier et de grammaire XML pour la modélisation et le stockage de caractéristiques géographiques comme les points, les lignes, les images, les polygones et les modèles pour l'affichage dans \textsc{Google Earth}, dans \textsc{Google Maps} et dans d'autres applications.}.
 
-Ce format, qui repose sur le XML\footnote{XML: Extensible Markup Language («langage extensible de balisage»), est un langage informatique de balisage générique.}, a l'avantage d’être simple à manipuler. Ça sémantique est définie sur le de google (cf. Biliographie \cite{gecode}) 
+Ce format, qui repose sur le XML\footnote{XML: Extensible Markup Language («langage extensible de balisage»), est un langage informatique de balisage générique.}, a l'avantage d’être simple à manipuler. Ça sémantique est définie sur le de google (cf. Bibliographie \cite{gecode}) 
 
 
 
 \section{Le programme réalisé et ses fonctions}
-    \subsection{Le fonctionement}
+    \subsection{Le fonctionnement}
             \paragraph{La configuration:}
-Le programme réalisé ne possède pas encore d'interface (IHM) graphique. Il est donc nécessaire de configurer les option a l'aide d'un fichier de configuration (cf. annexe \vref{config}). Nous pourons regler par l'intermediaire de celui-ci:
+Le programme réalisé ne possède pas encore d'interface (IHM) graphique. Il est donc nécessaire de configurer les option a l'aide d'un fichier de configuration (cf. annexe \vref{config}). Nous pourrons régler par l'intermédiaire de celui-ci:
 \begin{itemize}
-    \item Les fichiers Kml à recréer ou non, se qui est utile afin de ne pas avoir à recréer des fichier statique (tel que la position des point carcteristique ou encore des zones de controles) a chauque utilisation tout en laissant a l'utilisateur la possibiolité de les mettre a jour simplement.
-    \item Les diferant styles et couleurs.
+    \item Les fichiers Kml à recréer ou non, se qui est utile afin de ne pas avoir à recréer des fichier statique (tel que la position des point caractéristique ou encore des zones de contrôles) a chaque utilisation tout en laissant a l'utilisateur la possibilité de les mettre a jour simplement.
+    \item Les différant styles et couleurs.
     \item L'emplacement des fichiers de configuration.
-    \item les description et noms appliqué à chaque categorie.
+    \item les description et noms appliqué à chaque catégorie.
 \end{itemize}
-            \paragraph{L'execution:}
-Le fichier de configuration renseigné, le programme peut etre lancé. Il est possible de le lancer par l'intermediaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermediaire de l'interface Python ou encore en direct si les information pour gérer et lancer les fichiers Python ont été renseignée dans le systeme d'exploitation.
+            \paragraph{L'exécution:}
+Le fichier de configuration renseigné, le programme peut être lancé. Il est possible de le lancer par l'intermédiaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermédiaire de l'interface Python ou encore en direct si les information pour gérer et lancer les fichiers Python ont été renseignée dans le système d'exploitation.
             \paragraph{Le résultat}
-L'execution du programe réalise une suite d'action:
+L'exécution du programme réalise une suite d'action:
 \begin{enumerate}
-    \item Lire le fichier de configuration afin de determiner les action a effectuer.
-    \item Lire les fichiers de configuration du sysème \textsc{Tiare} affin de récuperer toutes les variable necessaire sous forme d'objet\footnote{Objet: structure de données valuées et cachées qui répond à un ensemble de messages. Cette structure de données définit son état tandis que l'ensemble des messages qu'il comprend décrit son comportement} (ex: points characteristique ...)
-    \item Lire les fichiers de log afin de créer des objets tel que les plans de vol ou encore les report \textsc{Ads}. Ces objet sont créer non seulement a partir de ses fichiers de log mais aussi a partir des objets créer precedement (ex: les point des plan de vol designé par un nom sont convertis en coordonées à l'aide des points characteristiques).
-    \item Créer les fichier \textsc{Kml} designé dans le fichir de configuration à l'aide des objets instancié.
+    \item Lire le fichier de configuration afin de déterminer les action a effectuer.
+    \item Lire les fichiers de configuration du système \textsc{Tiare} affin de récupérer toutes les variable nécessaire sous forme d'objet\footnote{Objet: structure de données valuées et cachées qui répond à un ensemble de messages. Cette structure de données définit son état tandis que l'ensemble des messages qu'il comprend décrit son comportement} (ex: points caractéristique ...)
+    \item Lire les fichiers de log afin de créer des objets tel que les plans de vol ou encore les report \textsc{Ads}. Ces objet sont créer non seulement a partir de ses fichiers de log mais aussi a partir des objets créer précédemment (ex: les point des plan de vol désigné par un nom sont convertis en coordonnées à l'aide des points caractéristiques).
+    \item Créer les fichier \textsc{Kml} désigné dans le fichier de configuration à l'aide des objets instancié.
     \item Créer un fichier \textsc{Kmz} a l'aide de tout les fichiers \textsc{Kml} afin d'avoir un fichier compact et facile a transporter.
 \end{enumerate}
 
 
 \section{Problèmes techniques rencontrés et solution apportées}
-Comme dans tout projet il y a une une multitude de problèmes a resoudre. Nous verrons dans cette partie quelques exemples de ces problèmes rencontré ainsi que la manière dont il ont été résolus. Cette liste reste bien entendu exhaustive au regard de tout les petit problème auxquels nous avons du faire face.
+Comme dans tout projet il y a une une multitude de problèmes a résoudre. Nous verrons dans cette partie quelques exemples de ces problèmes rencontré ainsi que la manière dont il ont été résolus. Cette liste reste bien entendu exhaustive au regard de tout les petit problème auxquels nous avons du faire face.
 
     \subsection{Gestion des erreur}
             \paragraph{problématique:}
@@ -123,43 +123,42 @@ Afin de déterminer l'heure d'entrée approximative des avions dans la zone ACI 
 \begin{figure}
     \center
     \includegraphics[width=5cm]{images/Sphere.png}
-    \caption{Représentation grossière de l'interssection de deux arc de cercle respectivement formé par la trajectoire la plus courte entre deux points situé sur le Globe terrestre}
+    \caption{Représentation grossière de l'intersection de deux arc de cercle respectivement formé par la trajectoire la plus courte entre deux points situé sur le Globe terrestre}
     \label{sphere}
 \end{figure}
             \paragraph{Résolution:}
-Étant donné que j'ai effectué un BTS avant d'intégrer l'EIGSI \footnote{EIGSI: École d'Ingénieurs en Génie des Systèmes Industriel située à La Rochelle}, les notion de coordonnées sphérique ne me sont que peut familière. Après avoir en vainc cherché sur internet ainsi que dans mon entourage  (maître de stage, collègues de travail) je me suis replié sur un forum de mathématique sur le quel j'ai déposé un sujet explicitant le problème (adresse, cf. bibliographie \cite{forummath}). Une personne nous a donnée une solution qui, après connaissance, semble tellement simple qu'on se demande pourquoi personne n'y a pensés. Cette solution consiste a déterminer les plan défini par les deux points aux extremités de chaques arc et par le centre de la terre (ainsi nous avons forcement la courbe qu'a suivi l'avion sur ce plan). Il faut ensuite déterminer la normal a chacun des plan pour en déduire la droite d'intersection de ces plan (passant par le centre de la sphère). Une foi cette droite acquise il faut définir sont vecteur norme et le convertir en coordonnée sphérique. Ce qui nous donne un des point d'intersection de la droite avec la sphère, l'autre étant situé par définition à l'opposé.
+Étant donné que j'ai effectué un BTS avant d'intégrer l'EIGSI \footnote{EIGSI: École d'Ingénieurs en Génie des Systèmes Industriel située à La Rochelle}, les notion de coordonnées sphérique ne me sont que peut familière. Après avoir en vainc cherché sur internet ainsi que dans mon entourage  (maître de stage, collègues de travail) je me suis replié sur un forum de mathématique sur le quel j'ai déposé un sujet explicitant le problème (adresse, cf. bibliographie \cite{forummath}). Une personne nous a donnée une solution qui, après connaissance, semble tellement simple qu'on se demande pourquoi personne n'y a pensés. Cette solution consiste a déterminer les plan défini par les deux points aux extrémités de chaque arc et par le centre de la terre (ainsi nous avons forcement la courbe qu'a suivi l'avion sur ce plan). Il faut ensuite déterminer la normal a chacun des plan pour en déduire la droite d'intersection de ces plan (passant par le centre de la sphère). Une foi cette droite acquise il faut définir sont vecteur norme et le convertir en coordonnée sphérique. Ce qui nous donne un des point d'intersection de la droite avec la sphère, l'autre étant situé par définition à l'opposé.
 
-Une démonstration valant amplement un long discours, et a titre informatif, voici ce que cela donne en résolution mathématique. Pour cet exemple nous avons deux arcs représentent 2 trajectoires difinie chaqune par 2 points A et B (cf. Fig. \vref{sphere}). Chaque pour sera defini par une latitude et une longitude.
+Une démonstration valant amplement un long discours, et a titre informatif, voici ce que cela donne en résolution mathématique. Pour cet exemple nous avons deux arcs représentent 2 trajectoires définies chacune par 2 points A et B (cf. Fig. \vref{sphere}). Chaque pour sera défini par une latitude et une longitude.
 
+Nous avons donc:
 \begin{itemize}
-    \item Nous avons donc:
-    \begin{itemize}
-        \item $lat_{A}$ la latitude de A
-        \item $long_{A}$ la longitude de A
-        \item $(x_{A}, y_{A}, z_{A})$ les coordonées cartésiennes de A
-        \item $I_{1}$ le point d'intersection \no 1
-        \item $I_{2}$ le point d'intersection \no 2
-    \end{itemize}
-    \item Il faut tout d'abord convertir les coordonnées sphérique en vecteur de coordonnées cartésiennes pour $A$ et $B$:
-    $$  A=\left\{
-    \begin{array}{rcl}x_A & = & cos(lat) \times cos(long)\\ y_D & = & cos(lat_{A}) \times sin(long_{A})\\ z_A & = & sin(lat_{A}) 
-    \end{array}\right.$$
-    \item Il faut ensuite déterminer le plan passant par $O$, $A$ et $B$ ayant alors pour équation:
-    $$ax+by+cz=0$$ où $$\left(\matrix {a\cr b\cr c}\right)= \left(\matrix {x_A\cr y_A\cr z_A}\right)\wedge \left(\matrix {x_B\cr y_B\cr z_B}\right)$$c'est à dire $$\left\{\matrix {a=y_Az_B-z_Ay_B\cr b=z_Ax_B-x_Az_B\cr c=x_Ay_B-y_Ax_B}\right.$$
-    \item L'intersection des deux plans de coordonées $(a,b,c)$ et (a',b',c') contient le point O, mais aussi le point $P$ de coordonnées $(x_P,y_P,z_P)$ tel que: $$\left(\matrix {x_P\cr y_P\cr z_P}\right)= \left(\matrix {a\cr b\cr c}\right)\wedge \left(\matrix {a'\cr b'\cr c'}\right)$$
-    \item P n'ettant pas forcément sur la sphère, il faut trouver un point de la droite $(OP)$ sur cette sphère. Pour cela il suffit de diviser les 3 coordonnées de P par la norme de $\overrightarrow{OP}$:
-    $$I_{1} = \left\{\matrix {x_P / \sqrt{x_P^2+y_P^2+z_P^2}\cr x_P / \sqrt{y_P^2+y_P^2+z_P^2}\cr x_P / \sqrt{z_P^2+y_P^2+z_P^2}}\right.$$
-    \item nous avons donc $I_1$ et son opposé $I_2$, il nous reste donc plus qu'a verifier si chaqun de ces points appartient à un des 2 arcs.
+    \item $lat_{A}$ la latitude de A
+    \item $long_{A}$ la longitude de A
+    \item $(x_{A}, y_{A}, z_{A})$ les coordonnées cartésiennes de A
+    \item $I_{1}$ le point d'intersection \no 1
+    \item $I_{2}$ le point d'intersection \no 2
 \end{itemize}
+Il faut tout d'abord convertir les coordonnées sphérique en vecteur de coordonnées cartésiennes pour $A$ et $B$:
+$$  A=\left\{
+\begin{array}{rcl}x_A & = & cos(lat) \times cos(long)\\ y_D & = & cos(lat_{A}) \times sin(long_{A})\\ z_A & = & sin(lat_{A}) 
+\end{array}\right.$$
+Il faut ensuite déterminer le plan passant par $O$, $A$ et $B$ ayant alors pour équation:
+$$ax+by+cz=0$$ où $$\left(\matrix {a\cr b\cr c}\right)= \left(\matrix {x_A\cr y_A\cr z_A}\right)\wedge \left(\matrix {x_B\cr y_B\cr z_B}\right)$$c'est à dire $$\left\{\matrix {a=y_Az_B-z_Ay_B\cr b=z_Ax_B-x_Az_B\cr c=x_Ay_B-y_Ax_B}\right.$$
+L'intersection des deux plans de coordonnées $(a,b,c)$ et (a',b',c') contient le point O, mais aussi le point $P$ de coordonnées $(x_P,y_P,z_P)$ tel que: $$\left(\matrix {x_P\cr y_P\cr z_P}\right)= \left(\matrix {a\cr b\cr c}\right)\wedge \left(\matrix {a'\cr b'\cr c'}\right)$$
+P n'étant pas forcément sur la sphère, il faut trouver un point de la droite $(OP)$ sur cette sphère. Pour cela il suffit de diviser les 3 coordonnées de P par la norme de $\overrightarrow{OP}$:
+$$I_{1} = \left\{\matrix {x_P / \sqrt{x_P^2+y_P^2+z_P^2}\cr x_P / \sqrt{y_P^2+y_P^2+z_P^2}\cr x_P / \sqrt{z_P^2+y_P^2+z_P^2}}\right.$$
+nous avons donc $I_1$ et son opposé $I_2$, il nous reste donc plus qu'a vérifier si chacun de ces points appartient à un des 2 arcs.
+
 Vous trouverez le code Python correspondant à ces calcule dans la fonction: "verifyIntersection (line, point):" du module "ususalFonction.py" disponible en annexe \vref{usualfonction}
 
     \subsection{Performance du logiciel\label{perf}}
             \paragraph{Problématique:}
-Les premiers tests du logiciel ce sont déroulé sur un nombre limité de fichiers (représenté par un nombre limité d'heure de vol), ce affin de pouvoir les valider rapidement. Lors de l'apparition de fichiers plus volumineux (plus de 300Mo de donnée en entrée, environ 10\% en sortie) c'est posé le probleme de performancee. Avant optimisation l'ordinateur moulinais des heures avant de pouvoir sortir un fichier. Il a donc falut optimiser le code afin d'alleger le programe en resources.
+Les premiers tests du logiciel ce sont déroulé sur un nombre limité de fichiers (représenté par un nombre limité d'heure de vol), ce affin de pouvoir les valider rapidement. Lors de l'apparition de fichiers plus volumineux (plus de 300Mo de donnée en entrée, environ 10\% en sortie) c'est posé le problème de performance. Avant optimisation l'ordinateur moulinais des heures avant de pouvoir sortir un fichier. Il a donc fallût optimiser le code afin d'alléger le programme en ressources.
 
             \paragraph{Résolution:}
-En cherchant des conseils dans des forum d'informatique ainsi que dans le livre cité précédement (cf. bibliographie \cite{pybook}, nous avons découvert que Python etait un langage orientier par les test et qu'il disposait donc de librairies spécialment conçues pour determiner les point bloquant d'un programme et les foctions appelées les plus gourmandes.
+En cherchant des conseils dans des forum d'informatique ainsi que dans le livre cité précédemment (cf. bibliographie \cite{pybook}, nous avons découvert que Python était un langage orienter par les test et qu'il disposait donc de librairies spécialement conçues pour déterminer les point bloquant d'un programme et les fonctions appelées les plus gourmandes.
 
-La fonction retenue pour repérer ce qui est appelé en anglais les Bottleneck\footnote{Bottlneck: (goulot d'étranglement) point d'un système limitant les performances globales, et pouvant avoir un effet sur les temps de traitement et de réponse.} est la fonction "hotshot" qui à pour but d'analyser un programme dans sa totalité en indiquant nottament les resources utilisées par chaque fonction appelée. Pour visualiser ce que donne le résultat d'une analyse veuillez vous reporter a la figure \vref{stat}.
+La fonction retenue pour repérer ce qui est appelé en anglais les Bottleneck\footnote{Bottlneck: (goulot d'étranglement) point d'un système limitant les performances globales, et pouvant avoir un effet sur les temps de traitement et de réponse.} est la fonction "hotshot" qui à pour but d'analyser un programme dans sa totalité en indiquant notamment les ressources utilisées par chaque fonction appelée. Pour visualiser ce que donne le résultat d'une analyse veuillez vous reporter a la figure \vref{stat}.
 
-Les bottlenecks reperés, une réecriture des parties bloquantes à du être effectuée. Cette analyse nous a permis de réduire les ressources et donc le temps d'execution du logiciel de plus de 80\%.
+Les bottlenecks repérés, une réécriture des parties bloquantes à du être effectuée. Cette analyse nous a permis de réduire les ressources et donc le temps d'exécution du logiciel de plus de 80\%.
