@@ -31,7 +31,7 @@ Il faut bien comprendre comment marche le système afin de bien visualiser d'où
     \item toutes les données de configuration du système tels que les nom et coordonnées des balise référencée, la position des zone de contrôle et des zone \textsc{Aci} ou encore les route utilisée pour décrire les plans de vols.
     \item Les fichiers de log du Commutateur \textsc{Cagou} afin de pouvoir exploiter les plans de vol reçus par le réseaux \textsc{Rsfta}.
     \item Tous les report \textsc{Ads} reçu par satellite et traité par le système.
-\end{itemize} 
+\end{itemize}\medskip 
 Le système envoyé les information récoltées et celle calculées au visues\footnote{Visue: Nom pour décrire les ordinateur utilisés pour visualiser les données de contrôles} situées dans la tour de contrôle au niveau de la Vigie ou de la salle \textsc{Ccr} ainsi que de la position déportée à \textsc{Morea}.
 
 Les données seront donc récupérée dans les fichiers ".asf" pour tous ce qui est de la configuration du système, dans les fichier du \textsc{Fdp} pour les plans de vol et dans les fichiers du serveur \textsc{Ads} pour les report ainsi que pour la position calculée des aéronefs.
@@ -88,7 +88,7 @@ Le programme réalisé ne possède pas encore d'interface (IHM) graphique. Il es
     \item Les différant styles et couleurs.
     \item L'emplacement des fichiers de configuration.
     \item les description et noms appliqué à chaque catégorie.
-\end{itemize}
+\end{itemize}\medskip
             \paragraph{L'exécution:}
 Le fichier de configuration renseigné, le programme peut être lancé. Il est possible de le lancer par l'intermédiaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermédiaire de l'interface Python ou encore en direct si les information pour gérer et lancer les fichiers Python ont été renseignée dans le système d'exploitation.
             \paragraph{Le résultat}
@@ -111,7 +111,7 @@ Le premier problème que nous avons rencontrer a été celui de la gestion des e
 \begin{itemize}
     \item Le premier type d'erreur était par exemple une réaction in attendue du logiciel, On pourrait prendre en exemple la conversion de coordonnées reçue en Système sexagésimal \footnote{(Système sexagésimal : Degrés ( \degres\ ) Minutes ( ' ) Secondes ('' ))} en coordonnées utilisées dans les fichiers KML \vref{Kml}, qui lors des premiers test donnais des donnée erronées.
     \item Le deuxième type était celui du au erreur contenu dans les fichiers de log utilisé pour récupérer les informations. Ces erreur faisait effet boule de neige et venait se répercuter dans le fonctionnement du logiciel.
-\end{itemize}
+\end{itemize}\medskip
 
             \paragraph{Résolution:}
 La solution au premier problème a été de mettre en place des test a chaque fonction implémenter ou après avoir réaliser chaque objectif fixé. On appel cette méthode le test continu du code. Grâce à cela nous allons pouvoir déterminer plus rapidement lors d'une erreur futur d'où provient celle-ci. Une méthode simple de la mette en place est de définir un test a réaliser pour valider la fonction ou le code. On détermine donc quel réaction doit avoir un fonction pour un environnement donné et l'on vérifie si le résultat corresponds bien avec celui espéré. (Ex: on a la coordonnée 4530N10045E qui correspond a 45\degres 30' Nord 100\degres 45' Est. On envoi cette variable dans la fonction de conversion et l'on vérifie que le résultat retourné est bien en décimal: 45,5\degres\ en latitude et -100,75 en longitude). Si le résultat est correct la fonction ou le morceau de code est validé, sinon il doit être corrigé.
