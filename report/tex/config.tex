@@ -185,6 +185,15 @@ stringstyle=\color{red}
 \setlength{\parindent}{0pt}
 \setlength{\medskipamount}{\parskip}
 
+%% Et les chapitre
+\makeatletter
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+   \LARGE \bfseries\thechapter\quad#1\par\nobreak
+   \vskip 10\p@
+  }}
+\makeatother
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

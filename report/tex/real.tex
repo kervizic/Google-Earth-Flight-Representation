@@ -14,7 +14,7 @@
 
 
 
-Avant de passer à la pratique un apprentissage théorique à du être réalisé.
+%Avant de passer à la pratique un apprentissage théorique à du être réalisé.
 
 \section{Le contexte technique opérationnel}
 
@@ -23,29 +23,29 @@ Il faut bien comprendre comment marche le système afin de bien visualiser d'où
 \begin{figure}
     \center
     \includegraphics[width=15cm]{images/SchemaControle.png}
-    \caption{Schématisation du système \textsc{EurocatX} au niveau des tour de contrôle}
+    \caption{Schématisation du système \textsc{EurocatX} au niveau des tours de contrôle}
     \label{eurocatx}
 \end{figure}
-\textsc{EurocatX} récupère les information sur les plans de vol par l'intermédiaire de \textsc{Cagou}\footnote{\textsc{Cagou}: nom donné au commutateur \textsc{Rsfta}}. Il récupère aussi le positionnement émis par l'avion à l'aide de la transmission Satellite, \textsc{Vhf}\footnote{\textsc{Vhf}: Very High Frequency, soit une bande radio de très haute fréquence} ou des données radars lors de son approche. Le système \textsc{EurocatX} donne un accès à la bureautique protégé par un par-feu (FireWall) afin de rendre disponible sur ce réseau un certain nombre d'information. Dans notre cas nous y récupérerons:
+\textsc{EurocatX} récupère les informations sur les plans de vol par l'intermédiaire de \textsc{Cagou}\footnote{\textsc{Cagou}: nom donné au commutateur \textsc{Rsfta}}. Il récupère aussi le positionnement émis par l'avion à l'aide de la transmission Satellite, \textsc{Vhf}\footnote{\textsc{Vhf}: Very High Frequency, soit une bande radio de très haute fréquence} ou des données radars lors de son approche. Le système \textsc{EurocatX} donne un accès à la bureautique protégé par un par-feu (FireWall) afin de rendre disponible sur ce réseau un certain nombre d'information. Dans notre cas nous y récupérerons:
 \begin{itemize}
     \item toutes les données de configuration du système tels que les nom et coordonnées des balise référencée, la position des zone de contrôle et des zone \textsc{Aci} ou encore les route utilisée pour décrire les plans de vols.
-    \item Les fichiers de log du Commutateur \textsc{Cagou} afin de pouvoir exploiter les plans de vol reçus par le réseaux \textsc{Rsfta}.
-    \item Tous les report \textsc{Ads} reçu par satellite et traité par le système.
+    \item Les fichiers de log du Commutateur \textsc{Cagou} afin de pouvoir exploiter les plans de vol reçus par le réseau \textsc{Rsfta}.
+    \item Tous les reports \textsc{Ads} reçu par satellite et traité par le système.
 \end{itemize}\medskip 
-Le système envoyé les information récoltées et celle calculées au visues\footnote{Visue: Nom pour décrire les ordinateur utilisés pour visualiser les données de contrôles} situées dans la tour de contrôle au niveau de la Vigie ou de la salle \textsc{Ccr} ainsi que de la position déportée à \textsc{Morea}.
+Le système envoyé les informations récoltées et celle calculées au visues\footnote{Visue: Nom pour décrire les ordinateur utilisés pour visualiser les données de contrôles} situées dans la tour de contrôle au niveau de la Vigie ou de la salle \textsc{Ccr} ainsi que de la position déportée à \textsc{Morea}.
 
-Les données seront donc récupérée dans les fichiers ".asf" pour tous ce qui est de la configuration du système, dans les fichier du \textsc{Fdp} pour les plans de vol et dans les fichiers du serveur \textsc{Ads} pour les report ainsi que pour la position calculée des aéronefs.
+Les données seront donc récupérée dans les fichiers ".asf" pour tous ce qui est de la configuration du système, dans les fichier du \textsc{Fdp} pour les plans de vol et dans les fichiers du serveur \textsc{Ads} pour les reports ainsi que pour la position calculée des aéronefs.
 
     \subsection{Le domaine de l'aviation}
-Il m'a aussi été nécessaire de prendre connaissance de touts les terme, unité, convention et j'en passe utilisé dans le domaine aéronautique.
+Il m'a aussi été nécessaire de prendre connaissance de touts les termes, unité, convention et j'en passe utilisé dans le domaine aéronautique.
 
         \subsubsection{Les coordonnées et unités:}
 Tout d'abord est vite venu le problème de conversion de coordonnées, J'ai donc du revoir les conversions de coordonnées sphériques ainsi que les conversions de distances.
 J'ai également du, comme expliquée ci dessus (cf. \vref{mathcoord})
-me remémoré les manière de calculé le point d'intersection de deux arc de cercle en coordonnées sphériques.
+me remémoré les solutions de calcule du point d'intersection de deux arc de cercle en coordonnées sphériques.
 
         \subsubsection{Convention:}
-Plusieurs conventions on du être acquise comme celle utilisé par le système TIARE pour décrire les report \textsc{Ads} ou encre celle utilisée par les compagnie pour le dépôt de plan de vole.
+Plusieurs conventions on du être acquise comme celle utilisé par le système TIARE pour décrire les report \textsc{Ads} ou encre celle utilisée par les compagnies pour le dépôt de plan de vole.
 NE PAS OUBLIER DE FAIRE RÉF AU DOCUMENT 4444 ...
 
 
@@ -59,9 +59,8 @@ Afin de pouvoir apprendre les bonne pratique de la programmation Python j'ai lu 
 
 Celui ci m'a par exemple appris le nouveau style de programmation qui part du principe que chaque nouvel objet définit est basé sur un Objet existant, et que par la même occasion tout en python était Objet (même une simple variable booléenne). Ou encore la manière de vérifier si un objet était faux, égale à 0 ou encore une chaîne vide simplement en demandant si il existait (ex:~\texttt{"if x != 0:"}~devient \texttt{"if not x:"})
 
-        \subsubsection{Utiliser les expression régulière:} 
-L'apprentissage de l'utilisation des expression régulière\footnote{Une expression régulière
- est en informatique une chaîne de caractères que l’on appelle parfois un motif et qui décrit un ensemble de chaînes de caractères possibles selon une syntaxe précise.}, m'a été grandement facilité garce au site: \url{http://www.dsimb.inserm.fr/}\cite{re} et a la documentation en ligne de Python\cite{pydoc}. Il s'est avéré après apprentissage que ces expression régulière aurons grandement facilité la faisabilité du projet.
+        \subsubsection{Utiliser les expressions régulières:} 
+L'apprentissage de l'utilisation des expressions régulières\footnote{Une expression régulière est en informatique une chaîne de caractères que l’on appelle parfois un motif et qui décrit un ensemble de chaînes de caractères possibles selon une syntaxe précise.}, m'a été grandement facilité garce au site: \url{http://www.dsimb.inserm.fr/}\cite{re} et a la documentation en ligne de Python\cite{pydoc}. Il s'est avéré après apprentissage que ces expression régulière aurons grandement facilité la faisabilité du projet.
 
         \subsubsection{L'optimisation:}
 Je pourrais cité un passage du livre\cite{pybook} qui dit:
@@ -70,7 +69,7 @@ Je pourrais cité un passage du livre\cite{pybook} qui dit:
     \raggedleft Vincent \textsc{Lozano}.
 \end{quotation}
 
-En effet il m'a été rapidement nécessaire de réalisé des test, aussi bien pour vérifier que mon code était valide que pour vérifier que celui-ci s’exécutait normalement. Il c'est avéré à plusieurs reprises que certaines parties de mon code étaient très gourmandes en processus. L’apprentissage des fonction de test du code tel que le module hotshot décrit plus tard (cf. \vref{perf}) m'a été rapidement nécessaire.
+En effet il m'a été rapidement nécessaire de réalisé des test, aussi bien pour vérifier que mon code était valide que pour vérifier que celui-ci s’exécutait normalement. Il c'est avéré à plusieurs reprises que certaines parties de mon code étaient très gourmandes en processus. L’apprentissage de fonctions de test de code, tel que le module hotshot décrit plus tard (cf. \vref{perf}), m'a été rapidement nécessaire.
 
     \subsection{\textsc{Google Earth}}
 \textsc{Google Earth} est un logiciel, propriété de la société \textsc{Google}, permettant une visualisation de la terre en 3 dimensions avec un assemblage de photographies aériennes ou satellites. Ce logiciel donne la possibilité de configurer un environnement, ajouter des lignes, des points ou encore des polygone en 3D en passent par des fichier de configuration au format KML\footnote{\label{Kml}KML: Keyhole Markup Language, est un format de fichier et de grammaire XML pour la modélisation et le stockage de caractéristiques géographiques comme les points, les lignes, les images, les polygones et les modèles pour l'affichage dans \textsc{Google Earth}, dans \textsc{Google Maps} et dans d'autres applications.}.
@@ -80,37 +79,37 @@ Ce format, qui repose sur le XML\footnote{XML: Extensible Markup Language («lan
 
 
 \section{Le programme réalisé et ses fonctions}
-    \subsection{Le fonctionnement}
+    \subsection{Le fonctionnement\label{fonctionnement}}
             \paragraph{La configuration:}
 Le programme réalisé ne possède pas encore d'interface (IHM) graphique. Il est donc nécessaire de configurer les option a l'aide d'un fichier de configuration (cf. annexe \vref{config}). Nous pourrons régler par l'intermédiaire de celui-ci:
 \begin{itemize}
-    \item Les fichiers Kml à recréer ou non, se qui est utile afin de ne pas avoir à recréer des fichier statique (tel que la position des point caractéristique ou encore des zones de contrôles) a chaque utilisation tout en laissant a l'utilisateur la possibilité de les mettre a jour simplement.
+    \item Les fichiers Kml à recréer ou non, se qui est utile afin de ne pas avoir à recréer des fichiers statique (tel que la position des point caractéristique ou encore des zones de contrôles) a chaque utilisation tout en laissant a l'utilisateur la possibilité de les mettre a jour simplement.
     \item Les différant styles et couleurs.
     \item L'emplacement des fichiers de configuration.
     \item les description et noms appliqué à chaque catégorie.
 \end{itemize}\medskip
             \paragraph{L'exécution:}
-Le fichier de configuration renseigné, le programme peut être lancé. Il est possible de le lancer par l'intermédiaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermédiaire de l'interface Python ou encore en direct si les information pour gérer et lancer les fichiers Python ont été renseignée dans le système d'exploitation.
+Le fichier de configuration renseigné, le programme peut être lancé. Il est possible de le lancer par l'intermédiaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermédiaire de l'interface Python ou encore en direct si les informations pour gérer et lancer les fichiers Python ont été renseignées dans le système d'exploitation.
             \paragraph{Le résultat}
 L'exécution du programme réalise une suite d'action:
 \begin{enumerate}
-    \item Lire le fichier de configuration afin de déterminer les action a effectuer.
+    \item Lire le fichier de configuration afin de déterminer les action à effectuer.
     \item Lire les fichiers de configuration du système \textsc{Tiare} affin de récupérer toutes les variable nécessaire sous forme d'objet\footnote{Objet: structure de données valuées et cachées qui répond à un ensemble de messages. Cette structure de données définit son état tandis que l'ensemble des messages qu'il comprend décrit son comportement} (ex: points caractéristique ...)
-    \item Lire les fichiers de log afin de créer des objets tel que les plans de vol ou encore les report \textsc{Ads}. Ces objet sont créer non seulement a partir de ses fichiers de log mais aussi a partir des objets créer précédemment (ex: les point des plan de vol désigné par un nom sont convertis en coordonnées à l'aide des points caractéristiques).
-    \item Créer les fichier \textsc{Kml} désigné dans le fichier de configuration à l'aide des objets instancié.
+    \item Lire les fichiers de log afin de créer des objets tel que les plans de vol ou encore les reports \textsc{Ads}. Ces objet sont créer non seulement a partir de ses fichiers de log mais aussi a partir des objets créer précédemment (ex: les point des plan de vol désigné par un nom sont convertis en coordonnées à l'aide des points caractéristiques).
+    \item Créer les fichiers \textsc{Kml} désigné dans le fichier de configuration à l'aide des objets instancié.
     \item Créer un fichier \textsc{Kmz} a l'aide de tout les fichiers \textsc{Kml} afin d'avoir un fichier compact et facile a transporter.
 \end{enumerate}
 
 
 \section{Problèmes techniques rencontrés et solution apportées}
-Comme dans tout projet il y a une une multitude de problèmes a résoudre. Nous verrons dans cette partie quelques exemples de ces problèmes rencontré ainsi que la manière dont il ont été résolus. Cette liste reste bien entendu exhaustive au regard de tout les petit problème auxquels nous avons du faire face.
+Comme dans tout projet il y a une multitude de problèmes à résoudre. Nous verrons dans cette partie quelques exemples de ces problèmes rencontrés ainsi que la manière dont ils ont été résolus. Cette liste reste bien entendu exhaustive au regard de tous les petits problèmes auxquels nous avons du faire face.
 
-    \subsection{Gestion des erreur}
-            \paragraph{problématique:}
-Le premier problème que nous avons rencontrer a été celui de la gestion des erreur. En effet, de la première mise en route du logiciel jusqu'à la fin du stage des erreurs ont du êtres gérée. Deux type d'erreur sont revenue:
+    \subsection{Gestion des erreurs}
+            \paragraph{Problématique:}
+Le premier problème que nous avons rencontré a été celui de la gestion des erreurs. En effet, de la première mise en route du logiciel jusqu'à la fin du stage des erreurs ont du être gérées. Deux types d'erreurs sont revenues:
 \begin{itemize}
-    \item Le premier type d'erreur était par exemple une réaction in attendue du logiciel, On pourrait prendre en exemple la conversion de coordonnées reçue en Système sexagésimal \footnote{(Système sexagésimal : Degrés ( \degres\ ) Minutes ( ' ) Secondes ('' ))} en coordonnées utilisées dans les fichiers KML \vref{Kml}, qui lors des premiers test donnais des donnée erronées.
-    \item Le deuxième type était celui du au erreur contenu dans les fichiers de log utilisé pour récupérer les informations. Ces erreur faisait effet boule de neige et venait se répercuter dans le fonctionnement du logiciel.
+    \item Le premier type d'erreur était par exemple une réaction in attendue du logiciel, On pourrait prendre en exemple la conversion de coordonnées reçue en Système sexagésimal \footnote{(Système sexagésimal : Degrés ( \degres\ ) Minutes ( ' ) Secondes ('' ))} en coordonnées décimales utilisées dans les fichiers KML \vref{Kml}, qui lors des premiers tests donnait des donnée erronées.
+    \item Le deuxième type était celui du aux erreurs contenues dans les fichiers de log utilisés pour récupérer les informations. Ces erreur faisaient effet boule de neige et venait se répercuter dans le fonctionnement du logiciel.
 \end{itemize}\medskip
 
             \paragraph{Résolution:}

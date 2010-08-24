@@ -1,10 +1,12 @@
-\chapter{Les codes sources du projet}
-    \section{Main}
+%Prévoir une annexe avec la description de l’ADSC / CPDLC
+
+\section{Les codes sources du projet}
+    \subsection{Main}
 Ce fichier sert à executer tout le programme:
 \lstinputlisting{/home/manu/DTI/Manu.py}
-    \section{Config}
+    \subsection{Config}
 Nous avons ic le fichier de configuration. Celui ci sert notament à se passer temporairement d'une interface graphique.
 \lstinputlisting{/home/manu/DTI/manu.cfg}
-    \section{KML}
+    \subsection{KML}
 Afin de pouvoir réaliser les document KML, un module a été implémenté. Celui-ci a pour objectif de mettre en forme le document final. Il ne réalise aucun calcul. Lors de l'initiation une variable est instencié. Celle-ci accumulera toute la mise en forme du document jusqu'a l'appel de la foction de fin qui permettera de clore cette variable et de l'enregistrer dans un fichier texte.
 \lstinputlisting{/home/manu/DTI/modules/KML.py}

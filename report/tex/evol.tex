@@ -1,1 +1,26 @@
+Ce projet est loin d'être arrivé a termes. Nous allons donc voir ici ce qui pourrait être fait afin de perfectionner ce logiciel. Les évolution seront axées sur trois points:
+\begin{itemize}
+    \item La mise en place d'une interface graphique.
+    \item L'automatisation de l'acquisition.
+    \item La pérennisation des données.
+\end{itemize}
+
+\section{La mise en place d'une interface graphique}
+Comme il a été expliqué précédemment \nref{fonctionnement}, la configuration du logiciel est effectuer manuellement par l'intermédiaire de fichiers textes et son exécution est effectuée en ligne de commande. C'est pourquoi une interface graphique faciliterait grandement son utilisation.
+
+Cette interface devrait pouvoir faciliter la configuration et l'exécution du programme, elle pourrait être basée sur des technologie web afin de la rendre portable tout en séparent le traitement des données de l'utilisation du fichier final dans \textsc{Google Earth}. En effet le programme pourrait être lancé a distance sur une machine, cela permettrait de sécuriser l'accès au données tout en libérant les ressources du poste de l'utilisateur.
+
+Pour faciliter la configuration un histogramme avec tous les vol figurant entre deux date sélectionnée pourrait être réalisé, cela permettrait de mieux visualiser le trafic et de pouvoir cibler les vols a afficher.
+
+Il pourrait aussi être intéressant d'inclure l'affichage final dans l'interface web, tout en laissant la possibilité a l'utilisateur de télécharger le fichier afin d'exploiter pleinement toutes les fonctionnalité du logiciel \textsc{Google Earth} tel que la mesure de distance entre deux points.
+
+\section{L'automatisation de l'acquisition}
+Actuellement chaque fichier à traiter est récupéré manuellement. On pourrait concevoir un système qui irait de lui même chercher les fichiers nécessaire dans le système \textsc{Tiare} et les mettre automatiquement à la disposition du programme.
+
+\section{La pérennisation des données}
+Dans une optique de pouvoir rejouer simplement des situations passées, on pourrait mettre en place un système de base de données légère tel que SQLite\footnote{SQLite est une bibliothèque écrite en C qui propose un moteur de base de données relationnelles accessible par le langage SQL.}. Contrairement aux serveurs de bases de données traditionnels, comme MySQL ou PostgreSQL, sa particularité est de ne pas reproduire le schéma habituel client-serveur mais d'être directement intégrée aux programmes. L'intégralité de la base de données (déclarations, tables, index et données) est stockée dans un fichier indépendant de la plate-forme.
+
+Ce procédé couplé à un traitement automatique permettrait de mettre et garder en mémoire tout les vols disponibles sur le système \textsc{Tiare}. Il permettrais donc de pouvoir rejoué des situations qui n'on été enregistrées plusieurs mois avant. 
+
+
 
