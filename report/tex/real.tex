@@ -15,6 +15,37 @@
 
 
 %Avant de passer à la pratique un apprentissage théorique à du être réalisé.
+\section{Architecture du logiciel}
+
+\textsc{Google Earth} dispose d’une interface graphique qui sera mise à profit pour:
+\begin{itemize}
+\item représenter les points remarquables (points nommés, points de coordination, etc.),
+\item représenter les espaces de contrôle,
+\item représenter le trafic aérien.
+\end{itemize}\medskip
+
+Ces données sont, soit statiques, soit dynamiques.
+\begin{description}
+\item[Statiques:] affichage de points fixes et affichage des espaces ou trajectoire plan de vol. 
+\item[Dynamique:] représentation du trafic aérien en fonction de coordonnées mises à jour.
+\end{description}
+
+Google Earth peut être enrichi de données externes via un fichier descriptif de données (\textsc{Kml}).
+
+A COMPLETER (plus compliqué que ca)
+%Fichier des points remarquables :‭ ‬xxxxx.kml
+
+%Les fichier KML sont fabriqués à partir des fichiers de configuration et de traces définis dans le système EurocatX.‭ ‬Le système EurocatX est configuré au moyen de fichiers de configuration statique.‭ ‬Ces fichiers seront‭ «‬ parsés ‭» ‬pour fabriquer les fichiers aa,‭ ‬bb,‭ ‬cc.
+
+%Ensuite à partir des fichiers de traces qui log les informations de vol‭ ‬,‭ ‬ce fichier est parsé pour donner le fichier aa,‭ ‬bb,‭ ‬cc
+
+%Au final le logiciel se compose des binaires suivants :
+
+%-‎ ‏toto1‭ ‬qui fait le parsing‭ 
+
+%-‎ ‏toto2‭ ‬qui fait le fichier KML.
+
+%Toto1 :‭ ‬se lance à partir de la ligne de commande‭ ‬,‭ ‬les fichiers de l’eurocatx sont placés dans un répertoire.‭ ‬Toto2‭ ‬se lance comme ça‭ ...
 
 \section{Le contexte technique opérationnel}
 
@@ -90,7 +121,7 @@ Le programme réalisé ne possède pas encore d'interface (IHM) graphique. Il es
 \end{itemize}\medskip
             \paragraph{L'exécution:}
 Le fichier de configuration renseigné, le programme peut être lancé. Il est possible de le lancer par l'intermédiaire d'un Shell\footnote{Shell: Interface en lignes de commandes}, par l'intermédiaire de l'interface Python ou encore en direct si les informations pour gérer et lancer les fichiers Python ont été renseignées dans le système d'exploitation.
-            \paragraph{Le résultat}
+            \paragraph{Le résultat:}
 L'exécution du programme réalise une suite d'action:
 \begin{enumerate}
     \item Lire le fichier de configuration afin de déterminer les action à effectuer.
@@ -99,6 +130,55 @@ L'exécution du programme réalise une suite d'action:
     \item Créer les fichiers \textsc{Kml} désigné dans le fichier de configuration à l'aide des objets instancié.
     \item Créer un fichier \textsc{Kmz} a l'aide de tout les fichiers \textsc{Kml} afin d'avoir un fichier compact et facile a transporter.
 \end{enumerate}
+
+    \subsection{L'exploitation dans \textsc{Google Earth}}
+L'execution du programme retourne en résultat un fichiers \textsc{Kmz}. C'est ce fichier qui est utiliser pour éxploiter les données dans \textsc{Google Earth}. Pour cela il suffit d'ouvrir le fichier à l'aide de ce logiciel.
+
+Nous allons vous présenter quelques exemple d'utilisation de ce logiciel.
+
+        \subsubsection{Vue d'ensemble}
+\begin{figure}[!h]
+\center
+\includegraphics[width=12cm]{images/gevuedensemble.png}
+\caption{Vue d’ensemble du trafic dans \textsc{Google Earth}}
+\label{gevuedensemble}
+\end{figure}
+Lors de l'ouverture du fichier la vu est centrée sur la zone de contrôle de Tahiti. Comme vous pouvez le voir \figref{gevuedensemble} nous pouvons distinguer trois zones dans le logiciel:
+            \paragraph{La zone de sélection :}
+Cette zone, numéroté 1 sur la figure, sert à sélectionner les éléments à afficher ou non. 
+
+Chaque groupe d'éléments est représenté par un dossiers. Ainsi il serra plus facile de sélectionner un groupe tel que les routes. Il sera aussi simple de dé-sélectionner un groupe (par exemple groupe Fpl qui contient tout les plans de vol) et de re-sélectionner un seul élément du groupe afin de le visualiser séparément (ex: le plan de vol d'un avion précis).
+
+            \paragraph{L'animation temporelle:}
+Sur notre figure cet outil est représenté par le numéro 2. Nous pourrons grâce a lui visualiser l'évolution du trafic dans le temps. Les principale option utile a notre cas seront:
+\begin{itemize}
+\item La sélection d'une date et une heure précise afin de visualiser ou devrait se trouver un avion ou encore avoir une vue de tout les vole en cours à cette heure.
+\item Un créneau compris entre deux date et heure. Cette option nous permettra de visualiser un vol sur un partie de son parcours afin d'avoir une vue un peut plus globale. Nous l'avons utilisé lors de l'exemple suivant \figref{gezoom} afin de mieux visualiser les points estimé par le système \textsc{Tiare}.
+\end{itemize}
+
+            \paragraph{La vue:}
+Cette zone, numérotée 3, nous permet visualisée notre sélection configurée à l'aide des deux zones citées précédemment.
+
+        \subsubsection{Exploitation des données}
+\begin{figure}[!h]
+\center
+\includegraphics[width=12cm]{images/gezoom.png}
+\caption{Zoom su la déviation de la trajectoire d'un vol par rapport a son plan de vol déposé}
+\label{gezoom}
+\end{figure}
+Nous avons pris en exemple un zoom sur un plan de vol qui a été dévié de son sa trajectoire initiale (son plan de vol).
+Nous pouvons donc apercevoir sur cette figure \figref{gezoom}:
+\begin{description}
+\item[Les lignes noires] Ces ligne représente les plans de vol des avions en cours a la date et l'heure sélectionnée. Ci ceux-ci ne sont pas recouvert par une ligne de couleur plus épaisse, cela signifie que l'avion n'est pas censé se trouver a cet endroit a l'instant défini. 
+\item[La ligne verte:] Cette ligne représente le plan de vol déposé. Chaque segment de cette ligne représente ou peut se situer l'avion a l'instant donné.
+\item[La ligne blanche:] Cette ligne représente la trajectoire réellement effectuée par l'avion. Cette ligne est définie par les report \textsc{Ads}.
+\item[Les points verts:] Ces points représente les report \textsc{Ads} reçu par le système \textsc{Tiare}. Lorsque l'on clic sur l'un de ces point il est possible de voir ça description qui contient le message émis par l'avion pour définir ce point.
+\item[Les points roses:] Ils représentent les points estimés par le système \textsc{Tiare}. Dans ce cas précis nous constatons que ces points ne correspondent pas avec la trajectoire réellement réalisée. Cette différence peut s'expliquer par le fait que le système utilise les point de reports suivant estimé par l'avion pour définir la position actuel de l'avion.
+\item[Les points oranges:] Ces point représentent les reports suivant estimés (next report) par l'avion cité précédemment.
+\item[Les points rouges:] Ces points représente l'heure d'entrée, estimé par le programme, dans la zone \textsc{Aci} \nref{Aci}. 
+\end{description}
+
+
 
 
 \section{Problèmes techniques rencontrés et solution apportées}
@@ -114,6 +194,7 @@ Le premier problème que nous avons rencontré a été celui de la gestion des e
 
             \paragraph{Résolution:}
 La solution au premier problème a été de mettre en place des test a chaque fonction implémenter ou après avoir réaliser chaque objectif fixé. On appel cette méthode le test continu du code. Grâce à cela nous allons pouvoir déterminer plus rapidement lors d'une erreur futur d'où provient celle-ci. Une méthode simple de la mette en place est de définir un test a réaliser pour valider la fonction ou le code. On détermine donc quel réaction doit avoir un fonction pour un environnement donné et l'on vérifie si le résultat corresponds bien avec celui espéré. (Ex: on a la coordonnée 4530N10045E qui correspond a 45\degres 30' Nord 100\degres 45' Est. On envoi cette variable dans la fonction de conversion et l'on vérifie que le résultat retourné est bien en décimal: 45,5\degres\ en latitude et -100,75 en longitude). Si le résultat est correct la fonction ou le morceau de code est validé, sinon il doit être corrigé.
+
 La solution du deuxième problème a été dans un premier temps d'afficher chaque erreur dans la console, mais cela est vite devenu trop compliqué du fait que la console ne retient par défaut qu'un nombre limité de ligne en mémoire et que les ligne trop ancienne sont simplement effacée. On a donc mis en place un système de log permettant, en plus d'avoir accès au information les plus ancienne, de pouvoir l'exploiter ares avoir fermé la console, effectuer des recherche a l'intérieur et tout avantage que peut apporter un fichier texte. Pour les dernière version de log, celles-ci sont crées avec des information relative au type d'erreur et l'emplacement de l'erreur dans le fichier source, le tout enregistrées dans un fichier comprenant la date et l'heure actuel dans le nom afin de pouvoir les différencier de chaque exécution du logiciel. 
 
     \subsection{Intersection entre plans de vol et zone ACI\label{mathcoord}}

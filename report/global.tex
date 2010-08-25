@@ -3,7 +3,7 @@
 %¯¯¯¯¯¯¯¯¯¯¯¯¯
 
 \date{10 septembre 2010}
-\title{Rapport de stage Elève Ingénieur}
+\title{Rapport de stage Élève Ingénieur}
 \author{Emmanuel \textsc{Kervizic}}
 
 \begin{document}
@@ -13,11 +13,13 @@
 
 % Table des matieres
 \renewcommand{\baselinestretch}{0.8}\small \normalsize
+\setcounter{tocdepth}{2}  
 \tableofcontents
 \renewcommand{\baselinestretch}{1.18}\small \normalsize
 
 % Debut des section
-\chapter{Introduction}
+\chapter*{Introduction} %Omission de la numérotation
+\addcontentsline{toc}{chapter}{Introduction} %Ajout tout de meme a la table des matieres
 % Insertion de fichier
 \input{tex/intro}
 
@@ -28,9 +30,6 @@
 \input{tex/besoin}
 \input{tex/extrem}
 
-\chapter{Rédaction des spécifications}
-\input{tex/spec}
-
 \chapter{Réalisation technique}
 \input{tex/real}
 
@@ -38,6 +37,7 @@
 \input{tex/validation}
 
 \chapter{Synthèse}
+\input{tex/spec}
 \input{tex/synthese}
 
 \chapter{Evolution projet}
