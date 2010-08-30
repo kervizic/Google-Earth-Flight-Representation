@@ -23,7 +23,7 @@
 %% Je veux pouvoir inclure des figures...
 %% À commenter si vous voulez faire du DVI :
 %
-\usepackage[pdftex]{graphicx}
+
 
 %% Je veux créer des Hyperdocuments
 %% À commenter si vous voulez faire du DVI :
@@ -50,10 +50,12 @@
       pdfauthor={\@auteur},
       pdfsubject={\@titre},
     }}
+    \usepackage[pdftex]{graphicx}
 \else
     \usepackage[hypertex=true,
     hyperindex=true,
     colorlinks=false]{hyperref}
+    \usepackage{graphicx}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -193,6 +195,14 @@ stringstyle=\color{red}
   {\parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
    \LARGE \bfseries\thechapter\quad#1\par\nobreak
+   \vskip 5\p@
+  }}
+
+\def\@makeschapterhead#1{%
+  {\vspace*{10\p@}
+    \parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+   \LARGE \bfseries\quad#1\par\nobreak
    \vskip 10\p@
   }}
 \makeatother
