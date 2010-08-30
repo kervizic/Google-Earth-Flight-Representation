@@ -16,7 +16,7 @@
 
 %Avant de passer à la pratique un apprentissage théorique à du être réalisé.
 \section{Architecture du logiciel}
-
+    \subsection{L'interface \textsc{Google Erath}}
 \textsc{Google Earth} dispose d’une interface graphique qui sera mise à profit pour:
 \begin{itemize}
 \item représenter les points remarquables (points nommés, points de coordination, etc.),
@@ -27,31 +27,57 @@
 Ces données sont, soit statiques, soit dynamiques.
 \begin{description}
 \item[Statiques:] affichage de points fixes et affichage des espaces ou trajectoire plan de vol. 
-\item[Dynamique:] représentation du trafic aérien en fonction de coordonnées mises à jour.
+\item[Dynamique:] représentation du trafic aérien en fonction de coordonnées mises à jour et en fonction du temps.
+\end{description}\medskip
+
+    \subsection{Gestion de l'affichage}
+Google Earth peut être enrichi de données externes via un fichier descriptif de données (\textsc{Kmz}).
+
+Ce fichier Kmz n'est autre qu'un fichier Zip compriment un fichier "doc.kml" ainsi que les fichiers vers les quel il pointe. Ce fichier "doc.kml" a pour but de regrouper les fichier à ouvrir (comme le ferait une liste de lecture pour les fichiers Mp3). Il indique donc à \textsc{Google Earth} de charger les fichiers suivant:
+\begin{description}
+\item[CharacteristicsPoints.kml:] Le fichier contenant les points remarquables
+\item[Fir.kml:] pour les zones de contrôle et la zone \textsc{Aci} 
+\item[Routes.kml:] regroupe toutes les routes définies
+\item[Fpl.kml:] affiche les plans de vol déposés
+\item[Ads.kml:] affiche le trafic aérien réel recu par l'\textsc{Adsc}
+\end{description}\medskip
+
+Les fichier KML sont fabriqués à partir des fichiers de configuration et de traces définis dans le système EurocatX. 
+
+Le système EurocatX est configuré au moyen de fichiers de configuration statique. Ces fichiers seront «parsés» pour fabriquer les fichiers: "CharacteristicsPoints.kml", "Fir.kml" et "Ads.kml".
+
+Ce système est également constitué de fichiers de traces qui log les informations de vol. Ces fichiers seront «parsés» pour fabriquer les fichiers: "Ads.kml" et "Fpl.kml".
+
+    \subsection{Les modules}
+Au final le logiciel se compose des modules suivants:
+\begin{description}
+\item[Manu:] Fichier principal, peut être considéré comme l'exécuteur. \nref{pyManu}
+\item[modules/Ads:] Met en mémoire les information sur les report \textsc{Ads}. \nref{pyAds}
+\item[modules/Aoi:] Permet de définir tout les volume utilisé pour concevoir les zone de contrôles. \nref{pyAoi}
+\item[modules/CharacteristicPoints:] Met en mémoire tous les points remarquables disponible sur le système. \nref{pyCP}
+\item[modules/Convertion:] Regroupe plusieurs fonctions utiliser pour convertir des donnée (ex: utilisé pour convertir les coordonnées). \nref{pyConvertion}
+\item[modules/Fdp:] définit et met en mémoire toutes les zone de contrôles. \nref{pyFdp}
+\item[modules/Fpl:] définit et mets en mémoire les plans de vol. \nref{pyFpl}
+\item[modues/GetOfFiles:] Coordonne la récupération des donnée, c'est lui qui va chercher la configuration et lance les modules tel que Aoi, Fdp ou encore Fpl. \nref{pyGOF}
+\item[modules/KML:] Ce module est utilisé pour mettre en forme les fichier \textsc{Kml} à l'aide des données reçues en entrée (par exemple pour un point il reçois ça description, ces coordonnées, son nom ...). \nref{pyKML}
+\item[modules/MakeKML:] C'est le module qui exploite toutes les données en mémoire et crée les fichiers \textsc{Kml}. \nref{pyMakeKML}
+\item[modules/MakeKMZ:] Récupère les fichiers \textsc{Kml} pour les regrouper en un fichier \textsc{Kmz} plus maniable. \nref{pyMakeKMZ}
+\item[modules/Routes:] définit et mets en mémoire les routes definies. \nref{pyRoutes}
+\item[modules/usualFonction:] Regroupe plusieurs fonction régulièrement utilisées. \nref{pyusualFonction}
 \end{description}
+Chaque modules est décrit avec plus de précisions en annexe.
 
-Google Earth peut être enrichi de données externes via un fichier descriptif de données (\textsc{Kml}).
+Le fichier principal (Manu.py) se lance à partir de la ligne de commande: "Python~Manu.py" dans un système ou Python est installé et correctement configuré.
 
-A COMPLETER (plus compliqué que ca)
-%Fichier des points remarquables :‭ ‬xxxxx.kml
+Les fichiers ".asf" contenant la configuration de l’eurocatx sont placés dans le répertoire "SurcesAsf" alors que les fichiers contenant les traces sont dans le répertoire "Sources". 
 
-%Les fichier KML sont fabriqués à partir des fichiers de configuration et de traces définis dans le système EurocatX.‭ ‬Le système EurocatX est configuré au moyen de fichiers de configuration statique.‭ ‬Ces fichiers seront‭ «‬ parsés ‭» ‬pour fabriquer les fichiers aa,‭ ‬bb,‭ ‬cc.
-
-%Ensuite à partir des fichiers de traces qui log les informations de vol‭ ‬,‭ ‬ce fichier est parsé pour donner le fichier aa,‭ ‬bb,‭ ‬cc
-
-%Au final le logiciel se compose des binaires suivants :
-
-%-‎ ‏toto1‭ ‬qui fait le parsing‭ 
-
-%-‎ ‏toto2‭ ‬qui fait le fichier KML.
-
-%Toto1 :‭ ‬se lance à partir de la ligne de commande‭ ‬,‭ ‬les fichiers de l’eurocatx sont placés dans un répertoire.‭ ‬Toto2‭ ‬se lance comme ça‭ ...
+Tout les modules sont appelé automatiquement, se qui signifie qu'une foi le fichier de configuration renseigner et le fichier principal lancé, aucune action n'est nécessaire jusqu'a la réception du fichier \textsc{Kmz}. Il n'y aura donc plus qu'a lancer se fichier en l'ouvrant depuis \textsc{Google Earth}. 
 
 \section{Le contexte technique opérationnel}
 
     \subsection{\textsc{EurocatX}}
 Il faut bien comprendre comment marche le système afin de bien visualiser d'où proviennent les informations. Comme décrit grossièrement dans le schéma (cf. Fig. \vref{eurocatx}),
-\begin{figure}
+\begin{figure}[!h]
     \center
     \includegraphics[width=15cm]{images/SchemaControle.png}
     \caption{Schématisation du système \textsc{EurocatX} au niveau des tours de contrôle}
@@ -72,7 +98,7 @@ Il m'a aussi été nécessaire de prendre connaissance de touts les termes, unit
 
         \subsubsection{Les coordonnées et unités:}
 Tout d'abord est vite venu le problème de conversion de coordonnées, J'ai donc du revoir les conversions de coordonnées sphériques ainsi que les conversions de distances.
-J'ai également du, comme expliquée ci dessus (cf. \vref{mathcoord})
+J'ai également du, comme expliquée ci dessous (cf. \vref{mathcoord})
 me remémoré les solutions de calcule du point d'intersection de deux arc de cercle en coordonnées sphériques.
 
         \subsubsection{Convention:}
@@ -239,6 +265,12 @@ Les premiers tests du logiciel ce sont déroulé sur un nombre limité de fichie
             \paragraph{Résolution:}
 En cherchant des conseils dans des forum d'informatique ainsi que dans le livre cité précédemment (cf. bibliographie \cite{pybook}, nous avons découvert que Python était un langage orienter par les test et qu'il disposait donc de librairies spécialement conçues pour déterminer les point bloquant d'un programme et les fonctions appelées les plus gourmandes.
 
-La fonction retenue pour repérer ce qui est appelé en anglais les Bottleneck\footnote{Bottlneck: (goulot d'étranglement) point d'un système limitant les performances globales, et pouvant avoir un effet sur les temps de traitement et de réponse.} est la fonction "hotshot" qui à pour but d'analyser un programme dans sa totalité en indiquant notamment les ressources utilisées par chaque fonction appelée. Pour visualiser ce que donne le résultat d'une analyse veuillez vous reporter a la figure \vref{stat}.
+La fonction retenue pour repérer ce qui est appelé en anglais les Bottleneck\footnote{Bottlneck: (goulot d'étranglement) point d'un système limitant les performances globales, et pouvant avoir un effet sur les temps de traitement et de réponse.} est la fonction "hotshot" qui à pour but d'analyser un programme dans sa totalité en indiquant notamment les ressources utilisées par chaque fonction appelée. Pour visualiser ce que donne le résultat d'une analyse veuillez vous reporter a la figure \vref{stats}.
+\begin{figure}
+\center
+\includegraphics[width=15cm]{images/stats.png}
+\caption{Analyse avec Kcachegrind de l'exécution de la fonction "TestIntersection" du programme dans le but de l'améliorer.}
+\label{stats}
+\end{figure}
 
 Les bottlenecks repérés, une réécriture des parties bloquantes à du être effectuée. Cette analyse nous a permis de réduire les ressources et donc le temps d'exécution du logiciel de plus de 80\%.
