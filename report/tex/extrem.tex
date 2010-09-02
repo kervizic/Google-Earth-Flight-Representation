@@ -6,9 +6,9 @@
 %Revue logicielle (validations qui permettront de faire évoluer le produit)
 \section{Gestion de projet}
     \subsection{Choix de la méthode de gestion de projet}
-Comme nous l'avons vu précédemment, les besoins ne sont pas clairement définis dès le début. Il était donc difficile de pouvoir établir des spécifications claire affin de pouvoir réaliser un cycle en V \nref{cyclev}. Nous avons donc choisis une méthodologie de gestion de projet différente de celle appliquée en temps normal à la \textsc{Dti}.
+Comme nous l'avons vu précédemment, les besoins ne sont pas clairement définis dès le début. Il était donc difficile de pouvoir établir des spécifications explicites dans le but de mettre en place un cycle en V \nref{cyclev}. Nous avons donc choisis une méthodologie de gestion de projet différente de celle appliquée en temps normal à la \textsc{Dti}.
 
-Cette méthodologie devait nous permettre de débuter un projet sans en connaitre réellement l'aboutissement final tout en gardant de la rigueur et de l'organisation. Nous avons donc décidé d'utiliser une méthode dites agile\footnote{Les méthodes Agiles sont des groupes de pratiques pouvant s'appliquer à divers types de projets, mais se limitant plutôt actuellement aux projets de développement en informatique (conception de logiciel). Les méthodes Agiles se veulent plus pragmatiques que les méthodes traditionnelles. Elles impliquent au maximum le demandeur (client) et permettent une grande réactivité à ses demandes. Elles visent la satisfaction réelle du besoin du client et non les termes d'un contrat de développement. }. Après quelque recherche et comparaison notre choix c'est orienté sur l'extreme programming \nref{extreme} nous allons donc vous décrire cette méthodologie et la comparé avec le système utilisé habituellement.
+Cette méthodologie devait nous permettre de débuter un projet sans en connaitre réellement l'aboutissement final tout en gardant de la rigueur et de l'organisation. Nous avons donc décidé d'utiliser une méthode agile\footnote{Les méthodes Agiles sont des groupes de pratiques pouvant s'appliquer à divers types de projets, mais se limitant plutôt actuellement aux projets de développement en informatique (conception de logiciel). Les méthodes Agiles se veulent plus pragmatiques que les méthodes traditionnelles. Elles impliquent au maximum le demandeur (client) et permettent une grande réactivité à ses demandes. Elles visent la satisfaction réelle du besoin du client et non les termes d'un contrat de développement. }. Après quelques recherches et comparaisons nous nous sommes orientés sur l'extreme programming \nref{extreme}. Nous allons donc vous décrire cette méthodologie et la comparer avec le système utilisé habituellement.
 
     \subsection{L' Extreme Programming\label{extreme}}
 
@@ -52,7 +52,7 @@ Pour résumé, cette méthode nous amène à réaliser la boucle suivante:
 \label{cyclev}
 \end{figure}
 
-Le modèle du cycle en V est un modèle conceptuel de gestion de projet imaginé suite au problème de réactivité du modèle en cascade. Il permet, en cas d'anomalie, de limiter un retour aux étapes précédentes. Les phases \figref{cyclev} de la partie montante doivent renvoyer de l'information sur les phases en vis-à-vis lorsque des défauts sont détectés, afin d'améliorer le logiciel.
+Le modèle du cycle en V est un modèle conceptuel de gestion de projet étudié pour résoudre le problème de réactivité du modèle en cascade. Il permet, en cas d'anomalie, de limiter un retour aux étapes précédentes. Les phases \figref{cyclev} de la partie montante doivent renvoyer de l'information sur les phases en vis-à-vis lorsque des défauts sont détectés, afin d'améliorer le logiciel.
 
 Le cycle en V est devenu un standard de l'Industrie logicielle depuis les années 1980 et depuis l'apparition de l'Ingénierie des Systèmes est devenu un standard conceptuel dans tous les domaines de l'Industrie. Le monde du logiciel ayant de fait pris un peu d'avance en termes de maturité, on trouvera dans la bibliographie courante souvent des références au monde du logiciel qui pourront s'appliquer au système.
 
@@ -69,12 +69,12 @@ Les étapes qui constituent cette méthode sont les suivantes :
     \item Recette (Vérification d'Aptitude au Bon Fonctionnement - VABF)
 \end{itemize}\medskip
  
-On voit bien que dans notre cas, avec des besoins indefini, il est impensable d'appliquée une telle méthodologie sans engendrer le rique que le logiciel final ne marche pas ou ne reponde pas aux attentes du client.
+Dans notre cas, avec ces besoins indefinis, cette méthodologie engendrerait un risque. Ce risque serait que le logiciel final ne fonctionne pas ou ne reponde pas aux attentes du client.
 
 \subsection{Les avantages et inconvénients}
-Les avantage de cette méthode, dans cette situation, serrons:
+Pour notre cas, les avantage de cette méthode sont les suivants:
 \begin{itemize}
-    \item Enrichir le produit à chaque itération du cycle. Ci le logiciel marche le client peut visualiser immédiatement les besoins qui étaient superficiels, dont il n'avait pas réellement besoins, et au contraire découvrir de nouveaux besoins réellement utiles.
+    \item Enrichir le produit à chaque itération du cycle. Ci le logiciel est fonctionel, le client peut visualiser immédiatement les besoins qui étaient superficiels (dont il n'avait pas réellement besoin) et au contraire découvrir de nouveaux besoins.
     \item Rediriger rapidement la conduite du projet. Si le client souhaite rediriger son projet, ceci peut être fait dans les meilleurs délais (changement d'objectifs ou de priorités)
 %    \item ... a completer.
 \end{itemize}\medskip

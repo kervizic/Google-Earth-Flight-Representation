@@ -4,7 +4,7 @@
 
 %% Je suis francophone !
 \usepackage[francais]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \selectlanguage{french}
 
@@ -14,6 +14,7 @@
 \usepackage{listings}
 \usepackage{lastpage}
 \usepackage[francais]{varioref}
+\usepackage{color}
 
 %% J'aime bien pouvoir contrôler mes hauts de page !
 \usepackage{fancyheadings}
@@ -24,6 +25,12 @@
 %% À commenter si vous voulez faire du DVI :
 %
 
+%% Quelques couleurs
+\definecolor{titre}{gray}{0.4}
+\definecolor{titre1}{gray}{0.5}
+\definecolor{titre2}{gray}{0.6}
+\definecolor{titre3}{gray}{0.7}
+\definecolor{bleu}{rgb}{0.0,0.0,0.6}
 
 %% Je veux créer des Hyperdocuments
 %% À commenter si vous voulez faire du DVI :
@@ -36,9 +43,9 @@
     hyperindex=true,
     colorlinks=true,
     pdfpagelabels,
-    linkcolor=blue,
+    linkcolor=bleu,
     citecolor=red,
-    urlcolor=blue,
+    urlcolor=bleu,
     anchorcolor=red,
     plainpages=false,
     bookmarks=true]{hyperref}
@@ -62,10 +69,13 @@
 %% Je peux définir mes propres « commandes »...
 
 %% pour citer une figure :
-\newcommand{\figref}[1]{(cf.~Fig.~\vref{#1})}
+\newcommand{\figref}[1]{(cf. Fig. \vref{#1})}
 
 %% pour citer une équation :
-\newcommand{\nref}[1]{(cf.~\vref{#1})}
+\newcommand{\nref}[1]{(cf. \vref{#1})}
+
+%% pour citer un livre:
+\newcommand{\bibref}[1]{(cf. Bibliographie \cite{#1})}
 
 %% pour mettre l'emphase sur un mot ou un groupe de mots :
 \newcommand{\empha}[1]{\textit{\textbf{#1}}}
@@ -130,7 +140,9 @@ morekeywords={*,self},            % if you want to add more keywords to the set
 keywordstyle=\bf \color {blue},
 %identifierstyle=\underline,
 commentstyle=\color[gray]{0.5},
-stringstyle=\color{red}
+stringstyle=\color{red},
+extendedchars=\true,
+inputencoding=utf8x
 }
 
 
@@ -181,31 +193,49 @@ stringstyle=\color{red}
 \newcommand{\tailleecole}[1]{\addtolength{\widthecole}{#1}}
 \newcommand{\tailleent}[1]{\addtolength{\widthent}{#1}}
 
-%% Je met en forme les paragraphe
-%\onehalfspacing
-%\singlespacing
-%\setstretch{1.3}
-\addtolength{\parskip}{0.5\baselineskip}
-\setlength{\parindent}{0pt}
-\setlength{\medskipamount}{\parskip}
+%% Et les chapitre et titres
 
-%% Et les chapitre
 \makeatletter
 \def\@makechapterhead#1{%
   {\parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
-   \LARGE \bfseries\thechapter\quad#1\par\nobreak
+   \LARGE\sc\bfseries\textcolor{titre}{\thechapter\quad#1}\par\nobreak
    \vskip 5\p@
   }}
 
 \def\@makeschapterhead#1{%
-  {\vspace*{10\p@}
+   {\vspace*{10\p@}
     \parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
-   \LARGE \bfseries\quad#1\par\nobreak
+   \LARGE\sc\bfseries\textcolor{titre}{\quad#1}\par\nobreak
    \vskip 10\p@
   }}
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+	{-2.5ex \@plus -2ex \@minus -.2ex}%
+	{1ex \@plus .8ex}%
+	{\reset@font\Large\bfseries\textcolor{titre1}}}
+\renewcommand\subsection{\@startsection {subsection}{2}{\z@}%
+	{-2ex \@plus -1ex \@minus -.2ex}%
+	{0.2ex \@plus .5ex}%
+	{\reset@font\large\bfseries\textcolor{titre2}}}
+\renewcommand\subsubsection{\@startsection {subsubsection}{3}{\z@}%
+	{-1.5ex \@plus -0.5ex \@minus -.1ex}%
+	{0.2ex \@plus .2ex}%
+	{\reset@font\normalsize\bfseries\textcolor{titre3}}}
+
+%\renewcommand{\section}{%
+%    \@startsection%
+%    {section}% nom du titre
+%    {1}% niveau de titre
+%    {0pt}% indentation
+%    {-3.5ex plus -1ex minus -.2ex}% espace vertical avant
+%    {2.3ex plus.2ex}% espace vertical après
+%    {\normalfont\Large\bfseries}}
 \makeatother
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

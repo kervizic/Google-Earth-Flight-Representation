@@ -1,12 +1,73 @@
 %Prévoir une annexe avec la description de l’ADSC / CPDLC
-
-\section{Les codes sources du projet}
-    \subsection{Main}
+\section{Codes sources du projet}
+    \subsection{Manu\label{pyManu}}
 Ce fichier sert à executer tout le programme:
-\lstinputlisting{/home/manu/DTI/Manu.py}
-    \subsection{Config}
-Nous avons ic le fichier de configuration. Celui ci sert notament à se passer temporairement d'une interface graphique.
-\lstinputlisting{/home/manu/DTI/manu.cfg}
-    \subsection{KML}
+\lstinputlisting{/home/manu/DTI/Manu.py}\newpage
+
+    \subsection{Config\label{pyConfig}}
+Nous avons ici le fichier de configuration. Celui ci sert notament à se passer temporairement d'une interface graphique.
+\lstinputlisting{/home/manu/DTI/manu.cfg}\newpage
+
+    \subsection{modules/Ads\label{pyAds}} 
+%Met en mémoire les information sur les report \textsc{Ads}. \nref{pyAds}
+Ce module lit le fichier de trace Ads du système tiraré et crée pour chaque aéronef un Objet Python ayant pour identifiant le nom de l'avion suivi de la date et l'heure. A cet objet est ensuite associé tout report lui concernant. Il recois donc les message recu par l'Ads-c et converti les point en coordonée. Mais il récupère aussi tout les points intermédiaire calculé par le système.
+\lstinputlisting{/home/manu/DTI/modules/Ads.py}\newpage
+
+
+    \subsection{modules/Aoi\label{pyAoi}} 
+Ce module permet de définir tout les volumes utilisés pour concevoir les zone de contrôles. Il récuper dans le fichiers Asf chaque volume qu'il stocke dans un obejet comprenant chaque coordonée du volume aisin que ca tranche d'altitude.
+\lstinputlisting{/home/manu/DTI/modules/Aoi.py}\newpage
+
+    \subsection{modules/CharacteristicPoints\label{pyCP}}
+Ce module met en mémoire tous les points remarquables disponible sur le système. Ces points seront ensuite utilisé pour concevoire les routes et les plans de vols.
+\lstinputlisting{/home/manu/DTI/modules/CharacteristicPoints.py}\newpage
+
+    \subsection{modules/Convertion\label{pyConvertion}} 
+Regroupe plusieurs fonctions utiliser pour convertir des donnée.
+\lstinputlisting{/home/manu/DTI/modules/Convertion.py}\newpage
+
+    \subsection{modules/Fdp\label{pyFdp}}
+Définit et met en mémoire toutes les zone de contrôles. Pour definir ces zones les volumes mis en mémoire a l'aide du module Aoi \nref{pyAoi}
+\lstinputlisting{/home/manu/DTI/modules/Fdp.py}\newpage
+
+    \subsection{modules/Fpl\label{pyFpl}}
+définit et mets en mémoire les plans de vol. Il recupère tous les plan de vol dans les fichiers contenu dans le répertoire "source" et contenat "FPL" dans le nom.
+
+Lorsque aucune date n'est renseigné dans le message Fpl une date est crée arbitrairement en fonction de la date et l'heure d'envoi du message et l'heure de décolage de l'avion.
+
+les trames Fpl (expliqué a la ligne 60 de la source) sont sous la forme : \newline
+(FPL-THT712-IX-A343/H-SXJIRYGWZ/SD-NTAA1630-N0479F400 DCT MOANA DCT TEANO DCT KARNO DCT 1755S14905W DCT PASTI DCT CORAL DCT OVINI DCT ONIDO DCT 18S149W/N0477F410 DCT DEBUT DCT FULL DCT FIN DCT BENKO/N0321F050 DCT TETIA DCT MANEV DCT BB/N0321F200 DCT IDUTA DCT-NTAA0345 NCRG-REG/FOSUN SEL/BMER DAT/SV NAV/RNP10 DLE/ONIDO 0061 DLE/BB 0027 RMK/CHARTER FLIGHT FOR ECLIPSE TRACK SOUTH OF TAHITI AND MEHETIA AT FL 410 EXPECT SIGHT SEEING REQUEST FOR DEPARTURE OVER MOOREA AND TAHITI AFTER THE ECLIPSE EXPECT SAME REQUEST UP TO TETIAROA AND BORA BORA BEFORE LANDING IN PPT EXPECT A 5000FT REQUEST OVER BORA BORA-E/0940 P/TBN R/VE S/M J/L D/8 440 C YELLOW A/BLUE/WHITE)
+
+Toutes erreur est enregistrée dans un fichier de log.
+\lstinputlisting{/home/manu/DTI/modules/Fpl.py}\newpage
+
+    \subsection{modues/GetOfFiles\label{pyGOF}} 
+Coordonne la récupération des donnée, c'est lui qui va chercher la configuration et lance les modules tel que Aoi, Fdp ou encore Fpl. 
+\lstinputlisting{/home/manu/DTI/modules/GetOfFiles.py}\newpage
+
+    \subsection{modules/\textsc{Kml}\label{pyKML}}
 Afin de pouvoir réaliser les document KML, un module a été implémenté. Celui-ci a pour objectif de mettre en forme le document final. Il ne réalise aucun calcul. Lors de l'initiation une variable est instencié. Celle-ci accumulera toute la mise en forme du document jusqu'a l'appel de la foction de fin qui permettera de clore cette variable et de l'enregistrer dans un fichier texte.
-\lstinputlisting{/home/manu/DTI/modules/KML.py}
+\lstinputlisting{/home/manu/DTI/modules/KML.py}\newpage
+
+
+    \subsection{modules/MakeKML\label{pyMakeKML}} 
+C'est le module qui exploite toutes les données en mémoire et crée les fichiers \textsc{Kml}.
+\lstinputlisting{/home/manu/DTI/modules/MakeKML.py}\newpage
+ 
+    \subsection{modules/MakeKMZ\label{pyMakeKMZ}} 
+Récupère les fichiers \textsc{Kml} pour les regrouper en un fichier \textsc{Kmz} plus maniable. \nref{pyMakeKMZ}
+\lstinputlisting{/home/manu/DTI/modules/MakeKMZ.py}\newpage
+
+    \subsection{modules/Routes\label{pyRoutes}} 
+Définit et mets en mémoire les routes. Il utilise les points caractéristique précedement enregistrer pour associer les points de chaque route à des coordonées.
+\lstinputlisting{/home/manu/DTI/modules/Routes.py}\newpage
+
+    \subsection{modules/usualFonction\label{pyusualFonction}} 
+Regroupe plusieurs fonction régulièrement utilisées. 
+\lstinputlisting{/home/manu/DTI/modules/usualFonction.py}\newpage
+
+
+
+
+
+
