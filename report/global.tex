@@ -8,14 +8,15 @@
 
 \begin{document}
 
-% Page de garde
-\maketitle
-
 % Table des matieres
-\renewcommand{\baselinestretch}{0.8}\small \normalsize
+\renewcommand{\baselinestretch}{1.1}\small \normalsize
 \setcounter{tocdepth}{2}  
 \tableofcontents
-\renewcommand{\baselinestretch}{1.18}\small \normalsize
+%% Je met en forme les paragraphe
+\addtolength{\parskip}{0.5\baselineskip}
+\setlength{\parindent}{0pt}
+\setlength{\medskipamount}{\parskip}
+\renewcommand{\baselinestretch}{1.2}\small \normalsize
 
 % Debut des section
 \chapter*{Introduction} %Omission de la numérotation
@@ -49,12 +50,11 @@
 
 % Début annexes
 \appendix
-%\input{annexes}
-%\section{Anexes}
-%%¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
-%\input{lynx}
-%\input{disquettes}
+\chapter{Annexes}
+%%¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+\renewcommand{\baselinestretch}{1}\small \normalsize
+\input{tex/annexes}
 
 \end{document}
 

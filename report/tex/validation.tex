@@ -23,18 +23,20 @@ Il s'agit pour nous de tester un module, indépendamment du reste du programme, 
 Mais ces tests ne sufisent pas car il ne donnent pas assez de recule pour visualiser si l'ensemble du programme est fonctionnel. Il nous donne seulement une confirmation théorique.
 
     \subsection{Les tests globaux}
-Comme nous l'avons cité précédement des tests unitaires ne sont pas sufisant dans notre cas. En effet ce projet étant un réél prototype, dans le sens ou rien n'a été effectué de semblable auparavant, les spécifications restent parfois mal déterminées. On pourra citer comme exemple la structure des messages \textsc{Fpl} qui sont cencés avoir toujours la meme forme, mais qui se retrouves souvant avec des erreurs du à la qualité de transmission.
+Comme nous l'avons cité précédement des tests unitaires ne sont pas sufisant dans notre cas. En effet ce projet étant un réél prototype, dans le sens ou rien n'a été effectué de semblable auparavant, les spécifications restent parfois mal déterminées. On pourra citer comme exemple la structure des messages \textsc{Fpl} qui sont cencés avoir toujours la même forme, mais qui se retrouve souvent avec des erreurs dûes à la qualité de transmission.
 
-Ces tests aurons donc pour but de valider le fait que toutes les parties développées indépendamment fonctionnent bien ensemble de façon cohérente.
+Ces tests auront donc pour but de valider le fait que toutes les parties développées indépendamment fonctionnent bien ensemble de façon cohérente.
 
-Pour ce faire nous avons passé un grand nombre de fichiers sources à «parsé». Ce qui nous a permis de découvrir tout au long du projet un certain nombre d'erreurs. Nous pourons citer en exemple le fait de prendre en compte le nom de l'avion, aéroport de départ et heure de depart comme identifiant, celui-ci pouvant être le meme sur plusieurs jours pour les vols cylciques. Dans ce cas les tests globaux nous ont permis de découvrir l'errur et nous ont permis d'ajouter le jour de depart de l'avion dans l'identifiant afin que chaque identifiant reste bien unique.
+Pour ce faire nous avons passé un grand nombre de fichiers sources à «parsé». Ce qui nous a permis de découvrir tout au long du projet un certain nombre d'erreurs. Nous pourons citer en exemple le fait de prendre en compte le nom de l'avion, aéroport de départ et heure de départ comme identifiant, celui-ci pouvant être le même sur plusieurs jours pour les vols cylciques. Dans ce cas les tests globaux nous ont permis de découvrir l'errure et nous ont permis d'ajouter le jour de départ de l'avion dans l'identifiant afin que chaque identifiant reste bien unique.
 
 \section{La validation}
-Chaque fin de cycle de notre méthode de gestion de projet qui est l'Extreme Programing nous amene à une étape de validation. Celle ci conciste à verifier avec le client que le programme se comporte bien comme il le souhaitait.
+Chaque fin de cycle de notre méthode de gestion de projet qui est l'Extreme Programing nous amène à une étape de validation. Celle-ci conciste à verifier avec le client que le programme se comporte bien comme il le souhaitait.
 
-Après chaque validation des spécification sont modifiées car, bien que répondant à leur definition, elle ne réponde pas réelement aux attentes du client. D'autres spécifications sont crées et certaines annulées.
+Après chaque validation des spécifications sont modifiées car, bien que répondant à leur definition, elles ne répondent pas réelement aux attentes du client. D'autres spécifications sont crées et certaines annulées.
 
 \section{Amélioration continue}
-A partir des tests réalisés et de la validation avec le client comme cité précedement nous redéfinissons les besoins ainsi que les spécifications. Cela nous amène donc à revenir au cycle des besoins \nref{besoins} dans notre méthode de gestion de projet \nref{extreme}.
+A partir des tests réalisés et de la validation avec le client comme cité précédement nous redéfinissons les besoins ainsi que les spécifications. Cela nous amène donc à revenir au cycle des besoins \nref{besoins} dans notre méthode de gestion de projet \nref{extreme}.
 
 Nous reprenons alors un cycle ce qui nous permettra d'améliorer le programme en continu.
+
+

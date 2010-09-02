@@ -22,7 +22,7 @@ class Points (object):
         """
         # Creat a new point
         #
-        # definition of variables :
+        # definition of variables:
         #
         # self.name = str        is the name of route
         # self.coordinate = {}        is the coordinate of point
@@ -74,8 +74,8 @@ class Aoi (object):
         aoi[str(self.name)] = self
         Aoi.lastAoi = str(self.name)
         
-    def definition (self, donnees) :
-        """ Disperssion des données 
+    def definition (self, donnees):
+        """ Disperssion des données
         # The data arrives in this form:
         # /SID/ 
         # Convention is as follows:
@@ -113,7 +113,7 @@ class Aoi (object):
                 self.points[i] = self.defPoints[x]
                 i += 1
     
-    def addPoints (self, donnees) :
+    def addPoints (self, donnees):
         donnees = donnees.strip(None)
         tabDonnees = donnees.split("|")
         for x in xrange(len(tabDonnees)) :
